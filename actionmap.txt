@@ -1,0 +1,31 @@
+﻿Users 
+[
+login
+register
+edit
+delete
+logout
+getAddresses
+add Address
+delete Address
+edit Address
+]
+
+
+Products 
+[
+get liked products
+delete liked products 
+add liked products
+rate products
+get rated products
+search
+add cart
+]
+
+
+Orders
+[
+add order
+get my orders
+]
