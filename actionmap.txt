@@ -29,18 +29,26 @@ Target address:
 
 
 Target Products: 
-(Admin)
+(As Admin)
+-getAll
 -add
 -delete
 -change
 
-(User)
--getLiked
+(As User)
+-getByCategories
+-getBySub_categories
+-getByType
+-getById
+-getFavorites
 -like
 -unlike
 
+-getAllCommentsForProduct
 -rate+writeComment
--myRated
+-getmyRated
+-getReviewById
+-editReview
 
 -addToBasket
 -removeFromBasket
@@ -50,7 +58,7 @@ Target Products:
 
 Target Home:
 -search
--getSearchedProducts
+
 
 
 
