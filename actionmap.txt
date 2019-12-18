@@ -1,31 +1,60 @@
-﻿Users 
-[
-login
-register
-edit
-delete
-logout
-getAddresses
-add Address
-delete Address
-edit Address
-]
+﻿
+Emag
+Action Map
 
 
-Products 
-[
-get liked products
-delete liked products 
-add liked products
-rate products
-get rated products
-search
-add cart
-]
 
 
-Orders
-[
-add order
-get my orders
-]
+
+
+Target:Users 
+
+-login
+-register
+-edit
+-delete
+-logout
+
+
+
+
+Target address:
+
+-get
+-add 
+-delete 
+-change 
+
+
+
+
+Target Products: 
+(Admin)
+-add
+-delete
+-change
+
+(User)
+-getLiked
+-like
+-unlike
+
+-rate+writeComment
+-myRated
+
+-addToBasket
+-removeFromBasket
+
+
+
+
+Target Home:
+-search
+-getSearchedProducts
+
+
+
+
+Target Orders:
+-add
+-get
