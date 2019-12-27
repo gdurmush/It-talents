@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/backend.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/DBManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/DBManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +76,9 @@
       <workItem from="1577340809603" duration="704000" />
       <workItem from="1577383656218" duration="6140000" />
       <workItem from="1577392453156" duration="10558000" />
+      <workItem from="1577444393594" duration="3042000" />
+      <workItem from="1577451327233" duration="33000" />
+      <workItem from="1577451431057" duration="289000" />
     </task>
     <servers />
   </component>
@@ -94,6 +94,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1160" y="81" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577393383480" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1577446685532">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577446685532" />
     <state x="330" y="291" key="NewPhpClassDialog" timestamp="1577393280639">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -102,9 +106,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="729" y="404" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577402212457" />
-    <state x="535" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1577340817828">
+    <state x="535" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1577451592791">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="535" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577340817828" />
+    <state x="535" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577451592791" />
   </component>
 </project>

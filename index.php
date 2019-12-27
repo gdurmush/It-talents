@@ -13,7 +13,7 @@ $controllerClassName = "\\Controller\\" . ucfirst($controllerName) . "Controller
 spl_autoload_register(function ($class){
     require_once str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
 });
-
+include_once "View/search.php";
 
 if (class_exists($controllerClassName)){
     $controller = new $controllerClassName();
