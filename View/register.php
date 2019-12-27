@@ -20,7 +20,7 @@ if (isset($err) && $err){
     <?php
 } ?>
 
-<form action="../Controller/backend.php" method="post">
+<form action="../index.php?target=User&action=register" method="post">
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -38,6 +38,11 @@ if (isset($err) && $err){
     <div class="form-group">
         <label >Last Name</label>
         <input type="text" name="last_name" class="form-control" >
+
+    </div>
+    <div class="form-group">
+        <label >Age</label>
+        <input type="number" name="age" class="form-control" min="0" max="100">
 
     </div>
     <div class="form-group">

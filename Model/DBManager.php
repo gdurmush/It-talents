@@ -1,5 +1,5 @@
 <?php
-include_once "../PDO/PDO.php";
+include_once "PDO.php";
 
 
 function existUser($email){

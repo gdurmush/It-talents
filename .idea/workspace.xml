@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="" />
+    <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/backend.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/DBManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/DBManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/register.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +20,10 @@
       <executable />
     </execution>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectId" id="1VAbbqtPafo2o1uvICmd1RwtD8D" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -20,12 +32,25 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Apps\htdocs\emag-project\Model\users" />
       <recent name="D:\Apps\htdocs\emag\View" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="index.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/index.php">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHP Script.index.php" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -50,6 +75,10 @@
       <option name="presentableId" value="Default" />
       <updated>1576698923111</updated>
       <workItem from="1576698929518" duration="11355000" />
+      <workItem from="1576713596319" duration="79000" />
+      <workItem from="1577340809603" duration="704000" />
+      <workItem from="1577383656218" duration="6140000" />
+      <workItem from="1577392453156" duration="10558000" />
     </task>
     <servers />
   </component>
@@ -57,9 +86,25 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="729" y="404" key="NewPhpFileDialog" timestamp="1576700181340">
+    <state x="1097" y="89" key="#PHP" timestamp="1577390987879">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="729" y="404" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576700181340" />
+    <state x="1097" y="89" key="#PHP/0.0.1920.1040@0.0.1920.1040" timestamp="1577390987879" />
+    <state x="1160" y="81" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1577393383480">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1160" y="81" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577393383480" />
+    <state x="330" y="291" key="NewPhpClassDialog" timestamp="1577393280639">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="330" y="291" key="NewPhpClassDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577393280639" />
+    <state x="729" y="404" key="NewPhpFileDialog" timestamp="1577402212457">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="729" y="404" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577402212457" />
+    <state x="535" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1577340817828">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="535" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577340817828" />
   </component>
 </project>
