@@ -1,7 +1,8 @@
 <?php
 include_once "PDO.php";
-
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 function existUser($email){
 
     try{
@@ -37,3 +38,122 @@ function addUser(array &$user) {
         echo $e->getMessage();
     }
 }
+
+function searchProduct ($keywords){
+    try {
+        $params = [];
+        $params[] = "{$keywords}%";
+
+        $pdo = getPDO();
+        $sql = "SELECT id , name FROM products WHERE name LIKE ? LIMIT 4;";
+        $statement = $pdo->prepare($sql);
+        $statement->execute($params);
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+    }
+    catch (PDOException $e){
+        echo $e->getMessage();
+    }
+
+}
+
+function searchCategorie ($keywords){
+    try {
+        $params = [];
+        $params[] = "{$keywords}%";
+        $params[] = "{$keywords}%";
+        $params[] = "{$keywords}%";
+
+        $pdo = getPDO();
+
+        $sql = "SELECT  c.name  FROM categories AS c
+                WHERE name LIKE ?
+                UNION
+                SELECT s.name  FROM sub_categories AS s
+                WHERE name LIKE ?
+                UNION
+                SELECT t.name  FROM types AS t  
+			    WHERE name LIKE ?;";
+        $statement = $pdo->prepare($sql);
+        $statement->execute($params);
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+    }
+    catch (PDOException $e){
+        echo $e->getMessage();
+    }
+
+}
+
+function searchProducer ($keywords){
+    try {
+        $params = [];
+        $params[] = "{$keywords}%";
+
+        $pdo = getPDO();
+        $sql = "SELECT id, name FROM producers WHERE name LIKE ? LIMIT 4;";
+        $statement = $pdo->prepare($sql);
+        $statement->execute($params);
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+    }
+    catch (PDOException $e){
+        echo $e->getMessage();
+    }
+
+}
+
+function findProduct ($id){
+    $pdo = getPDO();
+    $sql = "SELECT id , name , producer_id , price , type_id , quantity , image_url FROM products WHERE id = ?";
+    $statement = $pdo->prepare($sql);
+    $statement->execute([$id]);
+    $rows = $statement->fetch(PDO::FETCH_ASSOC);
+   $product = new \model\Product($rows["id"] , $rows["name"] , $rows["producer_id"] , $rows["price"] , $rows["type_id"]
+       , $rows["quantity"] , $rows["image_url"]);
+
+    return $product;
+
+}
+function checkIfInCart($id){
+    try {
+        $params = [];
+        $params[] = $id;
+        $params[] = $_SESSION["logged_user_id"];
+        $pdo = getPDO();
+        $sql = "SELECT user_id , product_id , quantity FROM cart WHERE product_id = ? AND user_id = ?";
+        $statement = $pdo->prepare($sql);
+        $statement->execute($params);
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+    }
+    catch (PDOException $e){
+      echo  $e->getMessage();
+    }
+}
+function putInCart($id){
+    try {
+        $params = [];
+        $params[] = $_SESSION["logged_user_id"];
+        $params[] = $id;
+        $params[] = 1;
+        $pdo = getPDO();
+        $sql = "INSERT INTO cart (user_id , product_id , quantity) VALUES (?,?,?)";
+        $statement = $pdo->prepare($sql);
+        $statement->execute($params);
+    }
+    catch (PDOException $e){
+        echo $e->getMessage();
+    }
+}
+function updateQuantityOfProduct($id){
+    $params = [];
+    $params[] = $_SESSION["logged_user_id"];
+    $params[] = $id;
+    $pdo = getPDO();
+    $sql = "UPDATE cart SET quantity = quantity + 1 WHERE user_id = ? AND product_id = ?";
+    $statement = $pdo->prepare($sql);
+    $statement->execute($params);
+
+}
+
