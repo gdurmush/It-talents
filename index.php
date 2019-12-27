@@ -4,7 +4,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-
 $controllerName = isset($_GET["target"]) ? $_GET["target"] : "main";
 $methodName = isset($_GET["action"]) ? $_GET["action"] : "render";
 
@@ -13,7 +12,9 @@ $controllerClassName = "\\Controller\\" . ucfirst($controllerName) . "Controller
 spl_autoload_register(function ($class){
     require_once str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
 });
+?> <a href="View/cart.php"><button>Cart</button></a> <?php
 include_once "View/search.php";
+
 
 if (class_exists($controllerClassName)){
     $controller = new $controllerClassName();
@@ -35,3 +36,4 @@ if (class_exists($controllerClassName)){
     echo "error: controller not found $controllerClassName\n";
     die();
 }
+
