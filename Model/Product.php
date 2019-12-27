@@ -11,7 +11,7 @@ public $name;
 protected $producerId;
 public $price;
 protected $typeId;
-protected $quantity;
+public $quantity;
 public $imageUrl;
 
 
