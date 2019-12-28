@@ -21,10 +21,10 @@ error_reporting(E_ALL);
 
 <form action="index.php?target=search&action=render" method="post">
     <div class="form-group">
-        Search<input type="text" class="form-control" name="search">
-
+            <input type="text" class="form-control" name="search">
+        <input type="submit" name="searchProducts"value="Search" class="btn btn-primary" Search>
     </div>
-    <input type="submit" name="searchProducts" class="btn btn-primary" Search>
+
 
 </form>
 

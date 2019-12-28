@@ -40,7 +40,11 @@ class CartController{
             <form action="index.php?target=cart&action=delete" method="post">
                 <input type="hidden" value="<?=$product["product_id"]?>" name="productId">
                 <input type="submit" value="Delete" name="deleteFromCart">
-            </form> <?php
+            </form>
+                <form action="index.php?target=favourite&action=add&id=<?=$product["product_id"]?>" method="post">
+                    <input type="submit" value="Add to Favourites" name="addToFavourites">
+                </form>
+                <?php
                  echo $productInfo->price*$product["quantity"]. "Euro";
 
             ?></div>
