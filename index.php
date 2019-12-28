@@ -12,8 +12,8 @@ $controllerClassName = "\\Controller\\" . ucfirst($controllerName) . "Controller
 spl_autoload_register(function ($class){
     require_once str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
 });
-?> <a href="View/cart.php"><button>Cart</button></a> <?php
-include_once "View/search.php";
+;
+
 
 
 if (class_exists($controllerClassName)){
@@ -37,3 +37,4 @@ if (class_exists($controllerClassName)){
     die();
 }
 
+//TODO can open View files with index.php

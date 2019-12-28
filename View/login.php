@@ -21,7 +21,7 @@ if (isset($err) && $err){
 <?php
 } ?>
 
-<form action="../index.php?target=User&action=login" method="post">
+<form action="index.php?target=User&action=login" method="post">
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
