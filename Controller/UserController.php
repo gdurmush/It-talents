@@ -54,7 +54,7 @@ const MIN_LENGTH=8;
         }
 //TODO verifier for password,age,phone_number
 
-//TODO phone_number problem
+//TODO phone_number validate
 
         if(strlen($_POST["password"])<self::MIN_LENGTH){
             $err=true;
@@ -98,8 +98,8 @@ const MIN_LENGTH=8;
     public function registerPage(){
         include_once "View/register.php";
     }
-    public function myAccount(){
-        include_once "View/myAccount.php";
+    public function account(){
+        include_once "View/account.php";
     }
 
 
@@ -122,10 +122,11 @@ const MIN_LENGTH=8;
             $msg = "Your password must be at least 8 characters!";
         }
 
-        /*if (!preg_match('/^[0-9]{10}$/', $_POST["phone_number"])) {
+
+        if (!preg_match('/^[0-9]{10}+$/', $_POST["phone_number"])) {
             $err = true;
             $msg = "Invalid Number!";
-        }*/
+        }
         if ($_POST["age"] < 18) {
             $err = true;
             $msg = "You must be at least 18 years old to create account!";
@@ -153,10 +154,9 @@ const MIN_LENGTH=8;
             $user=new User($_POST["email"],$password,$_POST["first_name"],$_POST["last_name"],$_POST["age"],$_POST["phone_number"],false);
             $user->setId($_SESSION["logged_user_id"]);
             UserDAO::update($user);
-            print_r($user);
-print_r($_SESSION["logged_user_id"]);
+            $msg="You successfully update your account";
         }
-        //include_once "View/myAccount.php";
+        include_once "View/account.php";
     }
 }
 

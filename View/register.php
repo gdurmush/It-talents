@@ -20,7 +20,7 @@ if (isset($err) && $err){
     <?php
 } ?>
 
-<form action="../index.php?target=User&action=register" method="post">
+<form action="index.php?target=User&action=register" method="post">
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
@@ -53,5 +53,6 @@ if (isset($err) && $err){
 
     <button name="register" type="submit" class="btn btn-primary">Submit</button>
 </form>
+<a href="index.php?target=User&action=loginPage"><button name="register" type="submit" class="btn btn-primary">Back to login page</button></a>
 </body>
 </html>

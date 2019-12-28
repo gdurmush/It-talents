@@ -1,13 +1,13 @@
 <?php
 namespace View;
-session_start();
+use Model\UserDAO;
 
 
-//TODO autoload fields
+
+$user=UserDAO::getUserByid($_SESSION["logged_user_id"]);
+
+
 //TODO addresses
-
-
-
 ?>
 
 <!doctype html>
@@ -16,6 +16,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
@@ -28,8 +29,14 @@ if (isset($err) && $err){
         <?php echo $msg;?>
     </div>
     <?php
-} ?>
-<form action="../index.php?target=User&action=edit" method="post">
+}elseif(isset($msg) && $msg!=''){
+    ?>
+    <div class="list-group-item list-group-item-success" role="alert">
+        <?php echo $msg;?>
+    </div>
+    <?php
+}?>
+<form action="index.php?target=User&action=edit" method="post">
 
 
     <div class="form-group">
@@ -69,6 +76,5 @@ if (isset($err) && $err){
 
     <button name="edit" type="submit" class="btn btn-primary">Save changes</button>
 </form>
-<a href="register.php"><button name="edit" type="submit" class="btn btn-primary">Save changes</button></a>
 </body>
 </html>

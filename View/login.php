@@ -34,5 +34,6 @@ if (isset($err) && $err){
 
     <button name="login" type="submit" class="btn btn-primary">Submit</button>
 </form>
+<a href="index.php?target=User&action=registerPage"><button name="register" type="submit" class="btn btn-primary">Register here</button></a>
 </body>
 </html>
