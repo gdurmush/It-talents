@@ -6,7 +6,7 @@ namespace Controller;
 use Model\User;
 use Model\UserDAO;
 
-class UserController{
+class userController{
 
 const MIN_LENGTH=8;
 
@@ -61,10 +61,10 @@ const MIN_LENGTH=8;
             $msg="Your password must be at least 8 characters!";
         }
 
-        /*if(!preg_match('/^[0-9]{10}$/', $_POST["phone_number"])) {
+        if(!preg_match('/^[0-9]{10}$/', $_POST["phone_number"])) {
             $err=true;
             $msg="Invalid Number!";
-        }*/
+        }
         if($_POST["age"]<18) {
             $err=true;
             $msg="You must be at least 18 years old to create account!";
@@ -91,21 +91,9 @@ const MIN_LENGTH=8;
 
     }
 
-    public function loginPage(){
-        include_once "View/login.php";
-    }
-
-    public function registerPage(){
-        include_once "View/register.php";
-    }
-    public function account(){
-        include_once "View/account.php";
-    }
 
 
-
-    public function edit()
-    {
+    public function edit(){
         $err = false;
         $msg = '';
         $result=UserDAO::getUserById($_SESSION["logged_user_id"]);
@@ -156,7 +144,25 @@ const MIN_LENGTH=8;
             UserDAO::update($user);
             $msg="You successfully update your account";
         }
+        include_once "View/edit.php";
+    }
+
+
+    public function loginPage(){
+        include_once "View/login.php";
+    }
+
+    public function registerPage(){
+        include_once "View/register.php";
+    }
+    public function account(){
         include_once "View/account.php";
     }
+
+    public function editPage(){
+        include_once "View/edit.php";
+    }
+
+
 }
 

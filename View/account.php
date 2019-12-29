@@ -1,11 +1,11 @@
 <?php
 namespace View;
 use Model\UserDAO;
-
+use Model\AddressDAO;
 
 
 $user=UserDAO::getUserByid($_SESSION["logged_user_id"]);
-
+$addresses=AddressDAO::getAll($_SESSION["logged_user_id"]);
 
 //TODO addresses
 ?>
@@ -21,60 +21,37 @@ $user=UserDAO::getUserByid($_SESSION["logged_user_id"]);
     <title>Document</title>
 </head>
 <body>
+<br>
+First Name:   <?php echo $user->first_name ?> <br>
+Last Name: <?php echo $user->last_name ?><br>
+Email:  <?php echo $user->email ;?><br>
+Age: <?php echo $user->age ?><br>
+Phone Number: <?php echo $user->phone_number ?><br>
+<a href="index.php?target=User&action=editPage"><button name="edit" class="btn btn-primary">Edit profile</button></a>
+<hr>
 
-<?php
-if (isset($err) && $err){
-    ?>
-    <div class="alert alert-danger" role="alert">
-        <?php echo $msg;?>
-    </div>
+My addresses:
+<table>
+    <?php foreach ($addresses as $address) {
+    ?><tr>
+        <td><?php echo $address->street_name .', '. $address->city_name ;?></td>
+        <td>
+            <form action='index.php?target=address&action=editAddress' method="post">
+                <input type='hidden' name='address_id' value="<?php echo $address->id;?>">
+                <input type="submit" name="editAddress" value="Edit">
+            </form>
+        </td>
+        <td>
+            <form action='index.php?target=address&action=delete' method="post">
+                <input type='hidden' name='address_id' value="<?php echo $address->id;?>">
+                <input type="submit" name="deleteAddress" value="Delete">
+            </form>
+        </td>
+       </tr>
     <?php
-}elseif(isset($msg) && $msg!=''){
-    ?>
-    <div class="list-group-item list-group-item-success" role="alert">
-        <?php echo $msg;?>
-    </div>
-    <?php
-}?>
-<form action="index.php?target=User&action=edit" method="post">
+    } ?>
 
-
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input name="email" type="email" value="<?php echo $user->email ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-
-    </div>
-
-    <div class="form-group">
-        <label for="exampleInputEmail1">First Name</label>
-        <input type="text" name="first_name" value="<?php echo $user->first_name ?>" class="form-control" >
-
-    </div>
-    <div class="form-group">
-        <label >Last Name</label>
-        <input type="text" name="last_name" value="<?php echo $user->last_name ?>" class="form-control" >
-
-    </div>
-    <div class="form-group">
-        <label >Age</label>
-        <input type="number" name="age" value="<?php echo $user->age ?>" class="form-control" min="0" max="100">
-
-    </div>
-    <div class="form-group">
-        <label >Phone number</label>
-        <input type="number" name="phone_number" value="<?php echo $user->phone_number ?>" class="form-control" placeholder="0888888888" >
-
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Change Password</label>
-        <input name="newPassword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your new password" >
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Enter current password</label>
-        <input name="accountPassword" type="password" class="form-control" id="exampleInputPassword1"  required>
-    </div>
-
-    <button name="edit" type="submit" class="btn btn-primary">Save changes</button>
-</form>
+</table>
+<a href="index.php?target=address&action=newAddress"><button name="addAddress" class="btn btn-primary">Add address</button></a>
 </body>
 </html>
