@@ -144,7 +144,7 @@ const MIN_LENGTH=8;
             UserDAO::update($user);
             $msg="You successfully update your account";
         }
-        include_once "View/edit.php";
+        include_once "View/editProfile.php";
     }
 
 
@@ -160,7 +160,7 @@ const MIN_LENGTH=8;
     }
 
     public function editPage(){
-        include_once "View/edit.php";
+        include_once "View/editProfile.php";
     }
 
 

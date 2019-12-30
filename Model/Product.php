@@ -15,9 +15,9 @@ public $quantity;
 public $imageUrl;
 
 
-function __construct($id ,$name , $producerId , $price , $typeId , $quantity ,$imageUrl)
+function __construct($name , $producerId , $price , $typeId , $quantity ,$imageUrl)
     {
-        $this->id =$id;
+
         $this->name=$name;
         $this->producerId = $producerId;
         $this->price=$price;
@@ -25,6 +25,26 @@ function __construct($id ,$name , $producerId , $price , $typeId , $quantity ,$i
         $this->quantity=$quantity;
         $this->imageUrl=$imageUrl;
     }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getProducerId()
+    {
+        return $this->producerId;
+    }
+
+    public function getTypeId()
+    {
+        return $this->typeId;
+    }
+
 function show(){
    $product = findProduct($this->id);
    echo $product->name;
