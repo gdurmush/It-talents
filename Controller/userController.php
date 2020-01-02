@@ -11,117 +11,69 @@ class userController{
 const MIN_LENGTH=8;
 
     public function login(){
-        $email=$_POST["email"];
-        $password=$_POST["password"];
-        $err=false;
-
-        if(!isset($email) || !isset($password)){
-            $err=true;
-
-        }elseif(strlen($password)<self::MIN_LENGTH){
-            $err=true;
-        }else{
-            $user=UserDAO::getUserByEmail($email);
-
-
-            if($user){
-                if(password_verify($_POST["password"],$user->password)){
-                    $_SESSION["logged_user_id"]=$user->id;
-                }else{
-                    $err=true;
+        if(isset($_POST["login"])) {
+            $err = false;
+            $msg='';
+            if (!isset($_POST["email"]) || !isset($_POST["password"])) {
+                $err = true;
+                $msg='All fields are required!';
+            } elseif (strlen($_POST["password"]) < self::MIN_LENGTH) {
+                $err = true;
+                $msg='Invalid username or password!';
+            } else {
+                $user = UserDAO::getUserByEmail($_POST["email"]);
+                if ($user) {
+                    if (password_verify($_POST["password"], $user->password)) {
+                        $_SESSION["logged_user_id"] = $user->id;
+                    } else {
+                        $err = true;
+                        $msg='Invalid username or password!';
+                    }
                 }
             }
-        }
-
-        if(!$err){
-            include_once "View/main.php";
-        }else{
-            include_once "View/login.php";
+            if(!$err){
+                include_once "View/main.php";
+            }else{
+                include_once "View/login.php";
+            }
         }
     }
 
     public function register(){
-
-        $err=false;
-        $msg='';
-
-        if(!isset($_POST["email"]) || !isset($_POST["password"])
-            || !isset($_POST["first_name"]) || !isset($_POST["last_name"])
-            || !isset($_POST["phone_number"]) || !isset($_POST["age"]) ){
-
-            $err=true;
-            $msg="All fields are required!";
-        }
-//TODO verifier for password,age,phone_number
-
-//TODO phone_number validate
-
-        if(strlen($_POST["password"])<self::MIN_LENGTH){
-            $err=true;
-            $msg="Your password must be at least 8 characters!";
-        }
-
-        if(!preg_match('/^[0-9]{10}$/', $_POST["phone_number"])) {
-            $err=true;
-            $msg="Invalid Number!";
-        }
-        if($_POST["age"]<18) {
-            $err=true;
-            $msg="You must be at least 18 years old to create account!";
-        }
-
+        $msg=$this->validate($_POST["email"],$_POST["password"],$_POST["first_name"],$_POST["last_name"],$_POST["phone_number"],$_POST["age"]);
 
         $result=UserDAO::getUserByEmail($_POST["email"]);
         if($result){
-            $err=true;
             $msg="This email already exist!";
         }
-        if(!$err){
-            $isAdmin="false";
-            $password=password_hash($_POST["password"],PASSWORD_BCRYPT);
-            $user = new User($_POST["email"],$password,$_POST["first_name"],$_POST["last_name"],$_POST["age"],$_POST["phone_number"],$isAdmin);
-            UserDAO::add($user);
-            $_SESSION["logged_user_id"]=$user->getId();
 
+        if($msg==""){
+            $role="user";
+            $password=password_hash($_POST["password"],PASSWORD_BCRYPT);
+            $user = new User($_POST["email"],$password,$_POST["first_name"],$_POST["last_name"],$_POST["age"],$_POST["phone_number"],$role);
+            UserDAO::add($user);
+
+            $_SESSION["logged_user_id"]=$user->getId();
 
             include_once "View/main.php";
         }else{
             include_once "View/register.php";
         }
-
     }
 
 
 
+
+
+
     public function edit(){
-        $err = false;
         $msg = '';
         $result=UserDAO::getUserById($_SESSION["logged_user_id"]);
 
+        $msg=$this->validate($_POST["email"],$_POST["accountPassword"],$_POST["first_name"],$_POST["last_name"],$_POST["phone_number"],$_POST["age"]);
 
-        if (empty($_POST["email"]) || empty($_POST["accountPassword"])
-            || empty($_POST["first_name"]) || empty($_POST["last_name"])
-            || empty($_POST["phone_number"]) || empty($_POST["age"])) {
-            $err = true;
-            $msg = "Fields must not be empty";
-        }
-        if (strlen($_POST["accountPassword"]) < self::MIN_LENGTH) {
-            $err = true;
-            $msg = "Your password must be at least 8 characters!";
-        }
-
-
-        if (!preg_match('/^[0-9]{10}+$/', $_POST["phone_number"])) {
-            $err = true;
-            $msg = "Invalid Number!";
-        }
-        if ($_POST["age"] < 18) {
-            $err = true;
-            $msg = "You must be at least 18 years old to create account!";
-        }
 
         if(password_verify($_POST["accountPassword"],$result->password)==false) {
-            $err = true;
             $msg = "Incorrect account password!";
         }
 
@@ -129,7 +81,6 @@ const MIN_LENGTH=8;
             $password=$result->password;
         }else {
             if (strlen($_POST["newPassword"]) < self::MIN_LENGTH) {
-                $err = true;
                 $msg = "Your password must be at least 8 characters!";
             }else {
                 $password=password_hash($_POST["newPassword"], PASSWORD_BCRYPT);
@@ -138,7 +89,7 @@ const MIN_LENGTH=8;
         }
 
 
-        if (!$err) {
+        if($msg==""){
             $user=new User($_POST["email"],$password,$_POST["first_name"],$_POST["last_name"],$_POST["age"],$_POST["phone_number"],false);
             $user->setId($_SESSION["logged_user_id"]);
             UserDAO::update($user);
@@ -147,6 +98,32 @@ const MIN_LENGTH=8;
         include_once "View/editProfile.php";
     }
 
+
+
+ public function validate($email,$password,$firstName,$lastName,$phone_number,$age){
+        $msg = '';
+        if (empty($email) || empty($password)
+            || empty($firstName) || empty($lastName)
+            || empty($phone_number) || empty($age)) {
+            $msg = "All fields are required!";
+        }
+        if (strlen($password) < self::MIN_LENGTH) {
+            $msg = "Your password must be at least 8 characters!";
+        }
+
+
+        if(!preg_match('/^[8][0-9]{8}$/', $phone_number)) {
+            $msg="Invalid Number format!";
+        }
+        if ($age < 18) {
+            $msg = "You must be at least 18 years old to create account!";
+        }
+
+        if(!ctype_alpha($firstName) || !ctype_alpha($lastName)){
+            $msg = "Invalid name format";
+        }
+        return $msg;
+    }
 
     public function loginPage(){
         include_once "View/login.php";

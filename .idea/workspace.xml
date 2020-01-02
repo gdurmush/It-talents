@@ -6,8 +6,12 @@
       <change beforePath="$PROJECT_DIR$/Controller/productController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/productController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller/userController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/userController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/editProfile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/iphone-png.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/ProductDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/ProductDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/UserDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/UserDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/account.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/account.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/editProfile.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/editProfile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/register.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +95,9 @@
       <workItem from="1577451431057" duration="9849000" />
       <workItem from="1577515087052" duration="39243000" />
       <workItem from="1577623096322" duration="2731000" />
-      <workItem from="1577708471790" duration="21171000" />
+      <workItem from="1577708471790" duration="25322000" />
+      <workItem from="1577788199283" duration="814000" />
+      <workItem from="1577951395524" duration="17664000" />
     </task>
     <servers />
   </component>
@@ -123,14 +129,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="330" y="291" key="NewPhpClassDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577393280639" />
-    <state x="729" y="404" key="NewPhpFileDialog" timestamp="1577735556909">
+    <state x="729" y="404" key="NewPhpFileDialog" timestamp="1577971863940">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="729" y="404" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577735556909" />
-    <state x="535" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1577713725130">
+    <state x="729" y="404" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577971863940" />
+    <state x="535" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1577951403229">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="535" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577713725130" />
+    <state x="535" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577951403229" />
     <state x="309" y="269" width="672" height="678" key="search.everywhere.popup" timestamp="1577729602664">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

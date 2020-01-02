@@ -95,8 +95,7 @@ class ProductDAO{
     }
 
 
-    public static function delete($id)
-    {
+    public static function delete($id){
         try {
             $db = getPDO();
             $sql = "DELETE FROM products WHERE id=? ;";
@@ -106,7 +105,77 @@ class ProductDAO{
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }
-
-
     }
+
+    public static function addRating($user_id,$product_id,$rating,$comment) {
+        try {
+            $db = getPDO();
+            $params = [];
+            $params[] = $user_id;
+            $params[] = $product_id;
+            $params[] = $rating;
+            $params[] = $comment;
+
+            $sql = "INSERT INTO user_rate_products (user_id, product_id, stars,text,date_created) VALUES (?,?,?,?,now());";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($params);
+
+
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public static function showMyRated($user_id) {
+        try {
+            $db = getPDO();
+
+            $sql="SELECT p.id AS product_id,p.name AS product_name,p.image_url,urp.id AS rating_id,urp.stars,urp.text
+                    FROM user_rate_products AS urp
+                    JOIN products AS p ON(p.id=urp.product_id)
+                    WHERE urp.user_id=?;";
+            $stmt=$db->prepare($sql);
+            $stmt->execute([$user_id]);
+            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
+public static function getAVGRating($product_id)
+{
+    try {
+        $db = getPDO();
+
+        $sql="SELECT round(avg(stars),2)  AS avg_stars  FROM user_rate_products WHERE product_id;";
+        $stmt=$db->prepare($sql);
+        $stmt->execute([$product_id]);
+        return  $stmt->fetch(\PDO::FETCH_OBJ);
+
+
+    } catch (\PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+    public static function getStarsCount ($product_id)
+    {
+        try {
+            $db = getPDO();
+
+                $sql="SELECT stars,count(stars)  AS stars_count  FROM user_rate_products where product_id=? group by stars;";
+                $stmt=$db->prepare($sql);
+                $stmt->execute([$product_id]);
+               return $stmt->fetchAll(\PDO::FETCH_OBJ);
+
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
+
+
+
 }

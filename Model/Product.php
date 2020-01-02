@@ -46,16 +46,16 @@ function __construct($name , $producerId , $price , $typeId , $quantity ,$imageU
     }
 
 function show(){
-   $product = findProduct($this->id);
-   echo $product->name;
-   ?> <img src="<?= $product->imageUrl ?>"width="150"></a>
+    $product = findProduct($this->id);
+    echo $product->name;
+    ?> <img src="<?= $product->imageUrl ?>"width="150"></a>
     <form action="index.php?target=cart&action=add&id=<?=$product->id?>" method="post">
         <input type="submit" value="Add to cart" name="addToCart">
     </form>
     <form action="index.php?target=favourite&action=add&id=<?=$product->id?>" method="post">
         <input type="submit" value="Add to Favourites" name="addToFavourites">
     </form>
-<?php
+    <?php
 }
 
 }

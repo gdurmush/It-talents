@@ -72,7 +72,6 @@ public function show (){
             if(empty($_POST["name"]) || empty($_POST["producer_id"])
                 || empty($_POST["price"]) || empty($_POST["type_id"])
                 || empty($_POST["quantity"])) {
-                $err = true;
                 $msg = "All fields are required!";
             }else{
                 if(!preg_match('/^[0-9]+$/',$_POST["quantity"]) || !is_numeric($_POST["quantity"])){
@@ -121,6 +120,35 @@ public function show (){
     }
 
 
+    public function rate(){
+    if(isset($_POST["save"])){
+        $msg="";
+
+        if(empty($_POST["rating"]) || empty($_POST["comment"])){
+            $msg = "All fields are required!";
+        }else{
+            if(!preg_match('/^[1-5]+$/',$_POST["rating"]) ||  !is_numeric($_POST["rating"])){
+                $msg = "Rating must be from 1 to 5!";
+            }
+            if(strlen($_POST["comment"])>100){
+                $msg = "Comment must be maximum 100 characters!";
+            }
+            if($msg==""){
+                ProductDAO::addRating($_SESSION["logged_user_id"],$_POST["product_id"],$_POST["rating"],$_POST["comment"]);
+                include_once "View/rateProduct.php";
+            }
+        }
+    }
+    }
+
+
+    public function ratePage(){
+        include_once "View/rateProduct.php";
+    }
+
+    public function myRated(){
+        include_once "View/myRated.php";
+    }
     public function addProduct(){
         include_once "View/addProduct.php";
     }
@@ -128,6 +156,9 @@ public function show (){
 
     public function editProduct(){
         include_once "View/editProduct.php";
+    }
+    public function showProduct(){
+        include_once "View/showProduct.php";
     }
 
 }
