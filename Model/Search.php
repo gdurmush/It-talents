@@ -7,40 +7,37 @@ class Search{
     public  $search;
     private $products;
     private $categories;
-    private $producers;
+    private $types;
 
     function __construct($search)
-
     {
         $this->search = $search;
         $this->products = searchProduct($this->search);
         $this->categories = searchCategorie($this->search);
-        $this->producers = searchProducer($this->search);
+        $this->types = searchType($this->search);
     }
 
     public function render(){
         if (isset($_POST["search"])){
             $search = new Search($_POST["search"]);
-            $search->renderProducts();
-            $search->renderCategories();
-            $search->renderProducers();
+                $search->renderProducts();
+                $search->renderCategories();
+                $search->renderTypes();
         }
-
     }
 
-    private function renderProducts(){
-        if ($this->products){
+    private function renderProducts()
+    {
+        if ($this->products)
+            {
             echo "<h1>Products </h1>";
-        }
-        else {
-            echo "<h1>Not Found Results</h1>";
-        }
-
-        foreach ($this->products as $product) {
-            ?>
-            <h3><a href="index.php?target=product&action=show&prdId=<?=$product["id"]?>"> <?= $product["name"] ?></a></h3>
-            <?php
-        }
+            }
+        foreach ($this->products as $product)
+            {
+                ?>
+                <h3><a href="index.php?target=product&action=show&prdId=<?=$product["id"]?>"> <?= $product["name"] ?></a></h3>
+                <?php
+            }
     }
 
     private function renderCategories(){
@@ -49,19 +46,19 @@ class Search{
             echo "<h1>Categories</h1>";
             foreach ($this->categories as $category) {
                 ?>
-                <h3><a href="index.php?target=product&action=show&id=<?=$category["id"]?>"> <?= $category["name"] ?></a></h3>
+                <h3><a href="index.php?target=product&action=show&ctgId=<?=$category["id"]?>"> <?= $category["name"] ?></a></h3>
                 <?php
             }
         }
     }
 
-    private function renderProducers(){
-        if ($this->producers) {
+    private function renderTypes(){
+        if ($this->types) {
 
-            echo "<h1>Producer</h1>";
-            foreach ($this->producers as $producer) {
+            echo "<h1>Type</h1>";
+            foreach ($this->types as $type) {
                 ?>
-                <h3><a href="index.php?target=product&action=show&id=<?= $producer["id"] ?>" ><?= $producer["name"] ?></a></h3>
+                <h3><a href="index.php?target=product&action=show&typId=<?= $type["id"] ?>" ><?= $type["name"] ?></a></h3>
                 <?php
             }
         }

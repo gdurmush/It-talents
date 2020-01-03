@@ -53,5 +53,7 @@ My addresses:
 
 </table>
 <a href="index.php?target=address&action=newAddress"><button name="addAddress" class="btn btn-primary">Add address</button></a>
+<a href="index.php?target=order&action=show"><button>My Orders</button></a>
+
 </body>
 </html>

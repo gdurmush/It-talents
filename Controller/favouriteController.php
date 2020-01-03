@@ -7,13 +7,6 @@ include_once dirname(__FILE__) . "/../Model/DBManager.php";
 class FavouriteController{
     public function show(){
         include_once "View/favourites.php";
-        $favourites = showFavourites();
-        foreach ($favourites as $favourite){
-            echo $favourite["product_id"];
-            ?>
-        <a href="index.php?target=favourite&action=delete&id=<?=$favourite["product_id"]?>"><button>Remove</button></a>
-            <?php
-        }
     }
     public function add(){
         if (isset($_GET["id"])){

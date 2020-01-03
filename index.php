@@ -14,7 +14,9 @@ spl_autoload_register(function ($class){
 });
 
 
-?> <a href="index.php?target=main&action=render"><button>Home</button></a> <?php
+?>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <a href="index.php?target=main&action=render"><button>Home</button></a> <?php
 
 
 if (class_exists($controllerClassName)){
