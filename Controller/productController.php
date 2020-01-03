@@ -140,11 +140,28 @@ public function show (){
         }
     }
     }
-
-
-    public function ratePage(){
-        include_once "View/rateProduct.php";
+    public function editRate(){
+        if(isset($_POST["saveChanges"])){
+            $msg="";
+            if(empty($_POST["rating"]) || empty($_POST["comment"])){
+                $msg = "All fields are required!";
+            }else{
+                if(!preg_match('/^[1-5]+$/',$_POST["rating"]) ||  !is_numeric($_POST["rating"])){
+                    $msg = "Rating must be from 1 to 5!";
+                }
+                if(strlen($_POST["comment"])>100){
+                    $msg = "Comment must be maximum 100 characters!";
+                }
+                if($msg==""){
+                    ProductDAO::editRating($_POST["rating_id"],$_POST["rating"],$_POST["comment"]);
+                    include_once "View/myRated.php";
+                }
+            }
+        }
     }
+
+
+
 
     public function myRated(){
         include_once "View/myRated.php";
@@ -152,13 +169,24 @@ public function show (){
     public function addProduct(){
         include_once "View/addProduct.php";
     }
-
-
     public function editProduct(){
         include_once "View/editProduct.php";
     }
     public function showProduct(){
         include_once "View/showProduct.php";
     }
+
+
+
+    public function ratePage(){
+        include_once "View/rateProduct.php";
+    }
+
+    public function editRatedPage(){
+        include_once "View/editRatedProduct.php";
+    }
+
+
+
 
 }

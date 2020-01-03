@@ -125,6 +125,23 @@ class ProductDAO{
             echo $e->getMessage();
         }
     }
+    public static function editRating($id,$rating,$comment) {
+        try {
+            $db = getPDO();
+            $params = [];
+            $params[] = $rating;
+            $params[] = $comment;
+            $params[] = $id;
+
+            $sql = "UPDATE user_rate_products SET stars=?, text=? WHERE id=? ;";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($params);
+
+
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 
     public static function showMyRated($user_id) {
         try {

@@ -4,7 +4,7 @@ namespace View;
 use Model\ProductDAO;
 
 $myRatings=ProductDAO::showMyRated($_SESSION["logged_user_id"]);
-print_r($myRatings);
+
 
 ?>
 
@@ -37,7 +37,19 @@ print_r($myRatings);
             <td>My comment for this product:</td>
             <td><?= $myRating->text?></td>
         </tr>
-        <tr><td><a href=""></a></td></tr>
+        <tr>
+            <td>
+                <form action="index.php?target=product&action=editRatedPage" method="post">
+                    <input type="submit" name="editRating" value="Edit">
+                    <input type="hidden" name="rating_id" value="<?= $myRating->rating_id?>">
+                    <input type="hidden" name="image_url" value="<?= $myRating->image_url?>">
+                    <input type="hidden" name="product_name" value="<?= $myRating->product_name?>">
+                    <input type="hidden" name="stars" value="<?= $myRating->stars?>">
+                    <input type="hidden" name="text" value="<?= $myRating->text?>">
+
+                </form>
+            </td>
+        </tr>
     </table>
     <hr>
     <?php
