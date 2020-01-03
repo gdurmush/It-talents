@@ -21,6 +21,9 @@ $countOfStars=ProductDAO::getStarsCount($product_id);
 <body>
 <table>
     <tr>
+        <td><?= $product->name?></td>
+    </tr>
+    <tr>
         <td><img src="<?= $product->imageUrl ?>"width="150"></td>
     </tr>
     <tr>
@@ -30,7 +33,7 @@ $countOfStars=ProductDAO::getStarsCount($product_id);
         <td><a href="index.php?target=favourite&action=add&id=<?=$product->id?>"></a><button>Add to Favourites</button> </a></td>
     </tr>
     <tr>
-        <td><a href="index.php?target=product&action=rateProduct"></a><button>Rate this product</button> </a></td>
+        <td><a href="index.php?target=product&action=ratePage"><button>Rate this product</button> </a></td>
     </tr>
 </table>
 <table>
