@@ -47,6 +47,7 @@ My addresses:
                 <input type="submit" name="deleteAddress" value="Delete">
             </form>
         </td>
+
        </tr>
     <?php
     } ?>
@@ -55,5 +56,6 @@ My addresses:
 <a href="index.php?target=address&action=newAddress"><button name="addAddress" class="btn btn-primary">Add address</button></a>
 <a href="index.php?target=order&action=show"><button>My Orders</button></a>
 
+<a href="index.php?target=product&action=myRated"><button class="btn btn-primary">My rated</button></a>
 </body>
 </html>

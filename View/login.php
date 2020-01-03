@@ -16,7 +16,7 @@
 if (isset($err) && $err){
     ?>
 <div class="alert alert-danger" role="alert">
-    Invalid email or password!
+  <?php echo $msg; ?>
 </div>
 <?php
 } ?>

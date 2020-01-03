@@ -14,9 +14,9 @@ public $quantity;
 public $imageUrl;
 
 
-function __construct($id ,$name , $producerId , $price , $typeId , $quantity ,$imageUrl)
+function __construct($name , $producerId , $price , $typeId , $quantity ,$imageUrl)
     {
-        $this->id =$id;
+
         $this->name=$name;
         $this->producerId = $producerId;
         $this->price=$price;
@@ -24,17 +24,37 @@ function __construct($id ,$name , $producerId , $price , $typeId , $quantity ,$i
         $this->quantity=$quantity;
         $this->imageUrl=$imageUrl;
     }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getProducerId()
+    {
+        return $this->producerId;
+    }
+
+    public function getTypeId()
+    {
+        return $this->typeId;
+    }
+
 function show(){
-   $product = findProduct($this->id);
-   echo $product->name;
-   ?> <img src="<?= $product->imageUrl ?>"width="150"></a>
+    $product = findProduct($this->id);
+    echo $product->name;
+    ?> <img src="<?= $product->imageUrl ?>"width="150"></a>
     <form action="index.php?target=cart&action=add&id=<?=$product->id?>" method="post">
         <input type="submit" value="Add to cart" name="addToCart">
     </form>
     <form action="index.php?target=favourite&action=add&id=<?=$product->id?>" method="post">
         <input type="submit" value="Add to Favourites" name="addToFavourites">
     </form>
-<?php
+    <?php
 }
 
 }

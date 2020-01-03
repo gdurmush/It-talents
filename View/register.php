@@ -12,7 +12,7 @@
 <body>
 
 <?php
-if (isset($err) && $err){
+if (isset($msg) && $msg!=""){
     ?>
     <div class="alert alert-danger" role="alert">
      <?php echo $msg;?>

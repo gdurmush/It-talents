@@ -45,7 +45,7 @@ class UserDAO{
             $params[] = $user->getAge();
             $params[] = $user->getPhoneNumber();
             $params[] = $user->getIsAdmin();
-            $sql = "INSERT INTO users (email, password, first_name,last_name,age,phone_number,is_admin,date_created) VALUES (?, ?, ?,?,?,?,?,now());";
+            $sql = "INSERT INTO users (email, password, first_name,last_name,age,phone_number,role,date_created) VALUES (?, ?, ?,?,?,?,?,now());";
             $stmt = $db->prepare($sql);
             $stmt->execute($params);
             $user->setId($db->lastInsertId());
@@ -77,7 +77,5 @@ class UserDAO{
             echo $e->getMessage();
         }
     }
-    public function delete(){
 
-    }
 }
