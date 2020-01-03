@@ -30,14 +30,18 @@ class CartController{
         include_once "View/cart.php";
     }
     public function update(){
-      $b =  checkQuantity($_POST["productId"]);
-      if ($b <= $_POST["quantity"]) {
-          updateCartQuantity($_POST["productId"], $_POST["quantity"]);
-          $this->show();
-      }
-      else{
-          echo "<h3>Quantity Not Available</h3>";
-      }
+        if (isset($_POST["updateQuantity"])){
+            $productQuantity =  checkQuantity($_POST["productId"]);
+            if ($productQuantity["quantity"] >= $_POST["quantity"]) {
+                updateCartQuantity($_POST["productId"], $_POST["quantity"]);
+                $this->show();
+            }
+            else{
+                $this->show();
+                echo "<h3>Quantity Not Available</h3>";
+            }
+        }
+
     }
     public function delete(){
         deleteProductFromCart($_GET["productId"]);

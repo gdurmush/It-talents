@@ -1,12 +1,8 @@
 <?php
 namespace View;
 use Model\ProductDAO;
-
-$product_id=2; // only for test
-$product=ProductDAO::getById($product_id);
-$avgStars=ProductDAO::getAVGRating($product_id);
-$countOfStars=ProductDAO::getStarsCount($product_id);
-
+$avgStars=ProductDAO::getAVGRating($this->id);
+$countOfStars=ProductDAO::getStarsCount($this->id);
 
 ?>
 <!doctype html>
@@ -21,16 +17,29 @@ $countOfStars=ProductDAO::getStarsCount($product_id);
 <body>
 <table>
     <tr>
-        <td><img src="<?= $product->imageUrl ?>"width="150"></td>
+        <td><img src="<?= $this->imageUrl ?>"width="150"></td>
     </tr>
     <tr>
-        <td><a href="index.php?target=cart&action=add&id=<?=$product->id?>"><button>Add to cart</button> </a></td>
+        <td><a href="index.php?target=cart&action=add&id=<?=$this->id?>"><button>Add to cart</button> </a></td>
     </tr>
+    <?php
+    if (checkIfInFavourites($this->id)){
+        ?>
+        <tr>
+            <td><a href="index.php?target=favourite&action=delete&id=<?=$this->id?>"><button>Remove From Favourites</button></a></td>
+        </tr>
+        <?php
+    }
+    else{
+        ?>
+        <tr>
+        <td><a href="index.php?target=favourite&action=add&id=<?=$this->id?>"><button>Add to Favourites</button></a></td>
+        </tr>
+        <?php
+    }
+    ?>
     <tr>
-        <td><a href="index.php?target=favourite&action=add&id=<?=$product->id?>"></a><button>Add to Favourites</button> </a></td>
-    </tr>
-    <tr>
-        <td><a href="index.php?target=product&action=rateProduct"></a><button>Rate this product</button> </a></td>
+        <td><a href="index.php?target=product&action=rateProduct"><button>Rate this product</button></a></td>
     </tr>
 </table>
 <table>

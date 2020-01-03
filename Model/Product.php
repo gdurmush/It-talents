@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 class Product{
-protected $id;
+public $id;
 public $name;
 protected $producerId;
 public $price;
@@ -14,9 +14,9 @@ public $quantity;
 public $imageUrl;
 
 
-function __construct($name , $producerId , $price , $typeId , $quantity ,$imageUrl)
+function __construct($id , $name , $producerId , $price , $typeId , $quantity ,$imageUrl)
     {
-
+        $this->id=$id;
         $this->name=$name;
         $this->producerId = $producerId;
         $this->price=$price;
@@ -45,16 +45,11 @@ function __construct($name , $producerId , $price , $typeId , $quantity ,$imageU
     }
 
 function show(){
-    $product = findProduct($this->id);
-    echo $product->name;
-    ?> <img src="<?= $product->imageUrl ?>"width="150"></a>
-    <form action="index.php?target=cart&action=add&id=<?=$product->id?>" method="post">
-        <input type="submit" value="Add to cart" name="addToCart">
-    </form>
-    <form action="index.php?target=favourite&action=add&id=<?=$product->id?>" method="post">
-        <input type="submit" value="Add to Favourites" name="addToFavourites">
-    </form>
-    <?php
+    include_once "View/showProduct.php";
+
+}
+function showMinimal (){
+
 }
 
 }

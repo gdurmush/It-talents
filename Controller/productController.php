@@ -187,12 +187,12 @@ public function show (){
         include_once "View/editProduct.php";
     }
     public function showProduct(){
-        include_once "View/showProduct.php";
+    include_once "View/showProduct.php";
     }
 
 
 
-    public function ratePage(){
+    public function rateProduct(){
         include_once "View/rateProduct.php";
     }
 
