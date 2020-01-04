@@ -50,7 +50,6 @@ $countOfStars=ProductController::showStars($this->id);
     }
     else{
         ?>
-        <tr>
         <td><a href="index.php?target=favourite&action=add&id=<?=$this->id?>"><img src="icons/like.svg" width="50" height="50"></a></td>
 
         </tr>
@@ -59,7 +58,6 @@ $countOfStars=ProductController::showStars($this->id);
     ?>
     <tr>
         <td><a href="index.php?target=product&action=rateProduct&id=<?=$this->id?>"><button>Rate this product</button></a></td>
-
     </tr>
 </table>
 

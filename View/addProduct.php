@@ -1,6 +1,6 @@
 <?php
 namespace View;
-use ModelProductDAO;
+use Model\ProductDAO;
 
 $producers=ProductDAO::getProducers();
 $types=ProductDAO::getTypes();
