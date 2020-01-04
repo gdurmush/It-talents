@@ -15,9 +15,10 @@ spl_autoload_register(function ($class){
 
 
 ?>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <a href="index.php?target=main&action=render"><button>Home</button></a> <?php
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<?php
+include_once "View/main.php";
 
 if (class_exists($controllerClassName)){
     $controller = new $controllerClassName();
@@ -39,5 +40,3 @@ if (class_exists($controllerClassName)){
     echo "error: controller not found $controllerClassName\n";
     die();
 }
-
-//TODO can open View files with index.php

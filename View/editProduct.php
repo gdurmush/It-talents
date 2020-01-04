@@ -2,7 +2,7 @@
 namespace View;
 use Model\ProductDAO;
 
-print_r($_POST);
+
 if(isset($_POST["editProduct"])){
     if(isset($_POST["productId"])){
         $productId=$_POST["productId"];
@@ -10,7 +10,7 @@ if(isset($_POST["editProduct"])){
         header("Location:index.php");
     }
 }else{
-
+    header("Location:index.php");
 }
 $producers=ProductDAO::getProducers();
 $types=ProductDAO::getTypes();

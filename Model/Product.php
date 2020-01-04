@@ -45,7 +45,7 @@ function __construct($id , $name , $producerId , $price , $typeId , $quantity ,$
     }
 
 function show(){
-    include_once "View/showProduct.php";
+    include "View/showProduct.php";
 
 }
 function showMinimal (){

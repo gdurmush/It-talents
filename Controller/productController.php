@@ -25,10 +25,12 @@ public function show (){
     }
     if (isset($_GET["typId"])){
       $products =  getProductsFromTypeId($_GET["typId"]);
+
       foreach ($products as $product){
-          $product = findProduct($product["id"]);
-          $product->show();
+          $productList = findProduct($product["id"]);
+          $productList->show();
       }
+
     }
 
 }
@@ -69,6 +71,7 @@ public function show (){
                 }
             }
             if(!$err){
+
 
                 ProductDAO::add($_POST["name"],$_POST["producer_id"],$_POST["price"],$_POST["type_id"],$_POST["quantity"],$img_url);
 

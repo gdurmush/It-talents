@@ -1,5 +1,8 @@
 <?php
 namespace Model;
+use PDO;
+use PDOException;
+
 include_once "PDO.php";
 
 class ProductDAO{
@@ -95,17 +98,7 @@ class ProductDAO{
     }
 
 
-    public static function delete($id){
-        try {
-            $db = getPDO();
-            $sql = "DELETE FROM products WHERE id=? ;";
-            $stmt = $db->prepare($sql);
-            $stmt->execute([$id]);
 
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
 
     public static function addRating($user_id,$product_id,$rating,$comment) {
         try {
