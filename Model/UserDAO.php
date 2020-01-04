@@ -44,7 +44,7 @@ class UserDAO{
             $params[] = $user->getLastName();
             $params[] = $user->getAge();
             $params[] = $user->getPhoneNumber();
-            $params[] = $user->getIsAdmin();
+            $params[] = $user->getRole();
             $sql = "INSERT INTO users (email, password, first_name,last_name,age,phone_number,role,date_created) VALUES (?, ?, ?,?,?,?,?,now());";
             $stmt = $db->prepare($sql);
             $stmt->execute($params);

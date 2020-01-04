@@ -2,10 +2,21 @@
 namespace View;
 use Model\ProductDAO;
 
+
+if(isset($_POST["editProduct"])){
+    if(isset($_POST["productId"])){
+        $productId=$_POST["productId"];
+    }else{
+        header("Location:index.php");
+    }
+}else{
+    header("Location:index.php");
+}
 $producers=ProductDAO::getProducers();
 $types=ProductDAO::getTypes();
-$productId=1; //only for test
 $product=ProductDAO::getById($productId);
+
+
 
 ?>
 

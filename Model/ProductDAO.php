@@ -56,21 +56,21 @@ class ProductDAO{
         }
     }
 
-    public static function add(Product $product) {
+    public static function add($product_name,$producer_id,$product_price,$type_id,$quantity,$image_url) {
         try {
             $db = getPDO();
             $params = [];
-            $params[] = $product->name;
-            $params[] = $product->getProducerId();
-            $params[] = $product->price;
-            $params[] = $product->getTypeId();
-            $params[] = $product->quantity;
-            $params[] = $product->imageUrl;
+            $params[] = $product_name;
+            $params[] = $producer_id;
+            $params[] = $product_price;
+            $params[] = $type_id;
+            $params[] = $quantity;
+            $params[] = $image_url;
             $sql = "INSERT INTO products (name, producer_id, price,type_id,quantity,image_url,date_created) VALUES (?,?,?,?,?,?,now());";
             $stmt = $db->prepare($sql);
             $stmt->execute($params);
-            $product->setId($db->lastInsertId());
-
+            $product_id=($db->lastInsertId());
+            new Product($product_id,$product_name,$producer_id,$product_price,$type_id,$quantity,$image_url);
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }
@@ -98,17 +98,7 @@ class ProductDAO{
     }
 
 
-    public static function delete($id){
-        try {
-            $db = getPDO();
-            $sql = "DELETE FROM products WHERE id=? ;";
-            $stmt = $db->prepare($sql);
-            $stmt->execute([$id]);
 
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
 
     public static function addRating($user_id,$product_id,$rating,$comment) {
         try {
@@ -169,7 +159,7 @@ public static function getAVGRating($product_id)
     try {
         $db = getPDO();
 
-        $sql="SELECT round(avg(stars),2)  AS avg_stars  FROM user_rate_products WHERE product_id;";
+        $sql="SELECT round(avg(stars),2)  AS avg_stars  FROM user_rate_products WHERE product_id=?;";
         $stmt=$db->prepare($sql);
         $stmt->execute([$product_id]);
         return  $stmt->fetch(\PDO::FETCH_OBJ);
@@ -184,10 +174,10 @@ public static function getAVGRating($product_id)
         try {
             $db = getPDO();
 
-                $sql="SELECT stars,count(stars)  AS stars_count  FROM user_rate_products where product_id=? group by stars;";
+                $sql="SELECT stars,count(stars)  AS stars_count  FROM user_rate_products where product_id=? group by stars order by stars;";
                 $stmt=$db->prepare($sql);
                 $stmt->execute([$product_id]);
-               return $stmt->fetchAll(\PDO::FETCH_OBJ);
+               return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         } catch (\PDOException $e) {
             echo $e->getMessage();
