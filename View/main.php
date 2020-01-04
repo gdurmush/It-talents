@@ -11,9 +11,9 @@ include_once "View/search.php";
 
 
 
-<a href="index.php?target=user&action=account"><img src="icons/user.svg" height="60" width="60"></a>My Account
-<a  href="index.php?target=favourite&action=show"><img src="icons/like.svg" height="60" width="60"></a>Favourites
-<a href="index.php?target=cart&action=show"><img src="icons/cart.svg" height="60" width="60"></a>My Cart
+<a href="index.php?target=user&action=account"><img src="icons/user.svg" height="60" width="60">Моят Акаунт</a>
+<a  href="index.php?target=favourite&action=show"><img src="icons/like.svg" height="60" width="60">Любими</a>
+<a href="index.php?target=cart&action=show"><img src="icons/cart.svg" height="60" width="60">Моята Количка</a>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </div>
  </nav>

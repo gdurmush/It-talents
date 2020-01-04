@@ -1,10 +1,9 @@
 <?php
 namespace Controller;
-use model\Types;
 
 use model\Product;
 use Model\ProductDAO;
-
+use model\Type;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -19,13 +18,14 @@ public function show (){
     if (isset($_GET["ctgId"])){
         $types = getTypesFromCategorieId($_GET["ctgId"]);
         foreach ($types as $type){
-            $typeObject = new Types($type["id"] , $type["name"] , $type["categorie_id"]);
+            $typeObject = new Type($type["id"] , $type["name"] , $type["categorie_id"]);
             $typeObject->show();
         }
     }
     if (isset($_GET["typId"])){
       $products =  getProductsFromTypeId($_GET["typId"]);
-
+        $type = getTypeInformation($_GET["typId"]);
+       echo "<h1>" .$type->name . "</h1>";
       foreach ($products as $product){
           $productList = findProduct($product["id"]);
           $productList->show();

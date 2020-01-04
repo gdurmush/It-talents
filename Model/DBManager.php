@@ -1,6 +1,7 @@
 <?php
 
 use model\Product;
+use model\Type;
 
 include_once "PDO.php";
 ini_set('display_errors', 1);
@@ -251,14 +252,20 @@ function getProductsFromTypeId($id){
     $products = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $products;
 }
-function findCategorie ($id){
-    $pdo = getPDO();
-    $sql = "SELECT id , name FROM categories WHERE id = ? ";
-    $statement = $pdo->prepare($sql);
-    $statement->execute([$id]);
-    $rows = $statement->fetch(PDO::FETCH_ASSOC);
-    $categorie = new Categories($rows["id"] , $rows["name"]);
-    return $categorie;
+function getTypeInformation ($id){
+    try{
+        $pdo = getPDO();
+        $sql = "SELECT id , name , categorie_id FROM types WHERE id = ? ";
+        $statement = $pdo->prepare($sql);
+        $statement->execute([$id]);
+        $rows = $statement->fetch(PDO::FETCH_ASSOC);
+        $type = new Type($rows["id"] , $rows["name"] , $rows["categorie_id"]);
+        return $type;
+    }
+    catch (PDOException $e){
+        echo $e->getMessage();
+    }
+
 
 }
 function getTypesFromCategorieId($id){
