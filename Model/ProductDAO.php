@@ -1,5 +1,8 @@
 <?php
 namespace Model;
+use PDO;
+use PDOException;
+
 include_once "PDO.php";
 
 class ProductDAO{

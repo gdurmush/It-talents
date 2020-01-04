@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 include_once dirname(__FILE__) . "/../Model/DBManager.php";
 use Model\Address;
 use Model\AddressDAO;
-
+use Model\ProductDAO;
 class CartController{
     public function add(){
         if (isset($_GET["id"])){

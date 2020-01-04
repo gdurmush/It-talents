@@ -33,13 +33,13 @@ $countOfStars=ProductDAO::getStarsCount($this->id);
     else{
         ?>
         <tr>
-        <td><a href="index.php?target=favourite&action=add&id=<?=$this->id?>"><button>Add to Favourites</button></a></td>
+        <td><a href="index.php?target=favourite&action=add&id=<?=$this->id?>"><img src="icons/like.svg" width="50" height="50"></a></td>
         </tr>
         <?php
     }
     ?>
     <tr>
-        <td><a href="index.php?target=product&action=rateProduct"><button>Rate this product</button></a></td>
+        <td><a href="index.php?target=product&action=rateProduct&id=<?=$this->id?>"><button>Rate this product</button></a></td>
     </tr>
 </table>
 <table>
