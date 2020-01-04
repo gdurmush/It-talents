@@ -1,4 +1,7 @@
+<?php
+namespace View;
 
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,7 +16,7 @@
 <body>
 
 <?php
-if (isset($err) && $err){
+if (isset($msg) && $msg!=""){
     ?>
 <div class="alert alert-danger" role="alert">
   <?php echo $msg; ?>

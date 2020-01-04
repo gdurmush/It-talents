@@ -9,12 +9,11 @@ class OrderController{
     {
         if (isset($_POST["order"])){
            $orderedProducts = showCart();
-           foreach ($orderedProducts as $value){
-
-           }
-          $id = addOrder($_POST["address"]);
+            $id = addOrder($_POST["address"]);
                 addOrderProducts($id , $orderedProducts);
+            decreaseProductQuantity($orderedProducts);
                 deleteCart();
+
 
 
 //            addOrder($_POST["totalPrice"] , $_POST["address"] , $_POST["orderedProducts"]);

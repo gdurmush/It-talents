@@ -10,11 +10,11 @@ class User
     private $last_name;
     private $age;
     private $phone_number;
-    private $is_admin;
+    private $role;
     //private $date_created;
 
 
-    public function __construct($email,$password,$first_name,$last_name,$age,$phone_number,$is_admin){
+    public function __construct($email,$password,$first_name,$last_name,$age,$phone_number,$role){
 
         $this->email=$email;
         $this->password=$password;
@@ -22,7 +22,7 @@ class User
         $this->last_name=$last_name;
         $this->age=$age;
         $this->phone_number=$phone_number;
-        $this->is_admin=$is_admin;
+        $this->role=$role;
     }
 
 
@@ -95,9 +95,9 @@ class User
     }
 
 
-    public function getIsAdmin()
+    public function getRole()
     {
-        return $this->is_admin;
+        return $this->role;
     }
 
 

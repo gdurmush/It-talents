@@ -69,8 +69,8 @@ public function show (){
                 }
             }
             if(!$err){
-                $product=new Product($_POST["name"],$_POST["producer_id"],$_POST["price"],$_POST["type_id"],$_POST["quantity"],$img_url);
-                ProductDAO::add($product);
+
+                ProductDAO::add($_POST["name"],$_POST["producer_id"],$_POST["price"],$_POST["type_id"],$_POST["quantity"],$img_url);
 
             }
 
@@ -113,8 +113,7 @@ public function show (){
                     }
                 }
                 if(!$err){
-                    $product=new Product($_POST["name"],$_POST["producer_id"],$_POST["price"],$_POST["type_id"],$_POST["quantity"],$img_url);
-                    $product->setId($_POST["product_id"]);
+                    $product=new Product($_POST["product_id"],$_POST["name"],$_POST["producer_id"],$_POST["price"],$_POST["type_id"],$_POST["quantity"],$img_url);
                     ProductDAO::edit($product);
 
                 }
@@ -123,14 +122,6 @@ public function show (){
 
         }
         include_once "View/editProduct.php";
-    }
-
-    public function delete(){
-    $id=1;  //only for test
-        //if(isset($_POST["deleteProduct"])){
-            ProductDAO::delete($id);
-
-       // }
     }
 
 
@@ -174,6 +165,26 @@ public function show (){
         }
     }
 
+    public static function showStars($product_id){
+        $product_stars=ProductDAO::getStarsCount($product_id);
+
+        $starsCountArr=[];
+        for($i=1;$i<=5;$i++) {
+            $isZero = true;
+            foreach ($product_stars as $product_star) {
+                if ($product_star["stars"] == $i) {
+                    $starsCountArr[$i] = $product_star["stars_count"];
+                    $isZero = false;
+                }
+            }
+            if($isZero) {
+                $starsCountArr[$i] = 0;
+            }
+        }
+
+        return $starsCountArr;
+    }
+
 
 
 
@@ -184,15 +195,16 @@ public function show (){
         include_once "View/addProduct.php";
     }
     public function editProduct(){
+
         include_once "View/editProduct.php";
     }
     public function showProduct(){
-        include_once "View/showProduct.php";
+    include_once "View/showProduct.php";
     }
 
 
 
-    public function ratePage(){
+    public function rateProduct(){
         include_once "View/rateProduct.php";
     }
 

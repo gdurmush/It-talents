@@ -1,4 +1,7 @@
 <?php
+
+use model\Product;
+
 include_once "PDO.php";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -66,7 +69,7 @@ function findProduct ($id){
     $statement = $pdo->prepare($sql);
     $statement->execute([$id]);
     $rows = $statement->fetch(PDO::FETCH_ASSOC);
-   $product = new \model\Product($rows["id"] , $rows["name"] , $rows["producer_id"] , $rows["price"] , $rows["type_id"]
+   $product = new Product($rows["id"] , $rows["name"] , $rows["producer_id"] , $rows["price"] , $rows["type_id"]
        , $rows["quantity"] , $rows["image_url"]);
 
     return $product;
@@ -86,6 +89,22 @@ function checkIfInCart($id){
     }
     catch (PDOException $e){
       echo  $e->getMessage();
+    }
+}
+function checkIfInFavourites($id){
+    try {
+        $params = [];
+        $params[] = $id;
+        $params[] = $_SESSION["logged_user_id"];
+        $pdo = getPDO();
+        $sql = "SELECT product_id FROM user_favourite_products WHERE product_id = ? AND user_id = ?";
+        $statement = $pdo->prepare($sql);
+        $statement->execute($params);
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+    }
+    catch (PDOException $e){
+        echo  $e->getMessage();
     }
 }
 function putInCart($id){
@@ -134,12 +153,11 @@ function checkQuantity ($id){
     try {
         $params = [];
         $params[] = $id;
-        $params[] = $_SESSION["logged_user_id"];
         $pdo = getPDO();
-        $sql = "SELECT quantity FROM products WHERE product_id = ? AND user_id = ?";
+        $sql = "SELECT quantity FROM products WHERE id = ?";
         $statement = $pdo->prepare($sql);
         $statement->execute($params);
-        $quantity = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $quantity = $statement->fetch(PDO::FETCH_ASSOC);
         return $quantity;
     }
     catch (PDOException $e){
@@ -258,6 +276,18 @@ function deleteCart (){
     $sql = "DELETE FROM cart WHERE user_id = ? ";
     $statement = $pdo->prepare($sql);
     $statement->execute($params);
+}
+
+function decreaseProductQuantity($orderedProducts){
+    foreach ($orderedProducts as $product){
+        $params = [];
+        $params[] = $product["quantity"];
+        $params[] = $product["product_id"];
+        $pdo = getPDO();
+        $sql = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
+        $statement = $pdo->prepare($sql);
+        $statement->execute($params);
+    }
 }
 
 function showOrders(){

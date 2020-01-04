@@ -11,9 +11,10 @@ class userController{
 const MIN_LENGTH=8;
 
     public function login(){
+        $err = false;
+        $msg='';
         if(isset($_POST["login"])) {
-            $err = false;
-            $msg='';
+
             if (!isset($_POST["email"]) || !isset($_POST["password"])) {
                 $err = true;
                 $msg='All fields are required!';
@@ -25,17 +26,18 @@ const MIN_LENGTH=8;
                 if ($user) {
                     if (password_verify($_POST["password"], $user->password)) {
                         $_SESSION["logged_user_id"] = $user->id;
+                        $_SESSION["logged_user_role"]=$user->role;
                     } else {
                         $err = true;
                         $msg='Invalid username or password!';
                     }
                 }
             }
-            if(!$err){
-                include_once "View/main.php";
-            }else{
-                include_once "View/login.php";
-            }
+        }
+        if(!$err){
+            include_once "View/main.php";
+        }else{
+            include_once "View/login.php";
         }
     }
 
@@ -54,7 +56,7 @@ const MIN_LENGTH=8;
             UserDAO::add($user);
 
             $_SESSION["logged_user_id"]=$user->getId();
-
+            $_SESSION["logged_user_role"]=$user->getRole();
             include_once "View/main.php";
         }else{
             include_once "View/register.php";
@@ -98,7 +100,13 @@ const MIN_LENGTH=8;
         include_once "View/editProfile.php";
     }
 
-
+        public function logout(){
+            if(isset($_SESSION["logged_user_id"])){
+                unset($_SESSION);
+                session_destroy();
+                header("Location: index.php");
+            }
+        }
 
  public function validate($email,$password,$firstName,$lastName,$phone_number,$age){
         $msg = '';
