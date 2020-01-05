@@ -183,6 +183,70 @@ public static function getAVGRating($product_id)
             echo $e->getMessage();
         }
     }
+   static function getProductsFromTypeId($id){
+        try{
+            $params = [];
+            $params[] = $id;
+            $pdo = getPDO();
+            $sql = "SELECT id , name FROM products WHERE type_id = ?";
+            $statement = $pdo->prepare($sql);
+            $statement->execute($params);
+            $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $products;
+        }
+        catch (PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+   static function checkQuantity ($id){
+        try {
+            $params = [];
+            $params[] = $id;
+            $pdo = getPDO();
+            $sql = "SELECT quantity FROM products WHERE id = ?";
+            $statement = $pdo->prepare($sql);
+            $statement->execute($params);
+            $quantity = $statement->fetch(PDO::FETCH_ASSOC);
+            return $quantity;
+        }
+        catch (PDOException $e){
+            echo  $e->getMessage();
+        }
+    }
+
+   static function findProduct ($id){
+        try{
+            $pdo = getPDO();
+            $sql = "SELECT id , name , producer_id , price , type_id , quantity , image_url FROM products WHERE id = ?";
+            $statement = $pdo->prepare($sql);
+            $statement->execute([$id]);
+            $rows = $statement->fetch(PDO::FETCH_ASSOC);
+            $product = new Product($rows["id"] , $rows["name"] , $rows["producer_id"] , $rows["price"] , $rows["type_id"]
+                , $rows["quantity"] , $rows["image_url"]);
+
+            return $product;
+        }
+        catch (PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+    function decreaseProductQuantity($orderedProducts)
+    {
+        try{
+            foreach ($orderedProducts as $product) {
+                $params = [];
+                $params[] = $product["quantity"];
+                $params[] = $product["product_id"];
+                $pdo = getPDO();
+                $sql = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
+                $statement = $pdo->prepare($sql);
+                $statement->execute($params);
+            }
+        }
+        catch (PDOException $e){
+            echo $e->getMessage();
+        }
+    }
 
     public static function getComments($product_id)
     {

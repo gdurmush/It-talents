@@ -3,7 +3,9 @@ namespace model;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+use model\SearchDAO;
 class Search{
+
     public  $search;
     private $products;
     private $categories;
@@ -12,9 +14,9 @@ class Search{
     function __construct($search)
     {
         $this->search = $search;
-        $this->products = searchProduct($this->search);
-        $this->categories = searchCategorie($this->search);
-        $this->types = searchType($this->search);
+        $this->products = SearchDAO::searchProduct($this->search);
+        $this->categories = SearchDAO::searchCategorie($this->search);
+        $this->types = SearchDAO::searchType($this->search);
     }
 
     public function render(){

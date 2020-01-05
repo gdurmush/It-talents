@@ -1,7 +1,11 @@
 <?php
-$favourites = showFavourites();
+
+use model\FavouriteDAO;
+use Model\ProductDAO;
+
+$favourites = FavouriteDAO::showFavourites();
 foreach ($favourites as $favourite) {
-    $product = findProduct($favourite["product_id"])
+    $product = ProductDAO::findProduct($favourite["product_id"])
     ?>
     <body>
 <table>

@@ -1,6 +1,6 @@
 <?php
 namespace model;
-class Types{
+class Type{
     public $id;
     public $name;
     public $categorie;

@@ -1,9 +1,11 @@
 <?php
 namespace Controller;
-use model\Types;
-
+use model\SearchDAO;
+use model\Search;
 use model\Product;
 use Model\ProductDAO;
+use model\Type;
+use TypeDAO;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -13,21 +15,22 @@ include_once dirname(__FILE__) . "/../Model/DBManager.php";
 class ProductController {
 public function show (){
     if (isset($_GET["prdId"])){
-        $product = findProduct($_GET["prdId"]);
+        $product = ProductDAO::findProduct($_GET["prdId"]);
         $product->show();
     }
     if (isset($_GET["ctgId"])){
-        $types = getTypesFromCategorieId($_GET["ctgId"]);
+        $types = TypeDAO::getTypesFromCategorieId($_GET["ctgId"]);
         foreach ($types as $type){
-            $typeObject = new Types($type["id"] , $type["name"] , $type["categorie_id"]);
+            $typeObject = new Type($type["id"] , $type["name"] , $type["categorie_id"]);
             $typeObject->show();
         }
     }
     if (isset($_GET["typId"])){
-      $products =  getProductsFromTypeId($_GET["typId"]);
-
+      $products =  ProductDAO::getProductsFromTypeId($_GET["typId"]);
+        $type = TypeDAO::getTypeInformation($_GET["typId"]);
+       echo "<h1>" .$type->name . "</h1>";
       foreach ($products as $product){
-          $productList = findProduct($product["id"]);
+          $productList = ProductDAO::findProduct($product["id"]);
           $productList->show();
       }
 
