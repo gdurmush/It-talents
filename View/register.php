@@ -53,6 +53,6 @@ if (isset($msg) && $msg!=""){
 
     <button name="register" type="submit" class="btn btn-primary">Submit</button>
 </form>
-<a href="index.php?target=User&action=loginPage"><button name="register" type="submit" class="btn btn-primary">Back to login page</button></a>
+<a href="index.php?target=user&action=loginPage"><button name="register" type="submit" class="btn btn-primary">Back to login page</button></a>
 </body>
 </html>

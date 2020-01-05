@@ -1,9 +1,9 @@
 <?php
 namespace View;
 
-use Model\ProductDAO;
+use Model\RatingDAO;
 
-$myRatings=ProductDAO::showMyRated($_SESSION["logged_user_id"]);
+$myRatings=RatingDAO::showMyRated($_SESSION["logged_user_id"]);
 
 
 ?>
@@ -39,7 +39,7 @@ $myRatings=ProductDAO::showMyRated($_SESSION["logged_user_id"]);
         </tr>
         <tr>
             <td>
-                <form action="index.php?target=product&action=editRatedPage" method="post">
+                <form action="index.php?target=rating&action=editRatedPage" method="post">
                     <input type="submit" name="editRating" value="Edit">
                     <input type="hidden" name="rating_id" value="<?= $myRating->rating_id?>">
                     <input type="hidden" name="image_url" value="<?= $myRating->image_url?>">

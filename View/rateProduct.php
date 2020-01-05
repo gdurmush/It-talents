@@ -1,6 +1,7 @@
 <?php
 namespace View;
-$_POST['product_id']=2;// only for test
+print_r($_GET['id']);
+
 ?>
 
 <!doctype html>
@@ -13,9 +14,9 @@ $_POST['product_id']=2;// only for test
     <title>Document</title>
 </head>
 <body>
-<form action="index.php?target=product&action=rate" method="post">
+<form action="index.php?target=rating&action=rate" method="post">
     <table>
-        <tr><input type="hidden" name="product_id" value="<?php echo $_POST['product_id'] ?>"></tr>
+        <tr><input type="hidden" name="product_id" value="<?php echo $_GET['id'] ;?>"></tr>
         <tr>
             <td>Give your vote from 1 to 5 for this product</td>
             <td><input type="number" name="rating" ></td>

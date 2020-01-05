@@ -17,7 +17,7 @@ class ProductDAO{
             return $stmt->fetchAll(\PDO::FETCH_OBJ);
 
         }
-        catch (\PDOException $e){
+        catch (PDOException $e){
             echo $e->getMessage();
         }
     }
@@ -41,7 +41,7 @@ class ProductDAO{
         try{
             $pdo=getPDO();
             $sql="SELECT p.name, p.producer_id, pr.name AS producer_name,
-                    p.price, p.type_id, t.name AS type_name,p.quantity,p.image_url
+                    p.price,p.old_price, p.type_id, t.name AS type_name,p.quantity,p.image_url
                     FROM products AS p 
                     JOIN producers AS pr ON(p.producer_id=pr.id)
                     JOIN types AS t ON (p.type_id=t.id)
@@ -75,20 +75,27 @@ class ProductDAO{
             echo $e->getMessage();
         }
     }
-    public static function edit(Product $product)
+    public static function edit(array $product)
     {
         try {
             $db = getPDO();
 
             $params = [];
-            $params[] = $product->name;
-            $params[] = $product->getProducerId();
-            $params[] = $product->price;
-            $params[] = $product->getTypeId();
-            $params[] = $product->quantity;
-            $params[] = $product->imageUrl;
-            $params[] = $product->getId();
-            $sql = "UPDATE products SET name=?, producer_id=?,price=?, type_id=?, quantity=?, image_url=? WHERE id=? ;";
+            $params[] = $product["name"];
+            $params[] = $product["producer_id"];
+            $params[] = $product["price"];
+            if( $product["old_price"]!=NULL){
+                $params[]=$product["old_price"];
+                $sql = "UPDATE products SET name=?, producer_id=?,price=?,old_price=?, type_id=?, quantity=?, image_url=? WHERE id=? ;";
+            }else{
+                $sql = "UPDATE products SET name=?, producer_id=?,price=?, type_id=?, quantity=?, image_url=? WHERE id=? ;";
+            }
+            $params[] = $product["type_id"];
+            $params[] = $product["quantity"];
+            $params[] = $product["image_url"];
+            $params[] = $product["product_id"];
+
+
             $stmt = $db->prepare($sql);
             $stmt->execute($params);
 
@@ -97,92 +104,6 @@ class ProductDAO{
         }
     }
 
-
-
-
-    public static function addRating($user_id,$product_id,$rating,$comment) {
-        try {
-            $db = getPDO();
-            $params = [];
-            $params[] = $user_id;
-            $params[] = $product_id;
-            $params[] = $rating;
-            $params[] = $comment;
-
-            $sql = "INSERT INTO user_rate_products (user_id, product_id, stars,text,date_created) VALUES (?,?,?,?,now());";
-            $stmt = $db->prepare($sql);
-            $stmt->execute($params);
-
-
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-    public static function editRating($id,$rating,$comment) {
-        try {
-            $db = getPDO();
-            $params = [];
-            $params[] = $rating;
-            $params[] = $comment;
-            $params[] = $id;
-
-            $sql = "UPDATE user_rate_products SET stars=?, text=? WHERE id=? ;";
-            $stmt = $db->prepare($sql);
-            $stmt->execute($params);
-
-
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    public static function showMyRated($user_id) {
-        try {
-            $db = getPDO();
-
-            $sql="SELECT p.id AS product_id,p.name AS product_name,p.image_url,urp.id AS rating_id,urp.stars,urp.text
-                    FROM user_rate_products AS urp
-                    JOIN products AS p ON(p.id=urp.product_id)
-                    WHERE urp.user_id=?;";
-            $stmt=$db->prepare($sql);
-            $stmt->execute([$user_id]);
-            return $stmt->fetchAll(\PDO::FETCH_OBJ);
-
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-
-
-public static function getAVGRating($product_id)
-{
-    try {
-        $db = getPDO();
-
-        $sql="SELECT round(avg(stars),2)  AS avg_stars  FROM user_rate_products WHERE product_id=?;";
-        $stmt=$db->prepare($sql);
-        $stmt->execute([$product_id]);
-        return  $stmt->fetch(\PDO::FETCH_OBJ);
-
-
-    } catch (\PDOException $e) {
-        echo $e->getMessage();
-    }
-}
-    public static function getStarsCount ($product_id)
-    {
-        try {
-            $db = getPDO();
-
-                $sql="SELECT stars,count(stars)  AS stars_count  FROM user_rate_products where product_id=? group by stars order by stars;";
-                $stmt=$db->prepare($sql);
-                $stmt->execute([$product_id]);
-               return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
    static function getProductsFromTypeId($id){
         try{
             $params = [];
@@ -248,17 +169,15 @@ public static function getAVGRating($product_id)
         }
     }
 
-    public static function getComments($product_id)
+
+    public static function removePromotion($product_id)
     {
         try {
             $db = getPDO();
-
-            $sql="SELECT concat(u.first_name,\" \", u.last_name) AS full_name,
-                    urp.stars,urp.text, cast(urp.date_created AS date) AS date FROM users AS u
-                    JOIN user_rate_products AS urp ON(u.id=urp.user_id) WHERE product_id=?";
+            $sql = "UPDATE products SET old_price=NULL WHERE id=? ;";
             $stmt=$db->prepare($sql);
             $stmt->execute([$product_id]);
-            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+
 
         } catch (\PDOException $e) {
             echo $e->getMessage();

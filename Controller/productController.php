@@ -4,8 +4,8 @@ use model\SearchDAO;
 use model\Search;
 use model\Product;
 use Model\ProductDAO;
-use model\Type;
-use TypeDAO;
+use Model\Type;
+use Model\TypeDAO;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -99,7 +99,23 @@ public function show (){
                     $msg="Invalid quantity format!";
                 }
 
-                if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $_POST["price"]) ||  !is_numeric($_POST["quantity"])){
+                $price=$_POST["price"];
+                $old_price=NULL;
+                if(!empty($_POST["newPrice"])){
+                    if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $_POST["newPrice"]) ||  !is_numeric($_POST["newPrice"])){
+                        $err=true;
+                        $msg="Invalid new price format!";
+                    }
+                    if($_POST["newPrice"]>$_POST["price"]){
+                        $err=true;
+                        $msg="New price of product must be lower than price";
+                    }else{
+                        $price=$_POST["newPrice"];
+                        $old_price=$_POST["price"];
+                    }
+                }
+
+                if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $_POST["price"]) ||  !is_numeric($_POST["price"])){
                     $err=true;
                     $msg="Invalid price format!";
                 }
@@ -119,7 +135,16 @@ public function show (){
                     }
                 }
                 if(!$err){
-                    $product=new Product($_POST["product_id"],$_POST["name"],$_POST["producer_id"],$_POST["price"],$_POST["type_id"],$_POST["quantity"],$img_url);
+                    $product=[];
+                    $product["product_id"]=$_POST["product_id"];
+                    $product["name"]=$_POST["name"];
+                    $product["producer_id"]=$_POST["producer_id"];
+                    $product["price"]=$price;
+                    $product["old_price"]=$old_price;
+                    $product["type_id"]=$_POST["type_id"];
+                    $product["quantity"]=$_POST["quantity"];
+                    $product["image_url"]=$img_url;
+
                     ProductDAO::edit($product);
 
                 }
@@ -127,97 +152,67 @@ public function show (){
             }
 
         }
+        $productId=$_POST["product_id"];
         include_once "View/editProduct.php";
     }
 
 
-    public function rate(){
-    if(isset($_POST["save"])){
-        $msg="";
+    public static function checkIfIsInPromotion($product_id){
+        $product=ProductDAO::getById($product_id);
 
-        if(empty($_POST["rating"]) || empty($_POST["comment"])){
-            $msg = "All fields are required!";
-        }else{
-            if(!preg_match('/^[1-5]+$/',$_POST["rating"]) ||  !is_numeric($_POST["rating"])){
-                $msg = "Rating must be from 1 to 5!";
-            }
-            if(strlen($_POST["comment"])>100){
-                $msg = "Comment must be maximum 100 characters!";
-            }
-            if($msg==""){
-                ProductDAO::addRating($_SESSION["logged_user_id"],$_POST["product_id"],$_POST["rating"],$_POST["comment"]);
-                include_once "View/rateProduct.php";
-            }
+
+
+        $oldPrice=null;
+        $inPromotion=false;
+        $discount=null;
+        if($product->old_price !=NULL){
+            $inPromotion=true;
+            $oldPrice=$product->old_price;
+            $discount=round((($product->old_price-$product->price)/$product->old_price)*100,0);
         }
+        $price=[];
+        $price["in_promotion"]=$inPromotion;
+        $price["old_price"]=$oldPrice;
+        $price["discount"]=$discount;
+        return $price;
     }
-    }
-    public function editRate(){
-        if(isset($_POST["saveChanges"])){
-            $msg="";
-            if(empty($_POST["rating"]) || empty($_POST["comment"])){
-                $msg = "All fields are required!";
-            }else{
-                if(!preg_match('/^[1-5]+$/',$_POST["rating"]) ||  !is_numeric($_POST["rating"])){
-                    $msg = "Rating must be from 1 to 5!";
-                }
-                if(strlen($_POST["comment"])>100){
-                    $msg = "Comment must be maximum 100 characters!";
-                }
-                if($msg==""){
-                    ProductDAO::editRating($_POST["rating_id"],$_POST["rating"],$_POST["comment"]);
-                    include_once "View/myRated.php";
-                }
-            }
+
+
+    public function removeDiscount(){
+    if(isset($_POST["remove"])){
+        if(isset($_POST["product_id"])){
+            ProductDAO::removePromotion($_POST["product_id"]);
+            $productId=$_POST["product_id"];
+            include_once "View/editProduct.php";
         }
     }
 
-    public static function showStars($product_id){
-        $product_stars=ProductDAO::getStarsCount($product_id);
 
-        $starsCountArr=[];
-        for($i=1;$i<=5;$i++) {
-            $isZero = true;
-            foreach ($product_stars as $product_star) {
-                if ($product_star["stars"] == $i) {
-                    $starsCountArr[$i] = $product_star["stars_count"];
-                    $isZero = false;
-                }
-            }
-            if($isZero) {
-                $starsCountArr[$i] = 0;
-            }
-        }
-
-        return $starsCountArr;
     }
 
-
-
-
-    public function myRated(){
-        include_once "View/myRated.php";
-    }
     public function addProduct(){
         include_once "View/addProduct.php";
     }
-    public function editProduct(){
 
-        include_once "View/editProduct.php";
+
+    public function editProduct(){
+        if(isset($_POST["editProduct"])){
+            if(isset($_POST["product_id"])){
+                $productId=$_POST["product_id"];
+                include_once "View/editProduct.php";
+            }else{
+                header("Location:index.php");
+            }
+        }else{
+            header("Location:index.php");
+        }
     }
+
+
     public function showProduct(){
     include_once "View/showProduct.php";
+
     }
-
-
-
-    public function rateProduct(){
-        include_once "View/rateProduct.php";
-    }
-
-    public function editRatedPage(){
-        include_once "View/editRatedProduct.php";
-    }
-
 
 
 

@@ -3,21 +3,13 @@ namespace View;
 use Model\ProductDAO;
 
 
-if(isset($_POST["editProduct"])){
-    if(isset($_POST["productId"])){
-        $productId=$_POST["productId"];
-    }else{
-        header("Location:index.php");
-    }
-}else{
-    header("Location:index.php");
-}
 $producers=ProductDAO::getProducers();
 $types=ProductDAO::getTypes();
+
 $product=ProductDAO::getById($productId);
 
 
-
+$isInPromotion=false;
 ?>
 
 <!doctype html>
@@ -34,6 +26,46 @@ $product=ProductDAO::getById($productId);
 if (isset($err) && $err) {
     echo $msg;
 }?> <br>
+
+<?php
+if ($product->old_price!=NULL) {
+    $isInPromotion=true;
+    echo "In Promotion!";
+}?> <br>
+
+
+<table>
+<tr>
+    <td><?= $product->name ?></td>
+</tr>
+<tr>
+    <td><img src="<?= $product->image_url ?>"width="150"></td>
+</tr>
+<?php if($isInPromotion){
+    ?>
+    <tr>
+        <td>Old Price:</td>
+        <td><?=$product->old_price ?> EURO</td>
+    </tr>
+    <tr>
+        <td>New Price:</td>
+        <td><?= $product->price ?> EURO</td>
+    </tr>
+
+    <?php
+}else{
+    ?>
+    <tr>
+        <td>Price:</td>
+        <td><?= $product->price ?> EURO</td>
+    </tr>
+    <?php
+}?>
+
+</table>
+<hr>
+
+<h3>Edit this product:</h3>
 <form action="index.php?target=product&action=edit" method="post" enctype="multipart/form-data">
     <table>
         <tr>
@@ -45,30 +77,26 @@ if (isset($err) && $err) {
         </tr>
         <tr>
             <td>Producer</td>
-            <td><select name="producer_id" required>
+            <td>
+                <select name="producer_id" required>
                     <option  value="<?php echo $product->producer_id?>"><?php echo $product->producer_name?></option>
                     <?php foreach ($producers as $producer) {
                         echo "<option value='$producer->id'>$producer->name</option>";
                     } ?>
-                </select></td>
-
-            </select>
+                </select>
             </td>
         </tr>
         <tr>
-            <td>Price</td>
-            <td><input type="number" step="0.01" name="price" min="0.01" value="<?php echo $product->price?>" required></td>
-        </tr>
-
-        <tr>
             <td>Type</td>
-            <td><select name="type_id" required>
+            <td>
+                <select name="type_id" required>
                     <option value="<?php echo $product->type_id?>"><?php echo $product->type_name?></option>
                     <?php foreach ($types as $type) {
                         echo "<option value='$type->id'>$type->name</option>";
 
                     } ?>
-                </select></td>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>Quantity</td>
@@ -76,14 +104,32 @@ if (isset($err) && $err) {
 
         </tr>
         <tr>
+            <td>Price</td>
+            <td><input type="number" step="0.01" name="price" min="0.01" value="<?php echo $product->price?>" required></td>
+        </tr>
+
+        <tr>
+            <td>Get in promotion</td>
+            <td><input type="number" step="0.01" name="newPrice"  placeholder="Get new price here"></td>
+
+        </tr>
+
+        <tr>
             <td>Upload image</td>
             <td><input type="file" name="file"></td>
             <tr><input type="hidden" name="old_image" value="<?php echo $product->image_url?>"></tr>
         </tr>
+
+
         <tr>
             <td colspan="2"><input type="submit" name="saveChanges" value="Save"></td>
         </tr>
     </table>
+</form>
+
+<form action="index.php?target=product&action=removeDiscount" method="post">
+    <input type="hidden" name="product_id" value="<?php echo $productId?>">
+    <input type="submit" name="remove" value="Remove Promotion">
 </form>
 </body>
 </html>

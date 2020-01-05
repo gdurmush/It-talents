@@ -1,13 +1,15 @@
 <?php
 namespace View;
-use model\FavouriteDAO;
-use Model\ProductDAO;
+use Controller\ratingController;
+use Model\FavouriteDAO;
 use Controller\ProductController;
-$avgStars=ProductDAO::getAVGRating($this->id);
-$countOfStars=ProductController::showStars($this->id);
-$comments=ProductDAO::getComments($this->id);
+use Model\RatingDAO;
 
-$_SESSION["logged_user_role"] = "user";
+$avgStars=RatingDAO::getAVGRating($this->id);
+$countOfStars=ratingController::showStars($this->id);
+$comments=RatingDAO::getComments($this->id);
+$inPromotion=ProductController::checkIfIsInPromotion($this->id);
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -26,17 +28,37 @@ $_SESSION["logged_user_role"] = "user";
     <tr>
         <td><img src="<?= $this->imageUrl ?>"width="150"></td>
     </tr>
+    <?php if($inPromotion["in_promotion"]){
+         ?>
+        <tr>
+            <td>Old Price:</td>
+            <td><?=$inPromotion["old_price"] ?> EURO</td>
+        </tr>
+        <tr>
+            <td>New Price:</td>
+            <td><?= $this->price ?> EURO</td>
+        </tr>
+        <tr>
+            <td>Discount:</td>
+            <td><?= $inPromotion["discount"] ?> %</td>
+        </tr>
+        <?php
+    }else{
+    ?>
     <tr>
-        <td>Price</td>
+        <td>Price:</td>
         <td><?= $this->price ?> EURO</td>
     </tr>
+    <?php
+    }?>
+
    
 
             <?php if(isset($_SESSION["logged_user_role"]) && $_SESSION["logged_user_role"]=="admin"){
                 ?>
     <tr>
                 <form action="index.php?target=product&action=editProduct" method="post">
-                    <input type="hidden" name="productId" value="<?= $this->id ?>">
+                    <input type="hidden" name="product_id" value="<?= $this->id ?>">
                     <input type="submit" name="editProduct" value="Edit this product">
 
                 </form>
@@ -65,7 +87,7 @@ $_SESSION["logged_user_role"] = "user";
         }
     ?>
     <tr>
-        <td><a href="index.php?target=product&action=rateProduct&id=<?=$this->id?>"><button>Rate this product</button></a></td>
+        <td><a href="index.php?target=rating&action=rateProduct&id=<?=$this->id?>"><button>Rate this product</button></a></td>
     </tr>
 </table>
            <?php }?>
