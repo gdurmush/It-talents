@@ -4,6 +4,7 @@ use Model\ProductDAO;
 use Controller\ProductController;
 $avgStars=ProductDAO::getAVGRating($this->id);
 $countOfStars=ProductController::showStars($this->id);
+$comments=ProductDAO::getComments($this->id);
 
 
 ?>
@@ -19,11 +20,16 @@ $countOfStars=ProductController::showStars($this->id);
 <body>
 <table>
     <tr>
-        <td><img src="<?= $this->imageUrl ?>"width="150"></td>
-
+        <td><?= $this->name ?></td>
     </tr>
-
-
+    <tr>
+        <td><img src="<?= $this->imageUrl ?>"width="150"></td>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td><?= $this->price ?> EURO</td>
+    </tr>
+   
 
             <?php if(isset($_SESSION["logged_user_role"]) && $_SESSION["logged_user_role"]=="admin"){
                 ?>
@@ -65,12 +71,42 @@ $countOfStars=ProductController::showStars($this->id);
            <?php }?>
 
 <table>
-    <tr><td>Average grade: <?= $avgStars->avg_stars?></td></tr>
+    <tr>
+        <td>Average grade: <?= $avgStars->avg_stars?></td>
     <?php foreach ($countOfStars as $key=>$countOfStar) {
         echo "<tr><td>Rate with $key stars:  $countOfStar</td></tr>";
     }
     ?>
-
+    </tr>
 </table>
+<hr>
+<h3>Comments</h3>
+
+
+    <?php foreach ($comments as $comment) {
+        ?>
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><?= $comment->full_name ?></td>
+        </tr>
+        <tr>
+            <td>Date:</td>
+            <td><?= $comment->date ?></td>
+        </tr>
+        <tr>
+            <td>Stars:</td>
+            <td><?= $comment->stars ?> stars</td>
+        </tr>
+        <tr>
+            <td>Opinion:</td>
+            <td><?= $comment->text ?></td>
+        </tr>
+
+       </table>
+        <hr>
+        <?php
+    } ?>
+
 </body>
 </html>

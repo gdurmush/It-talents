@@ -184,6 +184,22 @@ public static function getAVGRating($product_id)
         }
     }
 
+    public static function getComments($product_id)
+    {
+        try {
+            $db = getPDO();
+
+            $sql="SELECT concat(u.first_name,\" \", u.last_name) AS full_name,
+                    urp.stars,urp.text, cast(urp.date_created AS date) AS date FROM users AS u
+                    JOIN user_rate_products AS urp ON(u.id=urp.user_id) WHERE product_id=?";
+            $stmt=$db->prepare($sql);
+            $stmt->execute([$product_id]);
+            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 
 
 
