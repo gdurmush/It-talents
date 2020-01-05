@@ -42,38 +42,35 @@ public function show (){
 
 
     public function add(){
-    $err=false;
+
     $msg='';
     if(isset($_POST["save"])){
         if(empty($_POST["name"]) || empty($_POST["producer_id"])
             || empty($_POST["price"]) || empty($_POST["type_id"])
             || empty($_POST["quantity"])) {
-            $err = true;
+
             $msg = "All fields are required!";
         }else{
             if(!preg_match('/^[0-9]+$/',$_POST["quantity"]) || !is_numeric($_POST["quantity"])){
-                $err=true;
+
                 $msg="Invalid quantity format!";
             }
 
-            if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $_POST["price"])){
-                $err=true;
-                $msg="Invalid price format!";
-            }
+            $msg=$this->validatePrice($_POST["price"]);
             if(!is_uploaded_file($_FILES["file"]["tmp_name"])) {
-                $err = true;
+
                 $msg = "Image is not uploaded!";
-            }elseif(!$err){
+            }elseif($msg==""){
                 $file_name_parts=explode(".",$_FILES["file"]["name"]);
                 $extension=$file_name_parts[count($file_name_parts)-1];
                 $filename=time().".".$extension;
                 $img_url="images".DIRECTORY_SEPARATOR.$filename;
                 if(!move_uploaded_file($_FILES["file"]["tmp_name"],$img_url)){
-                    $err=true;
+
                     $msg="Image error!";
                 }
             }
-            if(!$err){
+            if($msg==""){
 
 
                 ProductDAO::add($_POST["name"],$_POST["producer_id"],$_POST["price"],$_POST["type_id"],$_POST["quantity"],$img_url);
@@ -86,8 +83,8 @@ public function show (){
     }
 
     public function edit(){
-        $err=false;
-        $msg='';
+
+        $msg="";
         if(isset($_POST["saveChanges"])){
             if(empty($_POST["name"]) || empty($_POST["producer_id"])
                 || empty($_POST["price"]) || empty($_POST["type_id"])
@@ -95,30 +92,23 @@ public function show (){
                 $msg = "All fields are required!";
             }else{
                 if(!preg_match('/^[0-9]+$/',$_POST["quantity"]) || !is_numeric($_POST["quantity"])){
-                    $err=true;
+
                     $msg="Invalid quantity format!";
                 }
 
                 $price=$_POST["price"];
                 $old_price=NULL;
                 if(!empty($_POST["newPrice"])){
-                    if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $_POST["newPrice"]) ||  !is_numeric($_POST["newPrice"])){
-                        $err=true;
-                        $msg="Invalid new price format!";
-                    }
+                    $msg=$this->validatePrice($_POST["newPrice"]);
                     if($_POST["newPrice"]>$_POST["price"]){
-                        $err=true;
-                        $msg="New price of product must be lower than price";
+                        $msg="New price of product must be lower than price !";
                     }else{
                         $price=$_POST["newPrice"];
                         $old_price=$_POST["price"];
                     }
                 }
 
-                if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $_POST["price"]) ||  !is_numeric($_POST["price"])){
-                    $err=true;
-                    $msg="Invalid price format!";
-                }
+                $msg=$this->validatePrice($_POST["price"]);
 
                 if(!is_uploaded_file($_FILES["file"]["tmp_name"])) {
                     $img_url= $_POST["old_image"];
@@ -130,11 +120,10 @@ public function show (){
                     if(move_uploaded_file($_FILES["file"]["tmp_name"],$img_url)){
                         unlink($_POST["old_image"]);
                     }else{
-                        $err=true;
                         $msg="Image error!";
                     }
                 }
-                if(!$err){
+                if($msg==""){
                     $product=[];
                     $product["product_id"]=$_POST["product_id"];
                     $product["name"]=$_POST["name"];
@@ -154,6 +143,14 @@ public function show (){
         }
         $productId=$_POST["product_id"];
         include_once "View/editProduct.php";
+    }
+
+    public function validatePrice($price){
+    $msg='';
+        if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $price) ||  !is_numeric($price)){
+            $msg="Invalid price format!";
+        }
+        return $msg;
     }
 
 

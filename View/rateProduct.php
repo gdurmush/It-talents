@@ -1,6 +1,6 @@
 <?php
 namespace View;
-print_r($_GET['id']);
+
 
 ?>
 

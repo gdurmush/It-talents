@@ -23,7 +23,7 @@ $isInPromotion=false;
 </head>
 <body>
 <?php
-if (isset($err) && $err) {
+if (isset($msg) && $msg!="") {
     echo $msg;
 }?> <br>
 
@@ -110,7 +110,7 @@ if ($product->old_price!=NULL) {
 
         <tr>
             <td>Get in promotion</td>
-            <td><input type="number" step="0.01" name="newPrice"  placeholder="Get new price here"></td>
+            <td><input type="number" step="0.01" name="newPrice" min="0.01" placeholder="Get new price here"></td>
 
         </tr>
 
