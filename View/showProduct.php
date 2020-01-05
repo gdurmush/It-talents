@@ -5,10 +5,10 @@ use Model\FavouriteDAO;
 use Controller\ProductController;
 use Model\RatingDAO;
 
-$avgStars=RatingDAO::getAVGRating($this->id);
+$review=RatingDAO::getReviewsNumber($this->id);
 $countOfStars=ratingController::showStars($this->id);
 $comments=RatingDAO::getComments($this->id);
-$inPromotion=ProductController::checkIfIsInPromotion($this->id);
+$status=ProductController::checkIfIsInPromotion($this->id);
 
 ?>
 <!doctype html>
@@ -28,11 +28,19 @@ $inPromotion=ProductController::checkIfIsInPromotion($this->id);
     <tr>
         <td><img src="<?= $this->imageUrl ?>"width="150"></td>
     </tr>
-    <?php if($inPromotion["in_promotion"]){
+    <tr>
+        <td><?= $review->reviews_count ?> reviews</td>
+    </tr>
+
+    <tr>
+        <td><?= $status["is_in_stock"] ?> </td>
+    </tr>
+
+    <?php if($status["in_promotion"]){
          ?>
         <tr>
             <td>Old Price:</td>
-            <td><?=$inPromotion["old_price"] ?> EURO</td>
+            <td><?=$status["old_price"] ?> EURO</td>
         </tr>
         <tr>
             <td>New Price:</td>
@@ -40,7 +48,7 @@ $inPromotion=ProductController::checkIfIsInPromotion($this->id);
         </tr>
         <tr>
             <td>Discount:</td>
-            <td><?= $inPromotion["discount"] ?> %</td>
+            <td><?= $status["discount"] ?> %</td>
         </tr>
         <?php
     }else{
@@ -93,7 +101,7 @@ $inPromotion=ProductController::checkIfIsInPromotion($this->id);
            <?php }?>
 <table>
     <tr>
-        <td>Average grade: <?= $avgStars->avg_stars?></td>
+        <td>Average grade: <?= $review->avg_stars?></td>
     <?php foreach ($countOfStars as $key=>$countOfStar) {
         echo "<tr><td>Rate with $key stars:  $countOfStar</td></tr>";
     }
@@ -101,7 +109,14 @@ $inPromotion=ProductController::checkIfIsInPromotion($this->id);
     </tr>
 </table>
 <hr>
-<h3>Comments</h3>
+
+<?php
+if($review->reviews_count==0){
+    echo"<h3>There is no comments for this product!</h3>";
+}else{
+    echo"<h3>Comments:</h3>";
+}?>
+
 
 
     <?php foreach ($comments as $comment) {

@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace Model;
 include_once "PDO.php";
 

@@ -1,11 +1,10 @@
 <?php
 namespace View;
+use Controller\userController;
 use Model\UserDAO;
 use Model\AddressDAO;
 
-if(!isset($_SESSION["logged_user_id"])){
-    header("Location: index.php?target=user&action=loginPage");
-}
+userController::validateForLoggedUser();
 
 $user=UserDAO::getUserByid($_SESSION["logged_user_id"]);
 $addresses=AddressDAO::getAll($_SESSION["logged_user_id"]);

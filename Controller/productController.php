@@ -167,11 +167,23 @@ public function show (){
             $oldPrice=$product->old_price;
             $discount=round((($product->old_price-$product->price)/$product->old_price)*100,0);
         }
-        $price=[];
-        $price["in_promotion"]=$inPromotion;
-        $price["old_price"]=$oldPrice;
-        $price["discount"]=$discount;
-        return $price;
+
+
+        $isInStock=null;
+        if($product->quantity==0){
+            $isInStock="Not available";
+        }elseif($product->quantity<=10){
+            $isInStock="Limited quantity";
+        }elseif($product->quantity>10){
+            $isInStock="In stock";
+        }
+
+        $status=[];
+        $status["in_promotion"]=$inPromotion;
+        $status["old_price"]=$oldPrice;
+        $status["discount"]=$discount;
+        $status["is_in_stock"]=$isInStock;
+        return $status;
     }
 
 

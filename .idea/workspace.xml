@@ -4,10 +4,14 @@
     <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller/productController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/productController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Model/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/addProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/addProduct.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/editProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/editProduct.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/rateProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/rateProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/ratingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/ratingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/userController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/userController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/RatingDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/RatingDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/UserDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/UserDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/account.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/account.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/myRated.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/myRated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/showProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/showProduct.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +101,7 @@
       <workItem from="1578036525865" duration="7640000" />
       <workItem from="1578083623974" duration="5731000" />
       <workItem from="1578132236571" duration="18234000" />
-      <workItem from="1578216896907" duration="22984000" />
+      <workItem from="1578216896907" duration="28019000" />
     </task>
     <servers />
   </component>
@@ -137,6 +141,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="535" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578216898374" />
+    <state x="739" y="118" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1578254327346">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="739" y="118" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1578254327346" />
     <state x="225" y="117" width="672" height="678" key="search.everywhere.popup" timestamp="1578243223511">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

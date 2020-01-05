@@ -64,12 +64,12 @@ class RatingDAO
     }
 
 
-    public static function getAVGRating($product_id)
+    public static function getReviewsNumber($product_id)
     {
         try {
             $db = getPDO();
 
-            $sql = "SELECT round(avg(stars),2)  AS avg_stars  FROM user_rate_products WHERE product_id=?;";
+            $sql = "SELECT round(avg(stars),2)  AS avg_stars , count(id) AS reviews_count FROM user_rate_products WHERE product_id=?;";
             $stmt = $db->prepare($sql);
             $stmt->execute([$product_id]);
             return $stmt->fetch(\PDO::FETCH_OBJ);

@@ -8,7 +8,7 @@ class ratingController
 
 
     public function rate(){
-
+       userController::validateForLoggedUser();
         if (isset($_POST["save"])) {
             $msg = "";
 

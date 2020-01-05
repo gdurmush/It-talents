@@ -148,6 +148,11 @@ const MIN_LENGTH=8;
         include_once "View/editProfile.php";
     }
 
+    public static function validateForLoggedUser(){
+        if(!isset($_SESSION["logged_user_id"])){
+            header("Location: index.php?target=user&action=loginPage");
+        }
+    }
 
 }
 
