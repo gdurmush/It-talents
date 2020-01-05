@@ -1,5 +1,8 @@
 <?php
-$products = showOrders();
+
+use model\OrderDAO;
+
+$products = OrderDAO::showOrders();
 foreach ($products as $product){
     ?>
     <table class="form-group">

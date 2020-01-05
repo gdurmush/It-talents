@@ -1,11 +1,12 @@
 <?php
 namespace View;
+use model\FavouriteDAO;
 use Model\ProductDAO;
 use Controller\ProductController;
 $avgStars=ProductDAO::getAVGRating($this->id);
 $countOfStars=ProductController::showStars($this->id);
 
-
+$_SESSION["logged_user_role"] = "user";
 ?>
 <!doctype html>
 <html lang="en">
@@ -34,14 +35,15 @@ $countOfStars=ProductController::showStars($this->id);
 
                 </form>
     </tr>
-           <?php }elseif(isset($_SESSION["logged_user_role"]) && $_SESSION["logged_user_role"]=="user"){
+           <?php }else{
             ?>
 
     <tr>
         <td><a href="index.php?target=cart&action=add&id=<?=$this->id?>"><button>Add to cart</button> </a></td>
     </tr>
     <?php
-    if (checkIfInFavourites($this->id)){
+    if (FavouriteDAO::checkIfInFavourites($this->id))
+    {
         ?>
         <tr>
             <td><a href="index.php?target=favourite&action=delete&id=<?=$this->id?>"><button>Remove From Favourites</button></a></td>
@@ -54,16 +56,13 @@ $countOfStars=ProductController::showStars($this->id);
 
         </tr>
         <?php
-    }
+        }
     ?>
     <tr>
         <td><a href="index.php?target=product&action=rateProduct&id=<?=$this->id?>"><button>Rate this product</button></a></td>
     </tr>
 </table>
-
-
            <?php }?>
-
 <table>
     <tr><td>Average grade: <?= $avgStars->avg_stars?></td></tr>
     <?php foreach ($countOfStars as $key=>$countOfStar) {

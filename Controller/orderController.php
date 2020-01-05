@@ -2,6 +2,8 @@
 namespace Controller;
 use Model\Address;
 use Model\AddressDAO;
+use model\OrderDAO;
+
 include_once dirname(__FILE__) . "/../Model/DBManager.php";
 class OrderController{
     public function order()
@@ -11,7 +13,7 @@ class OrderController{
             if (isset($_POST["order"])){
                 $orderedProducts = showCart();
 
-                finishOrder($orderedProducts);
+                OrderDAO::finishOrder($orderedProducts);
 
         }
 

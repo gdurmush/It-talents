@@ -6,18 +6,22 @@ error_reporting(E_ALL);
 include_once dirname(__FILE__) . "/../Model/DBManager.php";
 use Model\Address;
 use Model\AddressDAO;
+use model\CartDAO;
 use Model\ProductDAO;
+use model\Cart;
+use PDOException;
+use PDO;
 class CartController{
     public function add(){
         if (isset($_GET["id"])){
-           $check = checkIfInCart($_GET["id"]);
+           $check = CartDAO::checkIfInCart($_GET["id"]);
            if ($check)
            {
-                updateQuantityOfProduct($_GET["id"]);
+               CartDAO::updateQuantityOfProduct($_GET["id"]);
            }
            else{
                try {
-                   putInCart($_GET["id"]);
+                   CartDAO::putInCart($_GET["id"]);
                }
                catch (PDOException $exception){
 
@@ -31,9 +35,9 @@ class CartController{
     }
     public function update(){
         if (isset($_POST["updateQuantity"])){
-            $productQuantity =  checkQuantity($_POST["productId"]);
+            $productQuantity =  ProductDAO::checkQuantity($_POST["productId"]);
             if ($productQuantity["quantity"] >= $_POST["quantity"]) {
-                updateCartQuantity($_POST["productId"], $_POST["quantity"]);
+                CartDAO::updateCartQuantity($_POST["productId"], $_POST["quantity"]);
                 $this->show();
             }
             else{
@@ -44,7 +48,7 @@ class CartController{
 
     }
     public function delete(){
-        deleteProductFromCart($_GET["productId"]);
+        CartDAO::deleteProductFromCart($_GET["productId"]);
         $this->show();
     }
 }
