@@ -21,11 +21,11 @@ namespace View;
         <tr><input type="hidden" name="rating_id" value="<?= $_POST['rating_id'] ?>"></tr>
         <tr>
             <td>Give your vote from 1 to 5 for this product</td>
-            <td><input type="number" name="rating" value="<?= $_POST['stars'] ?>"></td>
+            <td><input type="number" name="rating" min="1" max="5" value="<?= $_POST['stars'] ?>"></td>
         </tr>
         <tr>
             <td>Write comments for this product</td>
-            <td><textarea name="comment" id="" cols="30" rows="10" ><?= $_POST['text'] ?></textarea></td>
+            <td><textarea name="comment" id="" cols="30" rows="10" minlength="4" ><?= $_POST['text'] ?></textarea></td>
         </tr>
 
         <tr>

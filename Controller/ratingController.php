@@ -10,43 +10,25 @@ class ratingController
     public function rate(){
        userController::validateForLoggedUser();
         if (isset($_POST["save"])) {
-            $msg = "";
+            $msg=$this->validateCommentsAndRating($_POST["comment"],$_POST["rating"]);
 
-            if (empty($_POST["rating"]) || empty($_POST["comment"])) {
-                $msg = "All fields are required!";
-            } else {
-                if (!preg_match('/^[1-5]+$/', $_POST["rating"]) || !is_numeric($_POST["rating"])) {
-                    $msg = "Rating must be from 1 to 5!";
-                }
-                if (strlen($_POST["comment"]) > 100) {
-                    $msg = "Comment must be maximum 100 characters!";
-                }
-                if ($msg == "") {
+            if ($msg == "") {
 
-                    RatingDAO::addRating($_SESSION["logged_user_id"], $_POST["product_id"], $_POST["rating"], $_POST["comment"]);
-                    include_once "View/showProduct.php";
-                }
+                RatingDAO::addRating($_SESSION["logged_user_id"], $_POST["product_id"], $_POST["rating"], $_POST["comment"]);
+                header("Location:index.php");
             }
         }
+
     }
 
     public function editRate(){
 
         if (isset($_POST["saveChanges"])) {
-            $msg = "";
-            if (empty($_POST["rating"]) || empty($_POST["comment"])) {
-                $msg = "All fields are required!";
-            } else {
-                if (!preg_match('/^[1-5]+$/', $_POST["rating"]) || !is_numeric($_POST["rating"])) {
-                    $msg = "Rating must be from 1 to 5!";
-                }
-                if (strlen($_POST["comment"]) > 100) {
-                    $msg = "Comment must be maximum 100 characters!";
-                }
-                if ($msg == "") {
-                    RatingDAO::editRating($_POST["rating_id"], $_POST["rating"], $_POST["comment"]);
-                    include_once "View/myRated.php";
-                }
+
+            $msg=$this->validateCommentsAndRating($_POST["comment"],$_POST["rating"]);
+            if ($msg == "") {
+                RatingDAO::editRating($_POST["rating_id"], $_POST["rating"], $_POST["comment"]);
+                include_once "View/myRated.php";
             }
         }
     }
@@ -72,6 +54,23 @@ class ratingController
         return $starsCountArr;
     }
 
+    public function validateCommentsAndRating($comment,$rating){
+        $msg = "";
+        if (empty($rating) || empty($comment)) {
+            $msg = "All fields are required!";
+        }
+        if (!preg_match('/^[1-5]+$/', $rating) || !is_numeric($rating)) {
+            $msg = "Rating must be from 1 to 5!";
+        }
+        if (strlen($comment) < 4) {
+            $msg = "Comment must be minimum 10 characters!";
+        }
+        if (strlen($comment) > 100) {
+            $msg = "Comment must be maximum 100 characters!";
+        }
+        return $msg;
+
+    }
 
     public function myRated()
     {
