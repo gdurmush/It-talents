@@ -15,6 +15,7 @@ include_once "View/search.php";
     if(isset($_SESSION["logged_user_role"]) && $_SESSION["logged_user_role"]=="admin"){
         ?>
         <a href="index.php?target=product&action=addProduct"><button>Add New Product</button></a>
+        <a href="index.php?target=user&action=account"><img src="icons/user.svg" height="60" width="60">Моят Акаунт</a>
         <?php
     }else{
         ?>

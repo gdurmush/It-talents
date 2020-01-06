@@ -76,19 +76,12 @@ class User
     }
 
 
-    public function setAge($age)
-    {
-        $this->age = $age;
-    }
+
     public function getAge()
     {
         return $this->age;
     }
 
-    public function setPhoneNumber($phone_number)
-    {
-        $this->phone_number = $phone_number;
-    }
     public function getPhoneNumber()
     {
         return $this->phone_number;

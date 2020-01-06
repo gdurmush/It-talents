@@ -1,6 +1,4 @@
 <?php
-
-
 namespace View;
 use Model\AddressDAO;
 

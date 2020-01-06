@@ -1,11 +1,10 @@
 <?php
 namespace View;
+use Controller\userController;
 use Model\UserDAO;
 use Model\AddressDAO;
 
-if(!isset($_SESSION["logged_user_id"])){
-    header("Location: index.php?target=user&action=loginPage");
-}
+userController::validateForLoggedUser();
 
 $user=UserDAO::getUserByid($_SESSION["logged_user_id"]);
 $addresses=AddressDAO::getAll($_SESSION["logged_user_id"]);
@@ -59,7 +58,7 @@ My addresses:
 
 <a href="index.php?target=address&action=newAddress"><button name="addAddress" class="btn btn-primary">Add address</button></a>
 <a href="index.php?target=order&action=show"><button class="btn btn-primary">My Orders</button></a>
-<a href="index.php?target=product&action=myRated"><button class="btn btn-primary">My rated</button></a>
+<a href="index.php?target=rating&action=myRated"><button class="btn btn-primary">My rated</button></a>
 <a href="index.php?target=user&action=logout"><button class="btn btn-primary">Log Out</button></a><br>
 </table>
 </body>

@@ -17,7 +17,7 @@ $types=ProductDAO::getTypes();
 </head>
 <body>
 <?php
-if (isset($err) && $err) {
+if (isset($msg) && $msg!="") {
     echo $msg;
 }?> <br>
 <form action="index.php?target=product&action=add" method="post" enctype="multipart/form-data">
