@@ -5,10 +5,7 @@ use model\CartDAO;
 use model\FavouriteDAO;
 use Model\ProductDAO;
 include_once "View/search.php";
-
-
 ?>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"
 <h1>Your Cart</h1>
       <?php
       $productsInCart = CartDAO::showCart();
@@ -35,11 +32,10 @@ include_once "View/search.php";
    else{?>
    <a href="index.php?target=favourite&action=add&id=<?=$productInfo->id?>"><button>Add To Favourites</button></a><?php
    }
-
-                 echo $productInfo->price*$product["quantity"]. "Euro";
-            ?></div><?php
+                 echo $productInfo->price*$product["quantity"]. "Лв.";
+            ?></div><br><?php
         }
-        echo "Total price : ". $totalprice . "Leva";
+        echo "Total price : ". $totalprice . "Лв.";
 
         $myAddresses =  AddressDAO::getAll($_SESSION["logged_user_id"]);
         ?>
@@ -50,7 +46,6 @@ include_once "View/search.php";
                 $add = AddressDAO::getById($address->id);
                 echo "<option value='$address->id'>$add->city_name , $add->street_name , Bulgaria</option>";
             }
-
             ?></select>
         <?php if($totalprice !=0){ ?>
         <input type="hidden" value="<?=$totalprice?>" name="totalPrice">
@@ -60,3 +55,5 @@ include_once "View/search.php";
 
 
 
+
+?>

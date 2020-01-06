@@ -60,7 +60,7 @@ class OrderDAO{
         }
     }
 
-    function finishOrder($orderedProducts){
+  static  function finishOrder($orderedProducts){
         try{
             $pdo = getPDO();
             $pdo->beginTransaction();

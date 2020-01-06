@@ -198,6 +198,36 @@ public static function getAVGRating($product_id)
             echo $e->getMessage();
         }
     }
+    static function getProductsFromTypeIdAsc($id){
+        try{
+            $params = [];
+            $params[] = $id;
+            $pdo = getPDO();
+            $sql = "SELECT id , name FROM products WHERE type_id = ? ORDER BY price ASC";
+            $statement = $pdo->prepare($sql);
+            $statement->execute($params);
+            $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $products;
+        }
+        catch (PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+    static function getProductsFromTypeIdDesc($id){
+        try{
+            $params = [];
+            $params[] = $id;
+            $pdo = getPDO();
+            $sql = "SELECT id , name FROM products WHERE type_id = ? ORDER BY price DESC";
+            $statement = $pdo->prepare($sql);
+            $statement->execute($params);
+            $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $products;
+        }
+        catch (PDOException $e){
+            echo $e->getMessage();
+        }
+    }
    static function checkQuantity ($id){
         try {
             $params = [];
@@ -230,7 +260,7 @@ public static function getAVGRating($product_id)
             echo $e->getMessage();
         }
     }
-    function decreaseProductQuantity($orderedProducts)
+   static function decreaseProductQuantity($orderedProducts)
     {
         try{
             foreach ($orderedProducts as $product) {

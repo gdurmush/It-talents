@@ -5,7 +5,8 @@ use model\Search;
 use model\Product;
 use Model\ProductDAO;
 use model\Type;
-use TypeDAO;
+use model\TypeDAO;
+
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -25,16 +26,43 @@ public function show (){
             $typeObject->show();
         }
     }
-    if (isset($_GET["typId"])){
+    if (isset($_GET["typId"]) && isset($_GET["order"])){
+        if ($_GET["order"] == "asc"){
+
+            $products =  ProductDAO::getProductsFromTypeIdAsc($_GET["typId"]);
+            $type = TypeDAO::getTypeInformation($_GET["typId"]);
+            include_once "View/showProductsFromType.php";
+            foreach ($products as $product){
+                $productList = ProductDAO::findProduct($product["id"]);
+                $productList->show();
+            }
+
+        }
+        elseif ($_GET["order"] == "desc"){
+            $products =  ProductDAO::getProductsFromTypeIdDesc($_GET["typId"]);
+            $type = TypeDAO::getTypeInformation($_GET["typId"]);
+
+            include_once "View/showProductsFromType.php";
+            foreach ($products as $product){
+                $productList = ProductDAO::findProduct($product["id"]);
+                $productList->show();
+            }
+
+        }
+    }
+    elseif (isset($_GET["typId"])){
       $products =  ProductDAO::getProductsFromTypeId($_GET["typId"]);
         $type = TypeDAO::getTypeInformation($_GET["typId"]);
-       echo "<h1>" .$type->name . "</h1>";
+        include_once "View/showProductsFromType.php";
       foreach ($products as $product){
           $productList = ProductDAO::findProduct($product["id"]);
           $productList->show();
       }
-
     }
+
+}
+
+public function showAsc (){
 
 }
 

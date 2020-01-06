@@ -1,7 +1,8 @@
 <?php
 namespace model;
 use model\Type;
-
+use PDOException;
+use PDO;
 class TypeDAO{
    static function getTypeInformation ($id){
         try{
@@ -19,7 +20,7 @@ class TypeDAO{
 
 
     }
-  static  function getTypesFromCategorieId($id){
+  static function getTypesFromCategorieId($id){
         try{
             $params = [];
             $params[] = $id;

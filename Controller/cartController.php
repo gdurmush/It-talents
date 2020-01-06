@@ -18,10 +18,12 @@ class CartController{
            if ($check)
            {
                CartDAO::updateQuantityOfProduct($_GET["id"]);
+               include_once "View/cart.php";
            }
            else{
                try {
                    CartDAO::putInCart($_GET["id"]);
+                   include_once "View/cart.php";
                }
                catch (PDOException $exception){
 
