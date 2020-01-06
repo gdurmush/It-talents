@@ -1,5 +1,6 @@
 <?php
 echo "<h1>" .$type->name . "</h1>";
+
 ?>
 <select onchange="if (this.value) window.location.href=this.value">
     <option value="">Order By:</option>

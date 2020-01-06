@@ -51,6 +51,15 @@ public function show (){
         }
     }
     elseif (isset($_GET["typId"])){
+        $attributeNames = ProductDAO::getProductAttributes($_GET["typId"]);
+        foreach ($attributeNames as $attributeName){
+            echo $attributeName["name"]."<br>";
+            $attributeValues = ProductDAO::getAttributeValues($_GET["typId"] , $attributeName["name"]);
+            foreach ($attributeValues as $attributeValue){
+                ?><input type="checkbox" value="<?=$attributeValue["value"]?>"><?=$attributeValue["value"] . "<br>"?>
+                <?php
+            }
+        }
       $products =  ProductDAO::getProductsFromTypeId($_GET["typId"]);
         $type = TypeDAO::getTypeInformation($_GET["typId"]);
         include_once "View/showProductsFromType.php";

@@ -277,6 +277,31 @@ public static function getAVGRating($product_id)
             echo $e->getMessage();
         }
     }
+    static function getProductAttributes ($id){
+        try{
+            $params = [];
+            $params[] = $id;
+            $pdo = getPDO();
+            $sql = "SELECT name  FROM attributes WHERE type_id = ?";
+            $statement = $pdo->prepare($sql);
+            $statement->execute($params);
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
+       static function getAttributeValues($typeId , $attributeName){
+          $params = [];
+          $params [] = $typeId;
+          $params [] = $attributeName;
+          $pdo = getPDO();
+          $sql =" SELECT value FROM product_attributes JOIN attributes ON attribute_id = id WHERE type_id = ? AND name = ?";
+          $statement = $pdo->prepare($sql);
+          $statement->execute($params);
+          return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
 
 
 
