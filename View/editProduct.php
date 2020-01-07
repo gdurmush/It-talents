@@ -41,6 +41,19 @@ if ($product->old_price!=NULL) {
 <tr>
     <td><img src="<?= $product->image_url ?>"width="150"></td>
 </tr>
+    <tr>
+        <td>Producer:</td>
+        <td><?= $product->producer_name ?></td>
+    </tr>
+    <tr>
+        <td>Type:</td>
+        <td><?= $product->type_name ?></td>
+    </tr>
+    <tr>
+        <td>Quantity:</td>
+        <td><?= $product->quantity ?></td>
+    </tr>
+
 <?php if($isInPromotion){
     ?>
     <tr>
@@ -100,7 +113,7 @@ if ($product->old_price!=NULL) {
         </tr>
         <tr>
             <td>Quantity</td>
-            <td><input type="number" name="quantity" min="1" value="<?php echo $product->quantity?>" required></td>
+            <td><input type="number" name="quantity" min="0" value="<?php echo $product->quantity?>" required></td>
 
         </tr>
         <tr>
@@ -128,7 +141,8 @@ if ($product->old_price!=NULL) {
 </form>
 
 <form action="index.php?target=product&action=removeDiscount" method="post">
-    <input type="hidden" name="product_id" value="<?php echo $productId?>">
+    <input type="hidden" name="product_id" value="<?= $productId?>">
+    <input type="hidden" name="product_old_price" value="<?=$product->old_price?>">
     <input type="submit" name="remove" value="Remove Promotion">
 </form>
 </body>

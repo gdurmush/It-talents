@@ -1,10 +1,20 @@
 <?php
 namespace View;
+use Controller\ratingController;
 use model\FavouriteDAO;
-use Model\ProductDAO;
+
 use Controller\ProductController;
-$avgStars=ProductDAO::getAVGRating($this->id);
-$countOfStars=ProductController::showStars($this->id);
+use Model\RatingDAO;
+
+/*$avgStars=ProductDAO::getAVGRating($this->id);
+$countOfStars=ProductController::showStars($this->id);*/
+
+$review=RatingDAO::getReviewsNumber($this->id);
+$countOfStars=ratingController::showStars($this->id);
+$comments=RatingDAO::getComments($this->id);
+$status=ProductController::checkIfIsInPromotion($this->id);
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -22,15 +32,45 @@ $countOfStars=ProductController::showStars($this->id);
     </tr>
     <tr>
         <td><img src="<?= $this->imageUrl ?>"width="150"></td>
-        <td>Цена :<?=$this->price ?> Лв.</td>
+     <!--   <td>Цена :<?/*=$this->price */?> Лв.</td>-->
+    </tr>
+    <tr>
+        <td><?= $review->reviews_count ?> reviews</td>
     </tr>
 
+    <tr>
+        <td><?= $status["is_in_stock"] ?> </td>
+    </tr>
+
+    <?php if($status["in_promotion"]){
+        ?>
+        <tr>
+            <td>Old Price:</td>
+            <td><?=$status["old_price"] ?> EURO</td>
+        </tr>
+        <tr>
+            <td>New Price:</td>
+            <td><?= $this->price ?> EURO</td>
+        </tr>
+        <tr>
+            <td>Discount:</td>
+            <td><?= $status["discount"] ?> %</td>
+        </tr>
+        <?php
+    }else{
+        ?>
+        <tr>
+            <td>Price:</td>
+            <td><?= $this->price ?> EURO</td>
+        </tr>
+        <?php
+    }?>
 
 
             <?php if(isset($_SESSION["logged_user_role"]) && $_SESSION["logged_user_role"]=="admin"){?>
     <tr>
                 <form action="index.php?target=product&action=editProduct" method="post">
-                    <input type="hidden" name="productId" value="<?= $this->id ?>">
+                    <input type="hidden" name="product_id" value="<?= $this->id ?>">
                     <input type="submit" name="editProduct" value="Edit this product">
                 </form>
     </tr>
@@ -64,12 +104,61 @@ $countOfStars=ProductController::showStars($this->id);
     </tr>
 </table>
            <?php }?>
-<table>
-    <tr><td>Average grade: <?= $avgStars->avg_stars?></td></tr>
-    <?php foreach ($countOfStars as $key=>$countOfStar) {
+<!--<table>
+    <tr><td>Average grade: <?/*= $avgStars->avg_stars*/?></td></tr>
+    <?php /*foreach ($countOfStars as $key=>$countOfStar) {
         echo "<tr><td>Rate with $key stars:  $countOfStar</td></tr>";
     }
-    ?>
+    */?>
 </table>
+</body>
+</html>
+-->
+
+<table>
+    <tr>
+        <td>Average grade: <?= $review->avg_stars?></td>
+        <?php foreach ($countOfStars as $key=>$countOfStar) {
+            echo "<tr><td>Rate with $key stars:  $countOfStar</td></tr>";
+        }
+        ?>
+    </tr>
+</table>
+<hr>
+
+<?php
+if($review->reviews_count==0){
+    echo"<h3>There is no comments for this product!</h3>";
+}else{
+    echo"<h3>Comments:</h3>";
+}?>
+
+
+
+<?php foreach ($comments as $comment) {
+    ?>
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><?= $comment->full_name ?></td>
+        </tr>
+        <tr>
+            <td>Date:</td>
+            <td><?= $comment->date ?></td>
+        </tr>
+        <tr>
+            <td>Stars:</td>
+            <td><?= $comment->stars ?> stars</td>
+        </tr>
+        <tr>
+            <td>Opinion:</td>
+            <td><?= $comment->text ?></td>
+        </tr>
+
+    </table>
+    <hr>
+    <?php
+} ?>
+
 </body>
 </html>

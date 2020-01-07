@@ -3,9 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/ratingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/ratingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/editRatedProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/editRatedProduct.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/rateProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/rateProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/productController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/productController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/searchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/searchController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/CartDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/CartDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/FavouriteDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/FavouriteDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/OrderDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/OrderDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/PDO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/PDO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/ProductDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/ProductDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/SearchDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/SearchDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/TypeDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/TypeDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/editProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/editProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/showProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/showProduct.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +34,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/gyukseldurmush/It-talents.git" />
+      </set>
+    </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectId" id="1VAbbqtPafo2o1uvICmd1RwtD8D" />
@@ -97,11 +112,33 @@
       <workItem from="1578132236571" duration="18234000" />
       <workItem from="1578216896907" duration="28019000" />
       <workItem from="1578296895401" duration="2647000" />
+      <workItem from="1578339110523" duration="10911000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="1097" y="89" key="#PHP" timestamp="1577390987879">
@@ -112,14 +149,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="834" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577568194432" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1577446685532">
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1578347603102">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577446685532" />
-    <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1578241498830">
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578347603102" />
+    <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1578344884470">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578241498830" />
+    <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578344884470" />
+    <state x="141" y="55" width="1425" height="680" key="DiffContextDialog" timestamp="1578348539795">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="141" y="55" width="1425" height="680" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578348539795" />
     <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1577730927708">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -132,10 +173,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="729" y="404" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578246747301" />
-    <state x="535" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1578296905273">
+    <state x="795" y="186" key="RollbackChangesDialog" timestamp="1578349211770">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="535" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578296905273" />
+    <state x="795" y="186" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578349211770" />
+    <state x="535" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1578339114806">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="535" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578339114806" />
     <state x="739" y="118" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1578254327346">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

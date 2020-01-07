@@ -79,67 +79,84 @@ public function showAsc (){
 
 
     public function add(){
-    $err=false;
-    $msg='';
-    if(isset($_POST["save"])){
-        if(empty($_POST["name"]) || empty($_POST["producer_id"])
-            || empty($_POST["price"]) || empty($_POST["type_id"])
-            || empty($_POST["quantity"])) {
-            $err = true;
-            $msg = "All fields are required!";
-        }else{
-            if(!preg_match('/^[0-9]+$/',$_POST["quantity"]) || !is_numeric($_POST["quantity"])){
-                $err=true;
-                $msg="Invalid quantity format!";
-            }
 
-            if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $_POST["price"])){
-                $err=true;
-                $msg="Invalid price format!";
-            }
-            if(!is_uploaded_file($_FILES["file"]["tmp_name"])) {
-                $err = true;
-                $msg = "Image is not uploaded!";
-            }elseif(!$err){
-                $file_name_parts=explode(".",$_FILES["file"]["name"]);
-                $extension=$file_name_parts[count($file_name_parts)-1];
-                $filename=time().".".$extension;
-                $img_url="images".DIRECTORY_SEPARATOR.$filename;
-                if(!move_uploaded_file($_FILES["file"]["tmp_name"],$img_url)){
-                    $err=true;
-                    $msg="Image error!";
+        $msg='';
+        if(isset($_POST["save"])){
+            if(empty($_POST["name"]) || empty($_POST["producer_id"])
+                || empty($_POST["price"]) || empty($_POST["type_id"])
+                || empty($_POST["quantity"])) {
+
+                $msg = "All fields are required!";
+            }else{
+                if (!is_numeric($_POST["quantity"]) || $_POST["quantity"] < 0 ||$_POST["quantity"] != round($_POST["quantity"])) {
+                    $msg="Invalid quantity format!";
                 }
+
+                if($msg==""){
+                    $msg=$this->validatePrice($_POST["price"]);
+                }
+
+                if(!is_uploaded_file($_FILES["file"]["tmp_name"])) {
+
+                    $msg = "Image is not uploaded!";
+                }elseif($msg==""){
+                    $file_name_parts=explode(".",$_FILES["file"]["name"]);
+                    $extension=$file_name_parts[count($file_name_parts)-1];
+                    $filename=time().".".$extension;
+                    $img_url="images".DIRECTORY_SEPARATOR.$filename;
+                    if(!move_uploaded_file($_FILES["file"]["tmp_name"],$img_url)){
+
+                        $msg="Image error!";
+                    }
+                }
+                if($msg==""){
+
+
+                    ProductDAO::add($_POST["name"],$_POST["producer_id"],$_POST["price"],$_POST["type_id"],$_POST["quantity"],$img_url);
+                    $msg="Product added successfully!";
+                }
+
             }
-            if(!$err){
-
-
-                ProductDAO::add($_POST["name"],$_POST["producer_id"],$_POST["price"],$_POST["type_id"],$_POST["quantity"],$img_url);
-
-            }
-
         }
-    }
         include_once "View/addProduct.php";
     }
 
     public function edit(){
-        $err=false;
-        $msg='';
+
+
         if(isset($_POST["saveChanges"])){
+            $msg="";
             if(empty($_POST["name"]) || empty($_POST["producer_id"])
                 || empty($_POST["price"]) || empty($_POST["type_id"])
                 || empty($_POST["quantity"])) {
                 $msg = "All fields are required!";
             }else{
-                if(!preg_match('/^[0-9]+$/',$_POST["quantity"]) || !is_numeric($_POST["quantity"])){
-                    $err=true;
+                $i = $_POST["quantity"];
+
+                if (!is_numeric($i) || $i < 0|| $i != round($i)) {
                     $msg="Invalid quantity format!";
                 }
 
-                if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $_POST["price"]) ||  !is_numeric($_POST["quantity"])){
-                    $err=true;
-                    $msg="Invalid price format!";
+
+                if($msg=="") {
+                    $price = $_POST["price"];
+                    $old_price = NULL;
+                    if (!empty($_POST["newPrice"])) {
+                        $msg = $this->validatePrice($_POST["newPrice"]);
+                        if ($_POST["newPrice"] > $_POST["price"]) {
+                            $msg = "New price of product must be lower than price !";
+                        } else {
+                            $price = $_POST["newPrice"];
+                            $old_price = $_POST["price"];
+                        }
+                    }
                 }
+                if($msg==""){
+                    $msg=$this->validatePrice($_POST["price"]);
+                }
+
+
+
 
                 if(!is_uploaded_file($_FILES["file"]["tmp_name"])) {
                     $img_url= $_POST["old_image"];
@@ -151,12 +168,20 @@ public function showAsc (){
                     if(move_uploaded_file($_FILES["file"]["tmp_name"],$img_url)){
                         unlink($_POST["old_image"]);
                     }else{
-                        $err=true;
                         $msg="Image error!";
                     }
                 }
-                if(!$err){
-                    $product=new Product($_POST["product_id"],$_POST["name"],$_POST["producer_id"],$_POST["price"],$_POST["type_id"],$_POST["quantity"],$img_url);
+                if($msg==""){
+                    $product=[];
+                    $product["product_id"]=$_POST["product_id"];
+                    $product["name"]=$_POST["name"];
+                    $product["producer_id"]=$_POST["producer_id"];
+                    $product["price"]=$price;
+                    $product["old_price"]=$old_price;
+                    $product["type_id"]=$_POST["type_id"];
+                    $product["quantity"]=$_POST["quantity"];
+                    $product["image_url"]=$img_url;
+
                     ProductDAO::edit($product);
 
                 }
@@ -164,97 +189,92 @@ public function showAsc (){
             }
 
         }
+        $productId=$_POST["product_id"];
         include_once "View/editProduct.php";
     }
 
-
-    public function rate(){
-    if(isset($_POST["save"])){
-        $msg="";
-
-        if(empty($_POST["rating"]) || empty($_POST["comment"])){
-            $msg = "All fields are required!";
-        }else{
-            if(!preg_match('/^[1-5]+$/',$_POST["rating"]) ||  !is_numeric($_POST["rating"])){
-                $msg = "Rating must be from 1 to 5!";
-            }
-            if(strlen($_POST["comment"])>100){
-                $msg = "Comment must be maximum 100 characters!";
-            }
-            if($msg==""){
-                ProductDAO::addRating($_SESSION["logged_user_id"],$_POST["product_id"],$_POST["rating"],$_POST["comment"]);
-                include_once "View/rateProduct.php";
-            }
-        }
-    }
-    }
-    public function editRate(){
-        if(isset($_POST["saveChanges"])){
+    public function validatePrice($price){
             $msg="";
-            if(empty($_POST["rating"]) || empty($_POST["comment"])){
-                $msg = "All fields are required!";
-            }else{
-                if(!preg_match('/^[1-5]+$/',$_POST["rating"]) ||  !is_numeric($_POST["rating"])){
-                    $msg = "Rating must be from 1 to 5!";
-                }
-                if(strlen($_POST["comment"])>100){
-                    $msg = "Comment must be maximum 100 characters!";
-                }
-                if($msg==""){
-                    ProductDAO::editRating($_POST["rating_id"],$_POST["rating"],$_POST["comment"]);
-                    include_once "View/myRated.php";
-                }
-            }
+        if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $price) ||  !is_numeric($price)){
+            $msg="Invalid price format!";
         }
+        return $msg;
     }
 
-    public static function showStars($product_id){
-        $product_stars=ProductDAO::getStarsCount($product_id);
 
-        $starsCountArr=[];
-        for($i=1;$i<=5;$i++) {
-            $isZero = true;
-            foreach ($product_stars as $product_star) {
-                if ($product_star["stars"] == $i) {
-                    $starsCountArr[$i] = $product_star["stars_count"];
-                    $isZero = false;
-                }
-            }
-            if($isZero) {
-                $starsCountArr[$i] = 0;
-            }
+    public static function checkIfIsInPromotion($product_id){
+        $product=ProductDAO::getById($product_id);
+
+
+
+        $oldPrice=null;
+        $inPromotion=false;
+        $discount=null;
+        if($product->old_price !=NULL){
+            $inPromotion=true;
+            $oldPrice=$product->old_price;
+            $discount=round((($product->old_price-$product->price)/$product->old_price)*100,0);
         }
 
-        return $starsCountArr;
+
+        $isInStock=null;
+        if($product->quantity==0){
+            $isInStock="Not available";
+        }elseif($product->quantity<=10){
+            $isInStock="Limited quantity";
+        }elseif($product->quantity>10){
+            $isInStock="In stock";
+        }
+
+        $status=[];
+        $status["in_promotion"]=$inPromotion;
+        $status["old_price"]=$oldPrice;
+        $status["discount"]=$discount;
+        $status["is_in_stock"]=$isInStock;
+        return $status;
     }
 
 
+    public function removeDiscount(){
+        if(isset($_POST["remove"])){
+            if(isset($_POST["product_id"]) && isset($_POST["product_old_price"])){
+                if($_POST["product_old_price"]!=NULL){
+                    ProductDAO::removePromotion($_POST["product_id"],$_POST["product_old_price"]);
+                }
+
+                $productId=$_POST["product_id"];
+                include_once "View/editProduct.php";
+            }
+        }
 
 
-    public function myRated(){
-        include_once "View/myRated.php";
     }
+
     public function addProduct(){
         include_once "View/addProduct.php";
     }
+
+
     public function editProduct(){
+        if(isset($_POST["editProduct"])){
+            if(isset($_POST["product_id"])){
+                $productId=$_POST["product_id"];
+                include_once "View/editProduct.php";
+            }else{
+                header("Location:index.php");
 
-        include_once "View/editProduct.php";
+
+            }
+        }else{
+            header("Location:index.php");
+        }
     }
+
+
     public function showProduct(){
-    include_once "View/showProduct.php";
+        include_once "View/showProduct.php";
+
     }
-
-
-
-    public function rateProduct(){
-        include_once "View/rateProduct.php";
-    }
-
-    public function editRatedPage(){
-        include_once "View/editRatedProduct.php";
-    }
-
 
 
 

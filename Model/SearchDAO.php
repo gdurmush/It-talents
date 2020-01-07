@@ -3,6 +3,7 @@ namespace model;
 use PDO;
 use PDOException;
 
+include_once "PDO.php";
 class SearchDAO
 {
    static function searchProduct ($keywords){

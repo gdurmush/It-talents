@@ -1,5 +1,7 @@
 <?php
 include_once "config.php";
+
+
 function getPDO(){
     try{
 

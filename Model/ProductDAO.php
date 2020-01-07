@@ -84,18 +84,13 @@ class ProductDAO{
             $params[] = $product["name"];
             $params[] = $product["producer_id"];
             $params[] = $product["price"];
-            if( $product["old_price"]!=NULL){
-                $params[]=$product["old_price"];
-                $sql = "UPDATE products SET name=?, producer_id=?,price=?,old_price=?, type_id=?, quantity=?, image_url=? WHERE id=? ;";
-            }else{
-                $sql = "UPDATE products SET name=?, producer_id=?,price=?, type_id=?, quantity=?, image_url=? WHERE id=? ;";
-            }
+            $params[]=$product["old_price"];
             $params[] = $product["type_id"];
             $params[] = $product["quantity"];
             $params[] = $product["image_url"];
             $params[] = $product["product_id"];
 
-
+            $sql = "UPDATE products SET name=?, producer_id=?,price=?,old_price=?, type_id=?, quantity=?, image_url=? WHERE id=? ;";
             $stmt = $db->prepare($sql);
             $stmt->execute($params);
 
@@ -225,13 +220,17 @@ class ProductDAO{
 }
 
 
-    public static function removePromotion($product_id)
+    public static function removePromotion($product_id,$price)
     {
         try {
             $db = getPDO();
-            $sql = "UPDATE products SET old_price=NULL WHERE id=? ;";
+
+            $params=[];
+            $params[]=$price;
+            $params[]=$product_id;
+            $sql = "UPDATE products SET price=?, old_price=NULL WHERE id=? ;";
             $stmt=$db->prepare($sql);
-            $stmt->execute([$product_id]);
+            $stmt->execute($params);
 
 
         } catch (\PDOException $e) {

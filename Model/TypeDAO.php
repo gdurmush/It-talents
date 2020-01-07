@@ -3,6 +3,8 @@ namespace model;
 use model\Type;
 use PDOException;
 use PDO;
+
+include_once "PDO.php";
 class TypeDAO{
    static function getTypeInformation ($id){
         try{

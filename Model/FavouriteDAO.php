@@ -2,6 +2,8 @@
 namespace model;
 use PDO;
 use PDOException;
+
+include_once "PDO.php";
 class FavouriteDAO{
     static function showFavourites (){
         try{

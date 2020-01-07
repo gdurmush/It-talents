@@ -3,6 +3,8 @@ namespace model;
 use model\Cart;
 use PDO;
 use PDOException;
+
+include_once "PDO.php";
 class CartDAO{
   static  function checkIfInCart($id){
         try {
