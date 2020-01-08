@@ -100,7 +100,7 @@ $status=ProductController::checkIfIsInPromotion($this->id);
         }
     ?>
     <tr>
-        <td><a href="index.php?target=product&action=rateProduct&id=<?=$this->id?>"><button>Оцени този продукт</button></a></td>
+        <td><a href="index.php?target=rating&action=rateProduct&id=<?=$this->id?>"><button>Оцени този продукт</button></a></td>
     </tr>
 </table>
            <?php }?>
