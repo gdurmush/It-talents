@@ -3,7 +3,7 @@ namespace Controller;
 use model\SearchDAO;
 use model\Search;
 use model\Product;
-use Model\ProductDAO;
+use model\ProductDAO;
 use model\Type;
 use model\TypeDAO;
 
@@ -11,64 +11,60 @@ use model\TypeDAO;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-include_once dirname(__FILE__) . "/../Model/DBManager.php";
 
 class ProductController {
 public function show (){
-    if (isset($_GET["prdId"])){
-        $product = ProductDAO::findProduct($_GET["prdId"]);
-        $product->show();
-    }
-    if (isset($_GET["ctgId"])){
-        $types = TypeDAO::getTypesFromCategorieId($_GET["ctgId"]);
-        foreach ($types as $type){
-            $typeObject = new Type($type["id"] , $type["name"] , $type["categorie_id"]);
-            $typeObject->show();
+    try{
+        if (isset($_GET["prdId"])){
+            $product = ProductDAO::findProduct($_GET["prdId"]);
+            $product->show();
         }
-    }
-    if (isset($_GET["typId"]) && isset($_GET["order"])){
-        if ($_GET["order"] == "asc"){
+        if (isset($_GET["ctgId"])){
+            $types = TypeDAO::getTypesFromCategorieId($_GET["ctgId"]);
+            foreach ($types as $type){
+                $typeObject = new Type($type["id"] , $type["name"] , $type["categorie_id"]);
+                $typeObject->show();
+            }
+        }
+        if (isset($_GET["typId"]) && isset($_GET["order"])){
+            if ($_GET["order"] == "asc"){
 
-            $products =  ProductDAO::getProductsFromTypeIdAsc($_GET["typId"]);
+                $products =  ProductDAO::getProductsFromTypeIdAsc($_GET["typId"]);
+                $type = TypeDAO::getTypeInformation($_GET["typId"]);
+                include_once "View/showProductsFromType.php";
+                foreach ($products as $product){
+                    $productList = ProductDAO::findProduct($product["id"]);
+                    $productList->show();
+                }
+
+            }
+            elseif ($_GET["order"] == "desc"){
+                $products =  ProductDAO::getProductsFromTypeIdDesc($_GET["typId"]);
+                $type = TypeDAO::getTypeInformation($_GET["typId"]);
+
+                include_once "View/showProductsFromType.php";
+                foreach ($products as $product){
+                    $productList = ProductDAO::findProduct($product["id"]);
+                    $productList->show();
+                }
+
+            }
+        }
+        elseif (isset($_GET["typId"])){
+
+            $products =  ProductDAO::getProductsFromTypeId($_GET["typId"]);
             $type = TypeDAO::getTypeInformation($_GET["typId"]);
             include_once "View/showProductsFromType.php";
+
             foreach ($products as $product){
                 $productList = ProductDAO::findProduct($product["id"]);
                 $productList->show();
             }
-
-        }
-        elseif ($_GET["order"] == "desc"){
-            $products =  ProductDAO::getProductsFromTypeIdDesc($_GET["typId"]);
-            $type = TypeDAO::getTypeInformation($_GET["typId"]);
-
-            include_once "View/showProductsFromType.php";
-            foreach ($products as $product){
-                $productList = ProductDAO::findProduct($product["id"]);
-                $productList->show();
-            }
-
         }
     }
-    elseif (isset($_GET["typId"])){
-        $attributeNames = ProductDAO::getProductAttributes($_GET["typId"]);
-        foreach ($attributeNames as $attributeName){
-            echo $attributeName["name"]."<br>";
-            $attributeValues = ProductDAO::getAttributeValues($_GET["typId"] , $attributeName["name"]);
-            foreach ($attributeValues as $attributeValue){
-                ?><input type="checkbox" value="<?=$attributeValue["value"]?>"><?=$attributeValue["value"] . "<br>"?>
-                <?php
-            }
-        }
-      $products =  ProductDAO::getProductsFromTypeId($_GET["typId"]);
-        $type = TypeDAO::getTypeInformation($_GET["typId"]);
-        include_once "View/showProductsFromType.php";
-      foreach ($products as $product){
-          $productList = ProductDAO::findProduct($product["id"]);
-          $productList->show();
-      }
+    catch (\PDOException $e){
+        echo $e->getMessage();
     }
-
 }
 
 public function showAsc (){
@@ -205,22 +201,20 @@ public function showAsc (){
     public static function checkIfIsInPromotion($product_id){
         $product=ProductDAO::getById($product_id);
 
-
-
         $oldPrice=null;
         $inPromotion=false;
         $discount=null;
-        if($product->old_price !=NULL){
+        if($product["old_price"] != NULL){
             $inPromotion=true;
-            $oldPrice=$product->old_price;
-            $discount=round((($product->old_price-$product->price)/$product->old_price)*100,0);
+            $oldPrice=$product["old_price"];
+            $discount=round((($product["old_price"]-$product["price"])/$product["old_price"])*100,0);
         }
 
 
         $isInStock=null;
-        if($product->quantity==0){
+        if($product["quantity"]==0){
             $isInStock="Not available";
-        }elseif($product->quantity<=10){
+        }elseif($product["quantity"]<=10){
             $isInStock="Limited quantity";
         }elseif($product->quantity>10){
             $isInStock="In stock";

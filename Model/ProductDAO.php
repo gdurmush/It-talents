@@ -1,5 +1,5 @@
 <?php
-namespace Model;
+namespace model;
 use PDO;
 use PDOException;
 
@@ -40,7 +40,7 @@ class ProductDAO{
 
         try{
             $pdo=getPDO();
-            $sql="SELECT p.name, p.producer_id, pr.name AS producer_name,
+            $sql=   "SELECT p.name, p.producer_id, pr.name AS producer_name,
                     p.price,p.old_price, p.type_id, t.name AS type_name,p.quantity,p.image_url
                     FROM products AS p 
                     JOIN producers AS pr ON(p.producer_id=pr.id)
@@ -48,7 +48,7 @@ class ProductDAO{
                     WHERE p.id=?;";
             $stmt=$pdo->prepare($sql);
             $stmt->execute([$id]);
-            return $stmt->fetch(\PDO::FETCH_OBJ);
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
 
         }
         catch (\PDOException $e){
@@ -100,7 +100,6 @@ class ProductDAO{
     }
 
    static function getProductsFromTypeId($id){
-        try{
             $params = [];
             $params[] = $id;
             $pdo = getPDO();
@@ -109,13 +108,10 @@ class ProductDAO{
             $statement->execute($params);
             $products = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $products;
-        }
-        catch (PDOException $e){
-            echo $e->getMessage();
-        }
+
     }
     static function getProductsFromTypeIdAsc($id){
-        try{
+
             $params = [];
             $params[] = $id;
             $pdo = getPDO();
@@ -125,12 +121,9 @@ class ProductDAO{
             $products = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $products;
         }
-        catch (PDOException $e){
-            echo $e->getMessage();
-        }
-    }
+
     static function getProductsFromTypeIdDesc($id){
-        try{
+
             $params = [];
             $params[] = $id;
             $pdo = getPDO();
@@ -139,10 +132,7 @@ class ProductDAO{
             $statement->execute($params);
             $products = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $products;
-        }
-        catch (PDOException $e){
-            echo $e->getMessage();
-        }
+
     }
    static function checkQuantity ($id){
         try {
@@ -161,7 +151,7 @@ class ProductDAO{
     }
 
    static function findProduct ($id){
-        try{
+
             $pdo = getPDO();
             $sql = "SELECT id , name , producer_id , price , type_id , quantity , image_url FROM products WHERE id = ?";
             $statement = $pdo->prepare($sql);
@@ -171,10 +161,6 @@ class ProductDAO{
                 , $rows["quantity"] , $rows["image_url"]);
 
             return $product;
-        }
-        catch (PDOException $e){
-            echo $e->getMessage();
-        }
     }
    static function decreaseProductQuantity($orderedProducts)
     {
@@ -194,7 +180,7 @@ class ProductDAO{
         }
     }
     static function getProductAttributes ($id){
-        try{
+
             $params = [];
             $params[] = $id;
             $pdo = getPDO();
@@ -202,10 +188,7 @@ class ProductDAO{
             $statement = $pdo->prepare($sql);
             $statement->execute($params);
             return $statement->fetchAll(PDO::FETCH_ASSOC);
-        }
-        catch (PDOException $e){
-            echo $e->getMessage();
-        }
+
     }
 
        static function getAttributeValues($typeId , $attributeName){
@@ -236,6 +219,9 @@ class ProductDAO{
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }
+    }
+    public  static function filterProducts ($typeId , $filters){
+       $filters = json_decode($filters);
     }
 
 

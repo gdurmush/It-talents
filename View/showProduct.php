@@ -4,7 +4,7 @@ use Controller\ratingController;
 use model\FavouriteDAO;
 
 use Controller\ProductController;
-use Model\RatingDAO;
+use model\RatingDAO;
 
 /*$avgStars=ProductDAO::getAVGRating($this->id);
 $countOfStars=ProductController::showStars($this->id);*/
@@ -77,31 +77,51 @@ $status=ProductController::checkIfIsInPromotion($this->id);
            <?php }
              else{
             ?>
-    <tr>
-        <td><a href="index.php?target=cart&action=add&id=<?=$this->id?>"><button>Добави в количка</button> </a></td>
-    </tr>
-    <?php
-    if (FavouriteDAO::checkIfInFavourites($this->id))
-    {
+    <?php if (isset($_SESSION["logged_user_role"])){
         ?>
         <tr>
-            <td><a href="index.php?target=favourite&action=delete&id=<?=$this->id?>"><button>Премахни от любими</button></a></td>
+            <td><a href="index.php?target=cart&action=add&id=<?=$this->id?>"><button>Добави в количка</button> </a></td>
+        </tr>
+        <?php
+        if (FavouriteDAO::checkIfInFavourites($this->id , $_SESSION["logged_user_role"]))
+        {
+            ?>
+            <tr>
+                <td><a href="index.php?target=favourite&action=delete&id=<?=$this->id?>"><button>Премахни от любими</button></a></td>
+            </tr>
+            <?php
+        }
+        else{
+            ?>
+            <tr>
+                <td>
+                    <a href="index.php?target=favourite&action=add&id=<?=$this->id?>"><img src="icons/like.svg" width="50" height="50"></a>
+                </td>
+            </tr>
+            <?php
+        }
+        ?>
+        <tr>
+            <td><a href="index.php?target=product&action=rateProduct&id=<?=$this->id?>"><button>Оцени този продукт</button></a></td>
         </tr>
         <?php
     }
-    else{
+    else {
         ?>
         <tr>
-        <td>
-            <a href="index.php?target=favourite&action=add&id=<?=$this->id?>"><img src="icons/like.svg" width="50" height="50"></a>
-        </td>
+            <td><a href="index.php?target=user&action=loginPage"><button>Добави в количка</button> </a></td>
+        </tr>
+        <tr>
+            <td>
+                <a href="index.php?target=user&action=loginPage"><img src="icons/like.svg" width="50" height="50"></a>
+            </td>
+        </tr>
+        <tr>
+            <td><a href="index.php?target=user&action=loginPage"><button>Оцени този продукт</button></a></td>
         </tr>
         <?php
-        }
+    }
     ?>
-    <tr>
-        <td><a href="index.php?target=product&action=rateProduct&id=<?=$this->id?>"><button>Оцени този продукт</button></a></td>
-    </tr>
 </table>
            <?php }?>
 <!--<table>

@@ -3,11 +3,10 @@ namespace Controller;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-include_once dirname(__FILE__) . "/../Model/DBManager.php";
 use Model\Address;
 use Model\AddressDAO;
 use model\CartDAO;
-use Model\ProductDAO;
+use model\ProductDAO;
 use model\Cart;
 use PDOException;
 use PDO;
@@ -33,6 +32,8 @@ class CartController{
     }
 
     public function show(){
+        userController::validateForLoggedUser();
+
         include_once "View/cart.php";
     }
     public function update(){

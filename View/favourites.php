@@ -1,7 +1,7 @@
 <?php
 
 use model\FavouriteDAO;
-use Model\ProductDAO;
+use model\ProductDAO;
 
 $favourites = FavouriteDAO::showFavourites();
 foreach ($favourites as $favourite) {

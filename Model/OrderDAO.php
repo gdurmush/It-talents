@@ -1,7 +1,7 @@
 <?php
 namespace model;
 use model\CartDAO;
-use Model\ProductDAO;
+use model\ProductDAO;
 use PDO;
 use PDOException;
 include_once "PDO.php";

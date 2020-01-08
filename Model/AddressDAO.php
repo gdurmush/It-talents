@@ -1,12 +1,12 @@
 <?php
 
-namespace Model;
+namespace model;
 include_once "PDO.php";
 class AddressDAO{
     public static function getById($id){
 
         try{
-            $pdo=getPDO();
+            $pdo= getPDO();
             $sql="SELECT a.id, a.city_id, c.name AS city_name,a.street_name 
                     FROM addresses AS a JOIN cities AS c ON(a.city_id=c.id)WHERE a.id=?;";
             $stmt=$pdo->prepare($sql);

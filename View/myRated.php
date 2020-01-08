@@ -1,7 +1,7 @@
 <?php
 namespace View;
 
-use Model\RatingDAO;
+use model\RatingDAO;
 
 $myRatings=RatingDAO::showMyRated($_SESSION["logged_user_id"]);
 

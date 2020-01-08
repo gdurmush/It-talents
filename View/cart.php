@@ -1,9 +1,9 @@
 <?php
 namespace View;
-use Model\AddressDAO;
+use model\AddressDAO;
 use model\CartDAO;
 use model\FavouriteDAO;
-use Model\ProductDAO;
+use model\ProductDAO;
 include_once "View/search.php";
 ?>
 <h1>Your Cart</h1>
@@ -25,7 +25,7 @@ include_once "View/search.php";
         <input type="submit" name="updateQuantity" value="Update">
     </form>
     <a href="index.php?target=cart&action=delete&productId=<?=$product["product_id"]?>"><button>Delete</button></a>
-    <?php if (FavouriteDAO::checkIfInFavourites($productInfo->id)){?>
+    <?php if (FavouriteDAO::checkIfInFavourites($productInfo->id , $_SESSION["logged_user_id"])){?>
           <td><a href="index.php?target=favourite&action=delete&id=<?=$productInfo->id?>"><button>Remove From Favourites</button></a></td>
 
    <?php }
