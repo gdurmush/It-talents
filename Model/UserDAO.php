@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace model;
 include_once "PDO.php";
 
 class UserDAO{
@@ -25,7 +25,6 @@ class UserDAO{
             $stmt=$pdo->prepare($sql);
             $stmt->execute([$id]);
             return $stmt->fetch(\PDO::FETCH_OBJ);
-
         }
         catch (\PDOException $e){
             echo $e->getMessage();

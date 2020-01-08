@@ -1,8 +1,8 @@
 <?php
 namespace View;
 use Controller\userController;
-use Model\UserDAO;
-use Model\AddressDAO;
+use model\UserDAO;
+use model\AddressDAO;
 
 userController::validateForLoggedUser();
 

@@ -4,7 +4,7 @@ namespace Controller;
 
 use Model\Address;
 use Model\AddressDAO;
-use Model\ProductDAO;
+use model\ProductDAO;
 
 
 

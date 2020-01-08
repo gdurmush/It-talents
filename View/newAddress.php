@@ -1,6 +1,6 @@
 <?php
 namespace View;
-use Model\AddressDAO;
+use model\AddressDAO;
 
 $cities=AddressDAO::getCities();
 

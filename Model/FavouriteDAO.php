@@ -49,11 +49,11 @@ class FavouriteDAO{
             echo $e->getMessage();
         }
     }
-    static function checkIfInFavourites($id){
+    static function checkIfInFavourites($id , $userId){
         try {
             $params = [];
             $params[] = $id;
-            $params[] = $_SESSION["logged_user_id"];
+            $params[] = $userId;
             $pdo = getPDO();
             $sql = "SELECT product_id FROM user_favourite_products WHERE product_id = ? AND user_id = ?";
             $statement = $pdo->prepare($sql);
@@ -65,4 +65,5 @@ class FavouriteDAO{
             echo  $e->getMessage();
         }
     }
+
 }

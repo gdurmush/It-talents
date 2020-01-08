@@ -1,6 +1,6 @@
 <?php
 namespace View;
-use Model\UserDAO;
+use model\UserDAO;
 
 
 

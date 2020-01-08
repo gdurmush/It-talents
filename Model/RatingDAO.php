@@ -1,5 +1,5 @@
 <?php
-namespace Model;
+namespace model;
 
 include_once "PDO.php";
 class RatingDAO

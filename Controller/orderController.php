@@ -5,7 +5,6 @@ use Model\AddressDAO;
 use model\CartDAO;
 use model\OrderDAO;
 
-include_once dirname(__FILE__) . "/../Model/DBManager.php";
 class OrderController{
     public function order()
     {

@@ -1,6 +1,6 @@
 <?php
 namespace View;
-use Model\AddressDAO;
+use model\AddressDAO;
 
 $address=AddressDAO::getById($_POST["address_id"]);
 $cities=AddressDAO::getCities();
