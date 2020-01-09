@@ -1,5 +1,6 @@
 <?php
 namespace Controller;
+use Emailer;
 use model\SearchDAO;
 use model\Search;
 use model\Product;
@@ -117,6 +118,7 @@ public function showAsc (){
         include_once "View/addProduct.php";
     }
 
+
     public function edit(){
 
 
@@ -144,6 +146,7 @@ public function showAsc (){
                         } else {
                             $price = $_POST["newPrice"];
                             $old_price = $_POST["price"];
+
                         }
                     }
                 }
@@ -179,6 +182,7 @@ public function showAsc (){
                     $product["image_url"]=$img_url;
 
                     ProductDAO::edit($product);
+                    self::sendPromotionEmail($product["product_id"] , $product["name"]);
 
                 }
 
@@ -270,6 +274,29 @@ public function showAsc (){
 
     }
 
+    public function filterProducts (){
+    if (isset($_POST["checked"])){
+//      $a = new Product(1,"something",1,1000,1,5,'dfgd');
+//      $b = new Product(1,"something",1,1000,1,5,'dfgd');
+//      $c = [];
+//      $c[] = $a;
+//      $c[] = $b;
+        if (isset($_POST["checked"]["os"]))
+
+        if (isset($_POST["checked"]["name"]))
+        echo json_encode($_POST["checked"]);
+    }
+    }
+   public static function sendPromotionEmail($productId , $productName){
+        $emails = ProductDAO::getUserEmailsByLikedProduct($productId);
+        foreach ($emails as $email){
+            Emailer::sendemail($email , $productName);
+        }
+
+    }
+
+
 
 
 }
+

@@ -31,6 +31,12 @@ $(function(){
             }
         });
         console.log(checked);
+        $.post('index.php?target=product&action=filterProducts', {checked})
+            .then((filtered) => {
+                console.log(filtered)
+                filtered.forEach((product)=> {console.log(product)})
+                console.log(filtered);
+            }).catch((err) => console.error(err));
 
     })
 })
