@@ -1,7 +1,7 @@
 <?php
 require_once "PHPMailer-5.2-stable/PHPMailerAutoload.php";
 $email = "yanislav.vejdarski@gmail.com";
-function sendemail($email){
+function sendemail($email , $product){
 
     $mail = new PHPMailer;
 //$mail->SMTPDebug = 3;                               // Enable verbose debug output
@@ -19,7 +19,7 @@ function sendemail($email){
     $mail->isHTML(true);                                  // Set email format to HTML
 
     $mail->Subject = 'Your Product is on Sale !!!';
-    $mail->Body    = 'Your wanted Product is in Sale Now !!! Go Check it out before the sale expires <b>in bold!</b>';
+    $mail->Body    = "$product Product is in Sale Now !!! Go Check it out before the sale expires <b>in bold!</b>";
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     if(!$mail->send()) {

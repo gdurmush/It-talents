@@ -220,10 +220,23 @@ class ProductDAO{
             echo $e->getMessage();
         }
     }
-    public  static function filterProducts ($typeId , $filters){
+    public  static function filterProducts ($filters){
+        $filters = "ok";
        $filters = json_decode($filters);
+       return $filters;
     }
+    public static function getUserEmailsByLikedProduct($productId){
 
+        $db = getPDO();
+        $params = [];
+        $params[] = $productId;
+        $sql = "SELECT email FROM users as u JOIN user_favourite_products as uf ON u.id = uf.user_id WHERE uf.product_id = ?";
+        $statement = $db->prepare($sql);
+        $statement->execute($params);
+        $emails = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $emails;
+
+    }
 
 
 
