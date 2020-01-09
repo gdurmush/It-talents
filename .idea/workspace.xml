@@ -54,7 +54,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../toto" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -62,12 +63,16 @@
       <recent name="D:\Apps\htdocs\emag\View" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="PHP Script.PDO.php">
+    <configuration name="PDO.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/Model/PDO.php">
+      <method v="2" />
+    </configuration>
     <configuration name="index.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/index.php">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHP Script.PDO.php" />
         <item itemvalue="PHP Script.index.php" />
       </list>
     </recent_temporary>
@@ -113,6 +118,7 @@
       <workItem from="1578216896907" duration="28019000" />
       <workItem from="1578296895401" duration="2647000" />
       <workItem from="1578339110523" duration="10911000" />
+      <workItem from="1578431606492" duration="6397000" />
     </task>
     <servers />
   </component>
@@ -134,7 +140,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -165,18 +173,39 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1577730927708" />
+    <state width="1323" height="163" key="GridCell.Tab.0.bottom" timestamp="1578514859919">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578514859919" />
+    <state width="1323" height="163" key="GridCell.Tab.0.center" timestamp="1578514859919">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1578514859919" />
+    <state width="1323" height="163" key="GridCell.Tab.0.left" timestamp="1578514859918">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1578514859918" />
+    <state width="1323" height="163" key="GridCell.Tab.0.right" timestamp="1578514859919">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1578514859919" />
     <state x="330" y="291" key="NewPhpClassDialog" timestamp="1578241401526">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="330" y="291" key="NewPhpClassDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578241401526" />
-    <state x="729" y="404" key="NewPhpFileDialog" timestamp="1578246747301">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="519" y="283" key="NewPhpFileDialog" timestamp="1578507457904">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="519" y="283" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1578507457904" />
     <state x="729" y="404" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578246747301" />
     <state x="795" y="186" key="RollbackChangesDialog" timestamp="1578349211770">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="795" y="186" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578349211770" />
+    <state x="296" y="15" key="SettingsEditor" timestamp="1578431679050">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="296" y="15" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1578431679050" />
     <state x="535" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1578339114806">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

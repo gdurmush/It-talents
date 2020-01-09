@@ -220,7 +220,7 @@ public function showAsc (){
             $isInStock="Not available";
         }elseif($product["quantity"]<=10){
             $isInStock="Limited quantity";
-        }elseif($product->quantity>10){
+        }elseif($product["quantity"]>10){
             $isInStock="In stock";
         }
 

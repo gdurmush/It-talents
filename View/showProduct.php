@@ -6,8 +6,7 @@ use model\FavouriteDAO;
 use Controller\ProductController;
 use model\RatingDAO;
 
-/*$avgStars=ProductDAO::getAVGRating($this->id);
-$countOfStars=ProductController::showStars($this->id);*/
+
 
 $review=RatingDAO::getReviewsNumber($this->id);
 $countOfStars=ratingController::showStars($this->id);
@@ -122,19 +121,9 @@ $status=ProductController::checkIfIsInPromotion($this->id);
         <?php
     }
     ?>
+
 </table>
            <?php }?>
-<!--<table>
-    <tr><td>Average grade: <?/*= $avgStars->avg_stars*/?></td></tr>
-    <?php /*foreach ($countOfStars as $key=>$countOfStar) {
-        echo "<tr><td>Rate with $key stars:  $countOfStar</td></tr>";
-    }
-    */?>
-</table>
-</body>
-</html>
--->
-
 <table>
     <tr>
         <td>Average grade: <?= $review->avg_stars?></td>
