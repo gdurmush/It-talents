@@ -1,9 +1,7 @@
 <?php
 namespace Controller;
+
 use Emailer;
-use model\SearchDAO;
-use model\Search;
-use model\Product;
 use model\ProductDAO;
 use model\Type;
 use model\TypeDAO;
@@ -35,7 +33,7 @@ public function show (){
                 include_once "View/showProductsFromType.php";
                 foreach ($products as $product){
                     $productList = ProductDAO::findProduct($product["id"]);
-                    $productList->show();
+                    $productList->showByType();
                 }
 
             }
@@ -46,7 +44,7 @@ public function show (){
                 include_once "View/showProductsFromType.php";
                 foreach ($products as $product){
                     $productList = ProductDAO::findProduct($product["id"]);
-                    $productList->show();
+                    $productList->showByType();
                 }
 
             }
@@ -59,7 +57,7 @@ public function show (){
 
             foreach ($products as $product){
                 $productList = ProductDAO::findProduct($product["id"]);
-                $productList->show();
+                $productList->showByType();
             }
         }
     }

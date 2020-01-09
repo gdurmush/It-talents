@@ -52,4 +52,10 @@ function showMinimal (){
 
 }
 
+    function showByType(){
+        include "View/showProductByType.php";
+
+    }
+
+
 }
