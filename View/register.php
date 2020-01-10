@@ -47,7 +47,12 @@ if (isset($msg) && $msg!=""){
     </div>
     <div class="form-group">
         <label >Phone number</label>
-        <input type="number" name="phone_number" class="form-control" placeholder="0888888888" required>
+        <input type="number" name="phone_number" class="form-control" placeholder="8## ### ###" required>
+
+    </div>
+    <div class="form-group">
+        <label >Subscribe for notification about latest promotions:</label>
+        <input type="checkbox" name="subscription">
 
     </div>
 

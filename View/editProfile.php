@@ -23,16 +23,16 @@ $user=UserDAO::getUserByid($_SESSION["logged_user_id"]);
 <body>
 
 <?php
-if (isset($err) && $err){
+if (isset($msg) && $msg!=''&& $msg!="success"){
     ?>
     <div class="alert alert-danger" role="alert">
         <?php echo $msg;?>
     </div>
     <?php
-}elseif(isset($msg) && $msg!=''){
+}elseif(isset($msg) &&  $msg=="success"){
     ?>
     <div class="list-group-item list-group-item-success" role="alert">
-        <?php echo $msg;?>
+        Successfully updated account!
     </div>
     <?php
 }?>
@@ -73,7 +73,11 @@ if (isset($err) && $err){
         <label for="exampleInputPassword1">Enter current password</label>
         <input name="accountPassword" type="password" class="form-control" id="exampleInputPassword1"  >
     </div>
+    <div class="form-group">
+        <label >Subscribe for notification about latest promotions:</label>
+        <input type="checkbox" name="subscription">
 
+    </div>
     <button name="edit" type="submit" class="btn btn-primary">Save changes</button>
 </form>
 <a href="index.php?target=User&action=account"><button name="myAccount" class="btn btn-primary">Back to My Account</button></a>

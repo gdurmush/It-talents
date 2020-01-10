@@ -48,11 +48,16 @@ const MIN_LENGTH=8;
         if($result){
             $msg="This email already exist!";
         }
-
+        $subscription="no";
+        if(isset($_POST["subscription"]) && $_POST["subscription"]=="on"){
+            $subscription="yes";
+        }
         if($msg==""){
             $role="user";
             $password=password_hash($_POST["password"],PASSWORD_BCRYPT);
-            $user = new User($_POST["email"],$password,$_POST["first_name"],$_POST["last_name"],$_POST["age"],$_POST["phone_number"],$role);
+            $first_name=ucfirst($_POST["first_name"]);
+            $last_name=ucfirst($_POST["last_name"]);
+            $user = new User($_POST["email"],$password,$first_name,$last_name,$_POST["age"],$_POST["phone_number"],$role,$subscription);
             UserDAO::add($user);
 
             $_SESSION["logged_user_id"]=$user->getId();
@@ -91,11 +96,19 @@ const MIN_LENGTH=8;
         }
 
 
+        if(isset($_POST["subscription"]) && $_POST["subscription"]=="on"){
+            $subscription="yes";
+        }else{
+            $subscription=$result->subscription;
+        }
         if($msg==""){
-            $user=new User($_POST["email"],$password,$_POST["first_name"],$_POST["last_name"],$_POST["age"],$_POST["phone_number"],false);
+            $role="user";
+            $first_name=ucfirst($_POST["first_name"]);
+            $last_name=ucfirst($_POST["last_name"]);
+            $user=new User($_POST["email"],$password,$first_name,$last_name,$_POST["age"],$_POST["phone_number"],$role,$subscription);
             $user->setId($_SESSION["logged_user_id"]);
             UserDAO::update($user);
-            $msg="You successfully update your account";
+            $msg="success";
         }
         include_once "View/editProfile.php";
     }

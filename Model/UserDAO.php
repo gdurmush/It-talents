@@ -42,7 +42,8 @@ class UserDAO{
             $params[] = $user->getAge();
             $params[] = $user->getPhoneNumber();
             $params[] = $user->getRole();
-            $sql = "INSERT INTO users (email, password, first_name,last_name,age,phone_number,role,date_created) VALUES (?, ?, ?,?,?,?,?,now());";
+            $params[]=$user->getSubscription();
+            $sql = "INSERT INTO users (email, password, first_name,last_name,age,phone_number,role,subscription,date_created) VALUES (?, ?, ?,?,?,?,?,?,now());";
             $stmt = $db->prepare($sql);
             $stmt->execute($params);
             $user->setId($db->lastInsertId());
@@ -64,9 +65,10 @@ class UserDAO{
             $params[] = $user->getLastName();
             $params[] = $user->getAge();
             $params[] = $user->getPhoneNumber();
+            $params[]=$user->getSubscription();
             $params[] = $user->getId();
 
-            $sql = "UPDATE users SET email=?, password=?, first_name=?,last_name=?,age=?,phone_number=? WHERE id=? ;";
+            $sql = "UPDATE users SET email=?, password=?, first_name=?,last_name=?,age=?,phone_number=?,subscription=? WHERE id=? ;";
             $stmt = $db->prepare($sql);
             $stmt->execute($params);
 

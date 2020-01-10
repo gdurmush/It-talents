@@ -11,10 +11,10 @@ class User
     private $age;
     private $phone_number;
     private $role;
-    //private $date_created;
+    private $subscription;
 
 
-    public function __construct($email,$password,$first_name,$last_name,$age,$phone_number,$role){
+    public function __construct($email,$password,$first_name,$last_name,$age,$phone_number,$role,$subscription){
 
         $this->email=$email;
         $this->password=$password;
@@ -23,6 +23,7 @@ class User
         $this->age=$age;
         $this->phone_number=$phone_number;
         $this->role=$role;
+        $this->subscription=$subscription;
     }
 
 
@@ -93,5 +94,10 @@ class User
         return $this->role;
     }
 
+
+    public function getSubscription()
+    {
+        return $this->subscription;
+    }
 
 }
