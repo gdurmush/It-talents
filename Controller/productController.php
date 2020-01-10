@@ -281,21 +281,31 @@ class ProductController
 
     public function filterProducts()
     {
-        if (isset($_POST["checked"])) {
 //      $a = new Product(1,"something",1,1000,1,5,'dfgd');
 //      $b = new Product(1,"something",1,1000,1,5,'dfgd');
 //      $c = [];
 //      $c[] = $a;
 //      $c[] = $b;
-            if (isset($_POST["checked"]["os"]))
+            if (isset($_POST["checked"])){
+                $msg = "SELECT name , price , quantity , image_url FROM products JOIN  ";
+                $filters = $_POST["checked"];
+                foreach ($filters as $filter){
+                        if($filter["name"] == "os"){
 
-                if (isset($_POST["checked"]["name"]))
-                    echo json_encode($_POST["checked"]);
-        }
+                        }
+                        elseif ($filter["name"] =="ram"){
+
+                        }
+                        elseif ($filter["name"] == "storage"){
+
+                        }
+                    }
+                }
     }
 
     function sendPromotionEmail($productId, $productName)
     {
+
         $emails = ProductDAO::getUserEmailsByLikedProduct($productId);
         foreach ($emails as $email) {
             $this->sendemail($email["email"], $productName , $productId);

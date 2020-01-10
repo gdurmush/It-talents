@@ -230,7 +230,8 @@ class ProductDAO{
         $db = getPDO();
         $params = [];
         $params[] = $productId;
-        $sql = "SELECT email FROM users as u JOIN user_favourite_products as uf ON u.id = uf.user_id WHERE uf.product_id = ?";
+        $sql = "SELECT email FROM users as u JOIN user_favourite_products as uf ON u.id = uf.user_id
+         WHERE uf.product_id = ? and u.subscription = 'yes'";
         $statement = $db->prepare($sql);
         $statement->execute($params);
         $emails = $statement->fetchAll(PDO::FETCH_ASSOC);
