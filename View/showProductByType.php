@@ -23,9 +23,6 @@ $status=ProductController::checkIfIsInPromotion($this->id);
 </head>
 <body>
 
-<span>
-
-<table>
     <tr>
         <td><h3> <?=$this->name ?></h3></td>
     </tr>
@@ -124,8 +121,6 @@ $status=ProductController::checkIfIsInPromotion($this->id);
         <?php
     }
     ?>
-
-</table>
 <?php }?>
 
 

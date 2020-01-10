@@ -7,7 +7,7 @@ use model\ProductDAO;
 use model\Type;
 use model\TypeDAO;
 use PHPMailer;
-
+include_once "credentials.php";
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -59,7 +59,8 @@ class ProductController
 
                 foreach ($products as $product) {
                     $productList = ProductDAO::findProduct($product["id"]);
-                    $productList->show();
+
+                    $productList->showByType();
                 }
             }
         } catch (\PDOException $e) {
@@ -297,13 +298,13 @@ class ProductController
     {
         $emails = ProductDAO::getUserEmailsByLikedProduct($productId);
         foreach ($emails as $email) {
-            $this->sendemail($email["email"], $productName);
+            $this->sendemail($email["email"], $productName , $productId);
         }
 
     }
 
 
-    function sendemail($email, $product)
+    function sendemail($email, $productName , $productId)
         {
             require_once "PHPMailer-5.2-stable/PHPMailerAutoload.php";
             $mail = new PHPMailer;
@@ -312,18 +313,18 @@ class ProductController
             $mail->SMTPDebug = 0;// Set mailer to use SMTP
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Host = 'smtp.sendgrid.net';  // Specify main and backup SMTP servers
-            $mail->Username = '';                 // SMTP username
-            $mail->Password = '';                           // SMTP password
+            $mail->Username = EMAIL_USERNAME;                 // SMTP username
+            $mail->Password = EMAIL_PASSWORD;                           // SMTP password
             $mail->SMTPSecure = 'tsl';                            // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 587;                                    // TCP port to connect to
 
-            $mail->setFrom('yanislav.vejdarski@gmail.com');
+            $mail->setFrom('emag9648@gmail.com');
             $mail->addAddress($email);     // Add a recipient
             $mail->isHTML(true);                                  // Set email format to HTML
 
             $mail->Subject = 'Your Product is on Sale !!!';
-            $mail->Body = "$product Product is in Sale Now !!! Go Check it out before the sale expires <b>in bold!</b>";
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            $mail->Body = "$productName Product is in Sale Now !!! Go Check it out before the sale expires ";
+            $mail->AltBody = 'Click For Register';
 
             if (!$mail->send()) {
                 echo 'Message could not be sent.';

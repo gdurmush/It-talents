@@ -1,5 +1,6 @@
 <?php
 namespace View;
+use Controller\addressController;
 use model\AddressDAO;
 use model\CartDAO;
 use model\FavouriteDAO;
@@ -38,20 +39,30 @@ include_once "View/search.php";
         echo "Total price : ". $totalprice . "Лв.";
 
         $myAddresses =  AddressDAO::getAll($_SESSION["logged_user_id"]);
-        ?>
-    <form action="index.php?action=order&target=order" method="post">
-        Delivery Address
-        <select name="address">
-            <?php foreach ($myAddresses as $address){
-                $add = AddressDAO::getById($address->id);
-                echo "<option value='$address->id'>$add->city_name , $add->street_name , Bulgaria</option>";
+        if (addressController::checkUserAddress()){
+      ?>
+<form action="index.php?action=order&target=order" method="post">
+    Delivery Address
+    <select name="address">
+        <?php foreach ($myAddresses as $address){
+            $add = AddressDAO::getById($address->id);
+            echo "<option value='$address->id'>$add->city_name , $add->street_name , Bulgaria</option>";
+        }
+        ?></select>
+    <?php if($totalprice !=0){ ?>
+    <input type="hidden" value="<?=$totalprice?>" name="totalPrice">
+    <input type="submit" value="Order Items" name="order">
+</form>
+<?php
             }
-            ?></select>
-        <?php if($totalprice !=0){ ?>
-        <input type="hidden" value="<?=$totalprice?>" name="totalPrice">
-        <input type="submit" value="Order Items" name="order">
-    </form>
-<?php }
+        }else{
+            ?>
+            <div>
+            You can't finish order without Address.
+            <a href="index.php?target=address&action=newAddress"><button>Add Address</button></a>
+            </div>
+            <?php
+        }
 
 
 

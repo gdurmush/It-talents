@@ -3,6 +3,11 @@
 namespace model;
 include_once "PDO.php";
 class AddressDAO{
+
+    public function __construct()
+    {
+    }
+
     public static function getById($id){
 
         try{
@@ -101,5 +106,14 @@ class AddressDAO{
 
 
     }
+      public function userAddress($userId){
+        $db = getPDO();
+        $sql = "SELECT id FROM addresses WHERE user_id = ?";
+        $statement = $db->prepare($sql);
+        $statement->execute([$userId]);
+        $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        return $result;
+
+      }
 
 }

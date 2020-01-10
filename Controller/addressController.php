@@ -54,4 +54,10 @@ class addressController{
     public function editAddress(){
         include_once "View/editAddress.php";
     }
+
+    public static function checkUserAddress(){
+       $check = new AddressDAO;
+       return $check->userAddress($_SESSION["logged_user_id"]);
+
+    }
 }
