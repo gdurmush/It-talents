@@ -95,11 +95,16 @@ const MIN_LENGTH=8;
 
         }
 
-
+        $subscription=null;
         if(isset($_POST["subscription"]) && $_POST["subscription"]=="on"){
             $subscription="yes";
-        }else{
-            $subscription=$result->subscription;
+        }elseif(isset($_POST["subs"])){
+            if($_POST["subs"]=="yes"){
+                $subscription="yes";
+            }elseif ($_POST["subs"]=="no"){
+                $subscription="no";
+            }
+
         }
         if($msg==""){
             $role="user";

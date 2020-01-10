@@ -1,11 +1,5 @@
 <?php
-//include_once "../config.php";
-
-define("DB_HOST","127.0.0.1");
-define("DB_PORT","3306");
-define("DB_NAME","emag");
-define("DB_USER","root");
-define("DB_PASS","");
+require_once "config.php";
 
 function getPDO(){
     try{
@@ -16,10 +10,9 @@ function getPDO(){
 
     }
     catch (PDOException $e){
-        /*echo $e->getMessage();*/
-        echo "yes";
+        echo $e->getMessage();
+
     }
 }
 
 
-getPDO();

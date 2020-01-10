@@ -73,11 +73,30 @@ if (isset($msg) && $msg!=''&& $msg!="success"){
         <label for="exampleInputPassword1">Enter current password</label>
         <input name="accountPassword" type="password" class="form-control" id="exampleInputPassword1"  >
     </div>
+
+    <?php
+    if($user->subscription==="yes"){
+        ?>
+
+        <div class="form-group">
+            <label >Subscribe for notification about latest promotions:</label><br>
+            <input type="radio" name="subs" value="yes" checked> YES <br>
+            <input type="radio" name="subs" value="no">NO <br>
+        </div>
+    <?php
+    }else{
+        ?>
     <div class="form-group">
         <label >Subscribe for notification about latest promotions:</label>
         <input type="checkbox" name="subscription">
 
     </div>
+    <?php
+    }
+    ?>
+
+
+
     <button name="edit" type="submit" class="btn btn-primary">Save changes</button>
 </form>
 <a href="index.php?target=User&action=account"><button name="myAccount" class="btn btn-primary">Back to My Account</button></a>
