@@ -368,26 +368,49 @@ class ProductController
 
     public function filterProducts()
     {
-//      $a = new Product(1,"something",1,1000,1,5,'dfgd');
-//      $b = new Product(1,"something",1,1000,1,5,'dfgd');
-//      $c = [];
-//      $c[] = $a;
-//      $c[] = $b;
-            if (isset($_POST["checked"])){
-                $msg = "SELECT name , price , quantity , image_url FROM products JOIN  ";
+                $counter = 0;
                 $filters = $_POST["checked"];
-                foreach ($filters as $filter){
-                        if($filter["name"] == "os"){
+                $msg = "";
+                $args = [];
+            if (isset($_POST["checked"])){
+                foreach ($_POST["checked"] as $filter){
+                    $name = $filter["name"];
+                    $checked = $filter["checkedValues"];
+                    $params = array_map(function ($el){return "?";}, $checked);
+                    $stringParams = implode(',',$params);
 
-                        }
-                        elseif ($filter["name"] =="ram"){
-
-                        }
-                        elseif ($filter["name"] == "storage"){
-
-                        }
+                    $alias = "attr$counter";
+                    if ($counter == 0){
+                        $msg.= "SELECT * FROM (
+                                SELECT distinct  p.name , p.id , p.price , p.quantity , p.image_url 
+                                FROM products as p 
+                                JOIN product_attributes as pha ON (p.id = pha.product_id)
+                                JOIN attributes as a ON (pha.attribute_id = a.id) 
+                                WHERE p.type_id = 1
+                                AND  a.name=? AND pha.value in($stringParams)) as $alias";
+                        $args[].= $name;
+                        $args = array_merge($args, $checked);
+                    }else {
+                        $prevIndex = $counter - 1;
+                        $prevAlias = "attr$prevIndex";
+                        $msg.=" join (
+                            SELECT distinct p.id 
+                            FROM products as p
+                            JOIN product_attributes as pha ON (p.id = pha.product_id)
+                            JOIN attributes as a ON (pha.attribute_id = a.id) 
+                            WHERE p.type_id = 1
+                            AND  a.name=? AND pha.value in($stringParams)
+                            ) as $alias on $prevAlias.id = $alias.id";
+                        $args[].= $name;
+                        $args = array_merge($args, $checked);
                     }
+
+                    ++$counter;
                 }
+                $msg.= ";";
+
+                ProductDAO::filterProducts($msg , $args);
+            }
     }
 
     function sendPromotionEmail($productId, $productName)
