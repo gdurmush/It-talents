@@ -2,24 +2,68 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/productController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/productController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/userController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/userController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/PDO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/PDO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/ProductDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/ProductDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/config.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/editProfile.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/editProfile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/credentials.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/addressController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/AddressController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/cartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/CartController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/favouriteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/FavouriteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/mainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/MainController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/orderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/productController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/ratingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/RatingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/searchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/SearchController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/userController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Address.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Address.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/AddressDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/AddressDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/CartDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/CartDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Categories.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Categories.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Emailer.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Emailer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Favourite.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Favourite.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/FavouriteDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/FavouriteDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/OrderDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/OrderDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/PDO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/PDO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/ProductDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/ProductDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/RatingDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/RatingDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Search.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/SearchDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/SearchDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Type.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Type.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/TypeDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/TypeDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/UserDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/UserDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/show2.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/show2.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/account.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/account.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/addProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/addProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/chk.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/chk.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/css.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/css.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/editAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editAddress.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/editProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/editProfile.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editProfile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/editRatedProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editRatedProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/favourites.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/favourites.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/myRated.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/myRated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/newAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/newAddress.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/rateProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/rateProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/showProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/showProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/showProductByType.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/showProductByType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/showProductsFromType.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/showProductsFromType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/PHPMailer-5.2-stable/composer.json</pharConfigPath>
     <execution>
       <executable />
@@ -119,6 +163,7 @@
       <workItem from="1578339110523" duration="10911000" />
       <workItem from="1578562818932" duration="5999000" />
       <workItem from="1578647225818" duration="11759000" />
+      <workItem from="1578730111078" duration="12579000" />
     </task>
     <servers />
   </component>
@@ -153,18 +198,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1097" y="89" key="#PHP/0.0.1920.1040@0.0.1920.1040" timestamp="1577390987879" />
-    <state x="834" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1577568194432">
+    <state x="834" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1578732019781">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="834" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577568194432" />
+    <state x="834" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578732019781" />
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1578668593551">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578668593551" />
-    <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1578344884470">
+    <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1578741858526">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578344884470" />
+    <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578741858526" />
     <state x="141" y="55" width="1425" height="680" key="DiffContextDialog" timestamp="1578348539795">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -185,10 +230,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="795" y="186" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578349211770" />
-    <state x="535" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1578647468549">
+    <state x="535" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1578730390021">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="535" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578647468549" />
+    <state x="535" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578730390021" />
     <state x="739" y="118" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1578254327346">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
