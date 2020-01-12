@@ -34,7 +34,7 @@ class RatingDAO
 
     }
 
-    public function showMyRated($user_id)
+    public static function showMyRated($user_id)
     {
 
         $db = getPDO();

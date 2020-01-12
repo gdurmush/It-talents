@@ -1,6 +1,7 @@
 <?php
 namespace controller;
 
+use model\Filter;
 use model\ProductDAO;
 use model\Type;
 use model\TypeDAO;
@@ -63,7 +64,7 @@ class ProductController
                     try {
                         $productDAO = new ProductDAO();
                         $productList = $productDAO->findProduct($product["id"]);
-                        $productList->show();
+                        $productList->showByType();
                     } catch (\PDOException $e) {
                         include_once "view/main.php";
                         echo "Oops, error 500!";
@@ -87,14 +88,17 @@ class ProductController
                 foreach ($products as $product) {
                     $productDAO = new ProductDAO();
                     $productList = $productDAO->findProduct($product["id"]);
-                    $productList->show();
+                    $productList->showByType();
                 }
 
             }
         } elseif (isset($_GET["typId"])) {
 
             try {
-                $productDAO = new ProductDAO();
+
+
+
+                /*$productDAO = new ProductDAO();
                 $products = $productDAO->getProductsFromTypeId($_GET["typId"]);
                 $typeDAO = new TypeDAO();
                 $type = $typeDAO->getTypeInformation($_GET["typId"]);
@@ -105,12 +109,47 @@ class ProductController
                     $productList = $productDAO->findProduct($product["id"]);
 
                     $productList->showByType();
-                }
+                }*/
             } catch (\PDOException $e) {
                 include_once "view/main.php";
                 echo "Oops, error 500!";
             }
+
+            $rrp=4;
+            if(isset($_GET["page"])){
+                $page=$_GET["page"];
+
+            }else{
+                $page=0;
+            }
+
+            if($page>1){
+                $start=($page*$rrp)-$rrp;
+
+            }else{
+                $start=0;
+            }
+            $typeDAO=new TypeDAO();
+            $resultSet=$typeDAO->getNumberOfProductsForType($_GET["typId"]);
+            $numRows=$resultSet->count;
+            $typeDAO=new TypeDAO();
+            $products=$typeDAO->getAllByType($_GET["typId"],$start,$rrp);
+            $filters=$this->getFilters($_GET["typId"]);
+            $totalPages=$numRows/$rrp;
+
+
+            include_once "View/showProductByType.php";
         }
+    }
+
+    public function getFilters($id){
+        $typeDAO=new TypeDAO();
+        $typeNames=$typeDAO->getAttributesByType($id);
+
+        $filter=new Filter();
+        $filter->setFilterNames($typeNames);
+        $filter->setFilterValues($typeNames);
+        return $filter;
     }
 
     public function showAsc()

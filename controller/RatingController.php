@@ -54,7 +54,6 @@ class ratingController
         try{
             $ratingDAO=new RatingDAO();
             $product_stars=$ratingDAO->getStarsCount($product_id);
-            include_once "view/myRated.php";
         }catch (\PDOException $e){
             include_once "view/main.php";
             echo "Oops, error 500!";

@@ -3,11 +3,10 @@ namespace controller;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-use Model\Address;
-use Model\AddressDAO;
+
 use model\CartDAO;
 use model\ProductDAO;
-use model\Cart;
+
 use PDOException;
 use PDO;
 class CartController{
@@ -17,8 +16,7 @@ class CartController{
 
                 $cartDAO=new CartDAO();
                 $check = $cartDAO->checkIfInCart($_GET["id"]);
-                if ($check)
-                {
+                if ($check) {
                     $cartDAO->updateQuantityOfProduct($_GET["id"]);
                     include_once "view/cart.php";
                 }

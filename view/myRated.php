@@ -5,7 +5,7 @@ use model\RatingDAO;
 
 try{
     $ratingDAO=new RatingDAO();
-    $myRatings=$ratingDAO->showMyRated($_SESSION["logged_user_id"]);
+    $myRatings=RatingDAO::showMyRated($_SESSION["logged_user_id"]);
 }catch (\PDOException $e){
     include_once "view/main.php";
     echo "Oops, error 500!";

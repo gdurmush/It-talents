@@ -28,5 +28,54 @@ class TypeDAO{
             return $types;
         }
 
+    public function getAllByType($id,$start,$productsPerPage){
 
+         $pdo = getPDO();
+
+        $sql = "SELECT * FROM products where type_id=? LIMIT ".$start.",".$productsPerPage.";";
+        $statement = $pdo->prepare($sql);
+        $statement->execute([$id]);
+        return $statement->fetchAll(PDO::FETCH_OBJ);
+
+    }
+
+    public function getAttributesByType($id){
+
+
+        $pdo = getPDO();
+        $sql = "SELECT distinct a.name, pha.values FROM attributes as a 
+JOIN product_have_attributes as pha ON(a.id=pha.attribute_id)
+where type_id=?;";
+        $statement = $pdo->prepare($sql);
+        $statement->execute([$id]);
+        return $statement->fetchAll(PDO::FETCH_OBJ);
+
+    }
+    public function getNumberOfProductsForType($id){
+
+            $pdo = getPDO();
+            $sql = "SELECT count(id) AS count FROM products where type_id=?;";
+            $statement = $pdo->prepare($sql);
+            $statement->execute([$id]);
+            return $statement->fetch(PDO::FETCH_OBJ);
+
+    }
+    public function getTypes(){
+
+        $pdo = getPDO();
+        $sql = "SELECT * FROM emag.types;";
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_OBJ);
+
+    }
+    public function getCategories(){
+
+        $pdo = getPDO();
+        $sql = "SELECT * FROM emag.categories;";
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_OBJ);
+
+    }
 }

@@ -50,8 +50,7 @@ include_once "view/search.php";
                   <?php } else {
                       ?>
                   <a href="index.php?target=favourite&action=add&id=<?= $productInfo->id ?>">
-                          <button>Add To Favourites</button></a>
-                      <?php
+                          <button>Add To Favourites</button></a><?php
                   }
                   echo $productInfo->price * $product["quantity"] . "Лв.";
                   ?></div><br><?php
