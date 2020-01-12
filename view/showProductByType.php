@@ -1,7 +1,7 @@
 <?php
 namespace view;
 
-use controller\TypeController;
+
 use model\FavouriteDAO;
 use controller\ProductController;
 use model\RatingDAO;
@@ -213,7 +213,7 @@ if(isset($filters)  && isset($products)&& isset($totalPages) && isset($page)) {
                                  width="40">
                             <div class="card-body">
                                 <h5 class="card-title"><?= $product->name ?></h5>
-                                <p class="card-text"><?= $product->price ?></p>
+                                <p class="card-text"><?= $product->price ?> EURO</p>
                                 <a href="index.php?target=cart&action=add&id=<? $product->id ?>"
                                    class="btn btn-primary">Add to cart</a>
                             </div>

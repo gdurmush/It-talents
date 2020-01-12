@@ -205,6 +205,21 @@ class ProductDAO{
 
     }
 
+    public function getMostSold(){
+
+        $db = getPDO();
+
+        $sql = "SELECT p.id,p.name,p.producer_id,p.price,p.old_price,p.image_url,count(ohp.product_id) as 
+ordered_count FROM emag.products AS p
+JOIN orders_have_products AS ohp ON(p.id=ohp.product_id)
+group by p.id order by ordered_count desc LIMIT 12;";
+        $statement = $db->prepare($sql);
+        $statement->execute();
+        $emails = $statement->fetchAll(PDO::FETCH_OBJ);
+        return $emails;
+
+    }
+
 
 
 }

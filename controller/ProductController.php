@@ -390,7 +390,7 @@ class ProductController
                 }
     }
 
-    function sendPromotionEmail($productId, $productName)
+    public function sendPromotionEmail($productId, $productName)
     {
         $productDAO = new ProductDAO();
         $emails = $productDAO->getUserEmailsByLikedProduct($productId);
@@ -400,6 +400,16 @@ class ProductController
 
     }
 
+    public function getMostCelledProducts(){
+        $productDAO = new ProductDAO();
+        return $products=$productDAO->getMostSold();
+
+    }
+    public function showMostOrdered(){
+
+        include_once "View/openPage.php";
+
+    }
 
     function sendemail($email, $productName , $productId)
         {

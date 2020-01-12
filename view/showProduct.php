@@ -19,6 +19,117 @@ try{
 
 
     ?>
+    <div  class="container">
+        <div class="row">
+            <div class="col">
+                <img src="<?= $this->imageUrl ?>" class="">
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <?= $review->reviews_count ?> reviews
+                        </div>
+
+                        <div class="row">
+                            <?= $status["is_in_stock"] ?>
+                        </div>
+                        <div class="row">
+<table>
+    <?php if($status["in_promotion"]){
+        ?>
+        <tr>
+            <td>Old Price:</td>
+            <td><?=$status["old_price"] ?> EURO</td>
+        </tr>
+        <tr>
+            <td>New Price:</td>
+            <td><?= $this->price ?> EURO</td>
+        </tr>
+        <tr>
+            <td>Discount:</td>
+            <td><?= $status["discount"] ?> %</td>
+        </tr>
+        <?php
+    }else{
+        ?>
+        <tr>
+            <td>Price:</td>
+            <td><?= $this->price ?> EURO</td>
+        </tr>
+        <?php
+    }?>
+</table>
+                        </div>
+                        <div class="row">
+ <?php if(isset($_SESSION["logged_user_role"]) && $_SESSION["logged_user_role"]=="admin"){?>
+
+                <form action="index.php?target=product&action=editProduct" method="post">
+                    <input type="hidden" name="product_id" value="<?= $this->id ?>">
+                    <input type="submit" name="editProduct" value="Edit this product">
+                </form>
+
+        <?php }?>
+                        </div>
+                        <div class="row">
+                            <?php if (isset($_SESSION["logged_user_role"])){
+                                ?>
+
+                                    <a href="index.php?target=cart&action=add&id=<?=$this->id?>"><button>Добави в количка</button> </a>
+
+                                <?php
+                                $favouriteDAO=new FavouriteDAO;
+                                if ($favouriteDAO->checkIfInFavourites($this->id , $_SESSION["logged_user_role"]))
+                                {
+                                    ?>
+
+                                        <a href="index.php?target=favourite&action=delete&id=<?=$this->id?>"><button>Премахни от любими</button></a>
+
+                                    <?php
+                                }
+                                else{
+                                    ?>
+
+                                            <a href="index.php?target=favourite&action=add&id=<?=$this->id?>"><img src="icons/like.svg" width="50" height="50"></a>
+
+                                    <?php
+                                }
+                                ?>
+
+                                    <a href="index.php?target=product&action=rateProduct&id=<?=$this->id?>"><button>Оцени този продукт</button></a>
+
+                                <?php
+                            }
+                            else {
+                                ?>
+
+                                    <a href="index.php?target=user&action=loginPage" class="btn btn-primary btn-lg btn-block">Добави в количка</a>
+
+                                <a href="index.php?target=user&action=loginPage" class="btn btn-primary btn-lg btn-block">Оцени този продукт</a>
+
+                                    <a href="index.php?target=user&action=loginPage"><img src="icons/like.svg" width="50" height="50"></a>
+
+
+
+
+
+
+
+
+                                <?php
+                            }
+                            ?>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            poiu
+        </div>
+    </div>
     <!doctype html>
     <html lang="en">
     <head>

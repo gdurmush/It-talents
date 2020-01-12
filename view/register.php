@@ -3,7 +3,7 @@ namespace view;
 ?>
 
 
-<!doctype html>
+<!--<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@ namespace view;
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-</head>
+</head>-->
 <body>
 
 <?php
@@ -23,7 +23,7 @@ if (isset($msg) && $msg!=""){
     </div>
     <?php
 } ?>
-
+<div class="container">
 <form action="index.php?target=User&action=register" method="post">
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
@@ -62,6 +62,8 @@ if (isset($msg) && $msg!=""){
 
     <button name="register" type="submit" class="btn btn-primary">Submit</button>
 </form>
+
 <a href="index.php?target=user&action=loginPage"><button name="register" type="submit" class="btn btn-primary">Back to login page</button></a>
+</div>
 </body>
 </html>
