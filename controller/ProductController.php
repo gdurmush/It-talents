@@ -287,7 +287,7 @@ class ProductController
     }
 
 
-    public static function checkIfIsInPromotion($product_id)
+    public function checkIfIsInPromotion($product_id)
     {
         $productDAO = new ProductDAO();
         $product = $productDAO->getById($product_id);
@@ -368,10 +368,12 @@ class ProductController
 
     public function filterProducts()
     {
+
                 $counter = 0;
                 $filters = $_POST["checked"];
                 $msg = "";
                 $args = [];
+                error_log(json_encode($_POST["checked"]));
             if (isset($_POST["checked"])){
                 foreach ($_POST["checked"] as $filter){
                     $name = $filter["name"];
@@ -408,8 +410,9 @@ class ProductController
                     ++$counter;
                 }
                 $msg.= ";";
+                $filter = new ProductDAO();
+                $filter->filterProducts($msg , $args);
 
-                ProductDAO::filterProducts($msg , $args);
             }
     }
 
@@ -426,6 +429,7 @@ class ProductController
 
     function sendemail($email, $productName , $productId)
         {
+
             require_once "PHPMailer-5.2-stable/PHPMailerAutoload.php";
             $mail = new PHPMailer;
 //$mail->SMTPDebug = 3;                               // Enable verbose debug output

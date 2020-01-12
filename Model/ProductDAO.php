@@ -143,6 +143,7 @@ class ProductDAO{
         $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         echo json_encode($products);
+        error_log(json_encode($products));
     }
 
 

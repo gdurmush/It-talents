@@ -74,8 +74,18 @@ class OrderDAO{
             $pdo->commit();
         }
         catch (PDOException $e){
-            $pdo->rollBack();
             echo $e->getMessage();
         }
+    }
+
+  static  function finishOrder($orderedProducts , $totalPrice){
+
+            $id = OrderDAO::addOrder($_POST["address"], $totalPrice);
+            OrderDAO::addOrderProducts($id , $orderedProducts);
+            $quantity = new ProductDAO();
+            $quantity->decreaseProductQuantity($orderedProducts);
+            $cart = new CartDAO();
+            $cart->deleteCart();
+
     }
 }
