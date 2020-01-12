@@ -97,8 +97,7 @@ class ProductController
             try {
 
 
-
-                /*$productDAO = new ProductDAO();
+                $productDAO = new ProductDAO();
                 $products = $productDAO->getProductsFromTypeId($_GET["typId"]);
                 $typeDAO = new TypeDAO();
                 $type = $typeDAO->getTypeInformation($_GET["typId"]);
@@ -109,7 +108,7 @@ class ProductController
                     $productList = $productDAO->findProduct($product["id"]);
 
                     $productList->showByType();
-                }*/
+                }
             } catch (\PDOException $e) {
                 include_once "view/main.php";
                 echo "Oops, error 500!";
@@ -149,6 +148,7 @@ class ProductController
         $filter=new Filter();
         $filter->setFilterNames($typeNames);
         $filter->setFilterValues($typeNames);
+
         return $filter;
     }
 

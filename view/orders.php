@@ -4,7 +4,7 @@ use model\OrderDAO;
 
 
 $products= new OrderDAO();
-$products->showOrders();
+$products=$products->showOrders();
     foreach ($products as $product){
         ?>
         <table class="form-group">

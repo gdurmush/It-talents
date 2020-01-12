@@ -11,17 +11,9 @@ include_once "view/search.php";
 <h1>Your Cart</h1>
       <?php
       try {
-          $cartDAO = new CartDAO();
-          $productsInCart = $cartDAO->showCart();
-          $totalprice = 0;
-          foreach ($productsInCart as $product) {
-              $productDAO = new ProductDAO();
-              $productInfo = $productDAO->findProduct($product["product_id"]);
-              $totalprice += $product["quantity"] * $productInfo->price;
-
 
               $cartDAO = new CartDAO();
-              $productsInCart = $cartDAO->showCart();
+              $productsInCart = $cartDAO->showCart($_SESSION["logged_user_id"]);
               $totalprice = 0;
               foreach ($productsInCart as $product) {
                   $productDAO = new ProductDAO();
@@ -87,7 +79,7 @@ include_once "view/search.php";
                   </div>
                   <?php
               }
-          }
+
 
       }catch (\PDOException $e){
           include_once "view/main.php";
