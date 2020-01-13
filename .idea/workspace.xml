@@ -2,19 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Controller/orderController.php~Order Fixes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model/OrderDAO.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model/OrderDAO.php~Order Fixes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model/ProductDAO.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model/ProductDAO.php~Product Filtration By Attributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/View/showProductByType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/View/showProductByType.php~Product Filtration By Attributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/product.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/AddressController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/AddressController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/CartController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/FavouriteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/FavouriteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/OrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/RatingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/1578157051.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/1578353227.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/RatingDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/RatingDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/CartDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/CartDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/OrderDAO.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/ProductDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/ProductDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/TypeDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/TypeDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/UserDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/UserDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/css.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/css.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/myRated.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/myRated.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/openPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/openPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/showProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/showProduct.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/showProductByType.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/showProductByType.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,7 +137,7 @@
       <workItem from="1578562818932" duration="5999000" />
       <workItem from="1578647225818" duration="11759000" />
       <workItem from="1578730111078" duration="39721000" />
-      <workItem from="1578817212485" duration="12320000" />
+      <workItem from="1578817212485" duration="47803000" />
     </task>
     <servers />
   </component>
@@ -166,14 +180,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578668593551" />
-    <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1578822052773">
+    <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1578864300066">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578822052773" />
-    <state x="141" y="55" width="1425" height="680" key="DiffContextDialog" timestamp="1578348539795">
+    <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578864300066" />
+    <state x="141" y="55" width="1781" height="897" key="DiffContextDialog" timestamp="1578862697079">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="141" y="55" width="1425" height="680" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578348539795" />
+    <state x="141" y="55" width="1781" height="897" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578862697079" />
     <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1578660489275">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -182,14 +196,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="330" y="291" key="NewPhpClassDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578760918661" />
-    <state x="729" y="404" key="NewPhpFileDialog" timestamp="1578755288861">
+    <state x="729" y="404" key="NewPhpFileDialog" timestamp="1578837524927">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="729" y="404" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578755288861" />
-    <state x="795" y="186" key="RollbackChangesDialog" timestamp="1578349211770">
+    <state x="729" y="404" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578837524927" />
+    <state x="795" y="186" key="RollbackChangesDialog" timestamp="1578862628334">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="795" y="186" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578349211770" />
+    <state x="795" y="186" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578862628334" />
     <state x="535" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1578817232431">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -34,6 +34,8 @@ const MIN_LENGTH=8;
                     if (password_verify($_POST["password"], $user->password)) {
                         $_SESSION["logged_user_id"] = $user->id;
                         $_SESSION["logged_user_role"]=$user->role;
+                        $_SESSION["logged_user_first_name"]=$user->first_name;
+                        $_SESSION["logged_user_last_name"]=$user->last_name;
                     } else {
                         $err = true;
                         $msg='Invalid username or password!';
@@ -83,6 +85,8 @@ const MIN_LENGTH=8;
 
             $_SESSION["logged_user_id"]=$user->getId();
             $_SESSION["logged_user_role"]=$user->getRole();
+            $_SESSION["logged_user_first_name"]=$user->getFirstName();
+            $_SESSION["logged_user_last_name"]=$user->getLastName();
             include_once "view/main.php";
         }else{
             include_once "view/register.php";
@@ -158,7 +162,8 @@ const MIN_LENGTH=8;
             if(isset($_SESSION["logged_user_id"])){
                 unset($_SESSION);
                 session_destroy();
-                header("Location: index.php");
+                include_once "index.php";
+                /*header("Location: index.php");*/
             }
         }
 

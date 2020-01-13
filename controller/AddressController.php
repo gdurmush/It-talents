@@ -50,7 +50,7 @@ class AddressController{
                     echo "Oops, error 500!";
                 }
 
-               header("Location: index.php?target=user&action=account");
+               include_once "view/account.php";
             }else{
                 $err=true;
                 $msg='All field are required';
@@ -71,7 +71,7 @@ class AddressController{
             }
 
 
-            header("Location: index.php?target=user&action=account");
+            include_once "view/account.php";
         }
     }
 

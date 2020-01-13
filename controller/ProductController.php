@@ -94,7 +94,7 @@ class ProductController
             }
         } elseif (isset($_GET["typId"])) {
 
-            try {
+           /* try {
 
 
                 $productDAO = new ProductDAO();
@@ -112,7 +112,7 @@ class ProductController
             } catch (\PDOException $e) {
                 include_once "view/main.php";
                 echo "Oops, error 500!";
-            }
+            }*/
 
             $rrp=4;
             if(isset($_GET["page"])){
@@ -128,13 +128,21 @@ class ProductController
             }else{
                 $start=0;
             }
-            $typeDAO=new TypeDAO();
-            $resultSet=$typeDAO->getNumberOfProductsForType($_GET["typId"]);
-            $numRows=$resultSet->count;
-            $typeDAO=new TypeDAO();
-            $products=$typeDAO->getAllByType($_GET["typId"],$start,$rrp);
-            $filters=$this->getFilters($_GET["typId"]);
-            $totalPages=$numRows/$rrp;
+
+            try{
+                $typeDAO=new TypeDAO();
+                $resultSet=$typeDAO->getNumberOfProductsForType($_GET["typId"]);
+                $numRows=$resultSet->count;
+                $typeDAO=new TypeDAO();
+                $products=$typeDAO->getAllByType($_GET["typId"],$start,$rrp);
+                $filters=$this->getFilters($_GET["typId"]);
+                $totalPages=$numRows/$rrp;
+
+            }catch (\PDOException $e){
+                include_once "view/main.php";
+                echo "Oops, error 500!";
+
+            }
 
 
             include_once "View/showProductByType.php";
@@ -142,14 +150,25 @@ class ProductController
     }
 
     public function getFilters($id){
-        $typeDAO=new TypeDAO();
-        $typeNames=$typeDAO->getAttributesByType($id);
 
-        $filter=new Filter();
-        $filter->setFilterNames($typeNames);
-        $filter->setFilterValues($typeNames);
 
-        return $filter;
+        try{
+            $typeDAO=new TypeDAO();
+            $typeNames=$typeDAO->getAttributesByType($id);
+
+            $filter=new Filter();
+            $filter->setFilterNames($typeNames);
+            $filter->setFilterValues($typeNames);
+
+            return $filter;
+
+        }catch (\PDOException $e){
+            include_once "view/main.php";
+            echo "Oops, error 500!";
+
+        }
+
+
     }
 
     public function showAsc()
@@ -416,7 +435,7 @@ class ProductController
             }
     }
 
-    function sendPromotionEmail($productId, $productName)
+    public function sendPromotionEmail($productId, $productName)
     {
         $productDAO = new ProductDAO();
         $emails = $productDAO->getUserEmailsByLikedProduct($productId);
@@ -426,6 +445,21 @@ class ProductController
 
     }
 
+    public function getMostCelledProducts(){
+        $productDAO = new ProductDAO();
+        return $products=$productDAO->getMostSold();
+
+    }
+    public function showMostOrdered(){
+
+        include_once "view/openPage.php";
+
+    }
+    public function getAttributes($product_id){
+        $productDAO = new ProductDAO();
+        return $attributes=$productDAO->getProductAttributesById($product_id);
+
+    }
 
     function sendemail($email, $productName , $productId)
         {

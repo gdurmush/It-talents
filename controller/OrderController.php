@@ -18,16 +18,17 @@ class OrderController{
             if (isset($_POST["order"])){
                 $orderedProducts = new CartDAO();
               $orderedProducts =  $orderedProducts->showCart($_SESSION["logged_user_id"]);
-                echo json_encode($orderedProducts);
+                /*echo json_encode($orderedProducts);*/
                 OrderDAO::finishOrder($orderedProducts , $_POST["totalPrice"]);
+
         }
 
         }
         catch (PDOException $e){
           echo $e->getMessage();
         }
-
-
+        $msg="Order received!";
+        include_once "view/cart.php";
     }
     public function show(){
       include_once "View/orders.php";
