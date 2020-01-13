@@ -35,7 +35,7 @@ $products=$productController->getMostCelledProducts();
                             <div class="card-body">
                                 <h5 class="card-title"><?= $product->name ?></h5>
                                 <p class="card-text"><?= $product->price ?> EURO</p>
-                                <a href="index.php?target=cart&action=add&id=<? $product->id ?>"
+                                <a href="index.php?target=cart&action=add&id=<?= $product->id ?>"
                                    class="btn btn-primary">Add to cart</a>
                             </div>
                         </div>

@@ -9,8 +9,12 @@ use model\FavouriteDAO;
 class FavouriteController{
     public function show(){
         $userController=new UserController();
-        $userController->validateForLoggedUser();
-        include_once "view/favourites.php";
+        if(!isset($_SESSION["logged_user_id"])){
+            include_once "view/login.php";
+        }else{
+            include_once "view/favourites.php";
+        }
+
     }
 
 
@@ -50,7 +54,7 @@ class FavouriteController{
             }
 
         }else{
-            echo "asdasdas";
+            echo "Bad request!";
         }
     }
 }

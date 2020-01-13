@@ -219,7 +219,17 @@ group by p.id order by ordered_count desc LIMIT 12;";
         return $emails;
 
     }
+    public function getProductAttributesById ($id){
 
+        $pdo = getPDO();
+        $sql = "SELECT a.name,pa.value FROM attributes AS a
+JOIN product_attributes AS pa ON(a.id=pa.attribute_id)
+WHERE product_id =?;";
+        $statement = $pdo->prepare($sql);
+        $statement->execute([$id]);
+        return $statement->fetchAll(PDO::FETCH_OBJ);
+
+    }
 
 
 }

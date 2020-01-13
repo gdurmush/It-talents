@@ -3,6 +3,7 @@
 namespace controller;
 use model\User;
 use model\UserDAO;
+use PHPMailer;
 
 class UserController{
 
@@ -211,6 +212,53 @@ const MIN_LENGTH=8;
             header("Location: index.php?target=user&action=loginPage");
         }
     }
+    public function forgottenPassword (){
+        include_once "View/forgottenPassword.php";
+    }
+    public function sendNewPassword(){
+        if (isset($_POST["forgotPassword"])){
+            if (isset($_POST["email"])){
+                $emailCheck = new UserDAO();
+                $newPassword = substr(md5(uniqid(mt_rand(), true)), 0, 8);
+                if ($emailCheck->checkEmailExist($_POST["email"],password_hash($newPassword,PASSWORD_BCRYPT))){
+                    $email = new UserController();
+                 $email->sendEmailPassword($_POST["email"],$newPassword);
+                }
+            }
+        }
+    }
+   public function sendEmailPassword($email, $newPassword)
+    {
+        require_once "Controller/credentials.php";
+        require_once "PHPMailer-5.2-stable/PHPMailerAutoload.php";
+        $mail = new PHPMailer;
+//$mail->SMTPDebug = 3;                               // Enable verbose debug output
+        $mail->isSMTP();
+        $mail->SMTPDebug = 0;// Set mailer to use SMTP
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Host = 'smtp.sendgrid.net';  // Specify main and backup SMTP servers
+        $mail->Username = EMAIL_USERNAME;                 // SMTP username
+        $mail->Password = EMAIL_PASSWORD;                           // SMTP password
+        $mail->SMTPSecure = 'tsl';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                                    // TCP port to connect to
+
+        $mail->setFrom('emag9648@gmail.com');
+        $mail->addAddress($email);     // Add a recipient
+        $mail->isHTML(true);                                  // Set email format to HTML
+
+        $mail->Subject = 'Forgotten Password!!!';
+        $mail->Body = "$newPassword is your new password , You can change it in your profile ! ";
+        $mail->AltBody = '';
+
+        if (!$mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            echo 'Message has been sent';
+        }
+    }
 
 }
+
+?>
 

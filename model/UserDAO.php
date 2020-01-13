@@ -63,4 +63,22 @@ class UserDAO{
 
     }
 
+    public function checkEmailExist($email , $newPassword){
+        $pdo=getPDO();
+        $params = [];
+        $params[] = $newPassword;
+        $params[] = $email;
+        $sql="UPDATE users SET password = ?WHERE email = ?;";
+        $stmt=$pdo->prepare($sql);
+        if ($stmt->execute($params)){
+            return true;
+        }
+        else{
+            return false;
+            }
+
+
+
+    }
+
 }

@@ -16,10 +16,14 @@ try{
 
     $productController=new ProductController();
     $status=$productController->checkIfIsInPromotion($this->id);
-
+    $productAttributes=$productController->getAttributes($this->id);
 
     ?>
     <div  class="container">
+
+        <div class="row">
+            <h3><?= $this->name ?></h3>
+        </div>
         <div class="row">
             <div class="col">
                 <img src="<?= $this->imageUrl ?>" class="">
@@ -75,7 +79,7 @@ try{
                             <?php if (isset($_SESSION["logged_user_role"])){
                                 ?>
 
-                                    <a href="index.php?target=cart&action=add&id=<?=$this->id?>"><button>Добави в количка</button> </a>
+                                    <a href="index.php?target=cart&action=add&id=<?=$this->id?>" class="btn btn-primary btn-lg btn-block">Add To Cart </a>
 
                                 <?php
                                 $favouriteDAO=new FavouriteDAO;
@@ -83,7 +87,7 @@ try{
                                 {
                                     ?>
 
-                                        <a href="index.php?target=favourite&action=delete&id=<?=$this->id?>"><button>Премахни от любими</button></a>
+                                        <a href="index.php?target=favourite&action=delete&id=<?=$this->id?>" class="btn btn-primary btn-lg btn-block">Remove From Favourite</a>
 
                                     <?php
                                 }
@@ -96,23 +100,18 @@ try{
                                 }
                                 ?>
 
-                                    <a href="index.php?target=product&action=rateProduct&id=<?=$this->id?>"><button>Оцени този продукт</button></a>
+                                    <a href="index.php?target=product&action=rateProduct&id=<?=$this->id?>" class="btn btn-primary btn-lg btn-block">Rate This Product</a>
 
                                 <?php
                             }
                             else {
                                 ?>
 
-                                    <a href="index.php?target=user&action=loginPage" class="btn btn-primary btn-lg btn-block">Добави в количка</a>
+                                    <a href="index.php?target=user&action=loginPage" class="btn btn-primary btn-lg btn-block">Add To Card</a>
 
-                                <a href="index.php?target=user&action=loginPage" class="btn btn-primary btn-lg btn-block">Оцени този продукт</a>
+                                <a href="index.php?target=user&action=loginPage" class="btn btn-primary btn-lg btn-block">Rate This Product</a>
 
                                     <a href="index.php?target=user&action=loginPage"><img src="icons/like.svg" width="50" height="50"></a>
-
-
-
-
-
 
 
 
@@ -127,166 +126,77 @@ try{
             </div>
         </div>
         <div class="row">
-            poiu
+            <h3>Characteristics:</h3>
         </div>
-    </div>
-    <!doctype html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-    </head>
-    <body>
-    <table>
-        <tr>
-            <td><h3> <?=$this->name ?></h3></td>
-        </tr>
-        <tr>
-            <td><img src="<?= $this->imageUrl ?>"width="150"></td>
 
-        </tr>
-        <tr>
-            <td><?= $review->reviews_count ?> reviews</td>
-        </tr>
-
-        <tr>
-            <td><?= $status["is_in_stock"] ?> </td>
-        </tr>
-
-        <?php if($status["in_promotion"]){
+        <?php foreach ($productAttributes as $productAttribute) {
             ?>
-            <tr>
-                <td>Old Price:</td>
-                <td><?=$status["old_price"] ?> EURO</td>
-            </tr>
-            <tr>
-                <td>New Price:</td>
-                <td><?= $this->price ?> EURO</td>
-            </tr>
-            <tr>
-                <td>Discount:</td>
-                <td><?= $status["discount"] ?> %</td>
-            </tr>
-            <?php
-        }else{
-            ?>
-            <tr>
-                <td>Price:</td>
-                <td><?= $this->price ?> EURO</td>
-            </tr>
+            <div class="row">
+                <h5><?= $productAttribute->name?>: <?= $productAttribute->value?></h5>
+            </div>
             <?php
         }?>
 
+    </div>
+    <br>
+    <br>
 
-        <?php if(isset($_SESSION["logged_user_role"]) && $_SESSION["logged_user_role"]=="admin"){?>
-            <tr>
-                <form action="index.php?target=product&action=editProduct" method="post">
-                    <input type="hidden" name="product_id" value="<?= $this->id ?>">
-                    <input type="submit" name="editProduct" value="Edit this product">
-                </form>
-            </tr>
-        <?php }
-        else{
-        ?>
-        <?php if (isset($_SESSION["logged_user_role"])){
-            ?>
-            <tr>
-                <td><a href="index.php?target=cart&action=add&id=<?=$this->id?>"><button>Добави в количка</button> </a></td>
-            </tr>
-            <?php
-            $favouriteDAO=new FavouriteDAO;
-            if ($favouriteDAO->checkIfInFavourites($this->id , $_SESSION["logged_user_role"]))
-            {
-                ?>
-                <tr>
-                    <td><a href="index.php?target=favourite&action=delete&id=<?=$this->id?>"><button>Премахни от любими</button></a></td>
-                </tr>
-                <?php
-            }
-            else{
-                ?>
-                <tr>
-                    <td>
-                        <a href="index.php?target=favourite&action=add&id=<?=$this->id?>"><img src="icons/like.svg" width="50" height="50"></a>
-                    </td>
-                </tr>
-                <?php
-            }
-            ?>
-            <tr>
-                <td><a href="index.php?target=product&action=rateProduct&id=<?=$this->id?>"><button>Оцени този продукт</button></a></td>
-            </tr>
-            <?php
-        }
-        else {
-            ?>
-            <tr>
-                <td><a href="index.php?target=user&action=loginPage"><button>Добави в количка</button> </a></td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="index.php?target=user&action=loginPage"><img src="icons/like.svg" width="50" height="50"></a>
-                </td>
-            </tr>
-            <tr>
-                <td><a href="index.php?target=user&action=loginPage"><button>Оцени този продукт</button></a></td>
-            </tr>
-            <?php
-        }
-        ?>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <h2>Average grade: <?= $review->avg_stars?></h2>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <?php foreach ($countOfStars as $key=>$countOfStar) {
+                        ?>
+                        <div class="row">
+                            <h3> Rate with <?= $key?> stars: <?= $countOfStar?></h3>
 
-    </table>
-    <?php }?>
-    <table>
-        <tr>
-            <td>Average grade: <?= $review->avg_stars?></td>
-            <?php foreach ($countOfStars as $key=>$countOfStar) {
-                echo "<tr><td>Rate with $key stars:  $countOfStar</td></tr>";
-            }
-            ?>
-        </tr>
-    </table>
-    <hr>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
 
-    <?php
-    if($review->reviews_count==0){
-        echo"<h3>There is no comments for this product!</h3>";
-    }else{
-        echo"<h3>Comments:</h3>";
-    }?>
+            </div>
+        </div>
+    </div>
+</div>
 
+    <br><br>
+    <div class="container">
 
-
+        <div class="row">
+            <h1>Comments:</h1>
+        </div>
     <?php foreach ($comments as $comment) {
         ?>
-        <table>
-            <tr>
-                <td>Name:</td>
-                <td><?= $comment->full_name ?></td>
-            </tr>
-            <tr>
-                <td>Date:</td>
-                <td><?= $comment->date ?></td>
-            </tr>
-            <tr>
-                <td>Stars:</td>
-                <td><?= $comment->stars ?> stars</td>
-            </tr>
-            <tr>
-                <td>Opinion:</td>
-                <td><?= $comment->text ?></td>
-            </tr>
+        <div class="row">
 
-        </table>
+                <div class="col">
+                    <div class="row">
+                        <h3><?= $comment->full_name ?></h3>
+                    </div>
+                    <div class="row">
+                        <h3><?= $comment->date ?></h3>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <h3>Rating: <?= $comment->stars ?> stars</h3>
+                    </div>
+                    <div class="row">
+                        <h3><?= $comment->text ?></h3>
+                    </div>
+                </div>
+        </div>
         <hr>
-        <?php
-    } ?>
+    <?php
+} ?>
+    </div>
 
-    </body>
-    </html>
 
 
 <?php

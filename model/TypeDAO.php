@@ -43,8 +43,8 @@ class TypeDAO{
 
 
         $pdo = getPDO();
-        $sql = "SELECT distinct a.name, pha.values FROM attributes as a 
-JOIN product_have_attributes as pha ON(a.id=pha.attribute_id)
+        $sql = "SELECT distinct a.name, pha.value FROM attributes as a 
+JOIN product_attributes as pha ON(a.id=pha.attribute_id)
 where type_id=?;";
         $statement = $pdo->prepare($sql);
         $statement->execute([$id]);

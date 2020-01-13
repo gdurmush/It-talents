@@ -42,12 +42,13 @@ class CartDAO{
             $statement->execute($params);
 
     }
-    public function showCart (){
+    public function showCart ($id){
 
             $params = [];
-            $params[] = $_SESSION["logged_user_id"];
+            $params[] = $id;
             $pdo = getPDO();
-            $sql = "SELECT product_id , quantity FROM cart WHERE user_id = ?";
+            $sql = "SELECT c.product_id , c.quantity , price*c.quantity as price 
+                    FROM cart as c JOIN products as p on c.product_id = p.id  WHERE user_id = ?";
             $statement = $pdo->prepare($sql);
             $statement->execute($params);
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);

@@ -34,8 +34,9 @@ $(function(){
         $.post('index.php?target=product&action=filterProducts', {checked})
             .then((filtered) => {
                 console.log(filtered)
-                filtered.forEach((product)=> {console.log(product)})
-                console.log(filtered);
+                console.log("The type is: " + typeof(filtered));
+                JSON.parse(filtered).forEach((product)=> {console.log(product)});
+                vuejs.app.data.items = filtered;
             }).catch((err) => console.error(err));
 
     })
