@@ -20,14 +20,17 @@ spl_autoload_register(function ($class){
         <html lang="en">
         <head>
             <link rel="icon" href="icons/favicon.png">
-        </head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>eMAG</title>
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+            <meta charset="UTF-8">
+            <meta name="viewport"
+                  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <title>eMAG</title>
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        </head>
+        <body>
+
         <?php
         include_once "view/main.php";
 
@@ -41,15 +44,21 @@ if (class_exists($controllerClassName)){
             $controller->$methodName();
         }catch (Exception $exception){
             echo "error -> " . $exception->getMessage();
+
             die();
         }
     }else{
         echo "error: method not found: $controllerClassName -> $methodName\n";
+
         die();
     }
 
     exit();
 }else{
     echo "error: controller not found $controllerClassName\n";
+
     die();
 }
+
+?>
+

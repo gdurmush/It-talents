@@ -209,7 +209,7 @@ class ProductDAO{
           $params [] = $typeId;
           $params [] = $attributeName;
           $pdo = getPDO();
-          $sql =" SELECT value FROM product_attributes JOIN attributes ON attribute_id = id WHERE type_id = ? AND name = ?";
+          $sql =" SELECT DISTINCT value FROM product_attributes JOIN attributes ON attribute_id = id WHERE type_id = ? AND name = ?";
           $statement = $pdo->prepare($sql);
           $statement->execute($params);
           return $statement->fetchAll(PDO::FETCH_ASSOC);
