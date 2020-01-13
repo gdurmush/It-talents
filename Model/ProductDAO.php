@@ -7,99 +7,78 @@ include_once "PDO.php";
 
 class ProductDAO{
 
-    public static function getProducers(){
+    public function getProducers(){
+        $pdo=getPDO();
+        $sql="SELECT * FROM producers;";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
 
-        try{
-            $pdo=getPDO();
-            $sql="SELECT * FROM producers;";
-            $stmt=$pdo->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll(\PDO::FETCH_OBJ);
-
-        }
-        catch (PDOException $e){
-            echo $e->getMessage();
-        }
     }
 
-    public static function getTypes(){
+    public function getTypes(){
 
-        try{
             $pdo=getPDO();
             $sql="SELECT * FROM types;";
             $stmt=$pdo->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(\PDO::FETCH_OBJ);
 
-        }
-        catch (\PDOException $e){
-            echo $e->getMessage();
-        }
     }
-    public static function getById($id){
 
-        try{
-            $pdo=getPDO();
-            $sql=   "SELECT p.name, p.producer_id, pr.name AS producer_name,
+    public  function getById($id){
+        $pdo=getPDO();
+        $sql=   "SELECT p.name, p.producer_id, pr.name AS producer_name,
                     p.price,p.old_price, p.type_id, t.name AS type_name,p.quantity,p.image_url
                     FROM products AS p 
                     JOIN producers AS pr ON(p.producer_id=pr.id)
                     JOIN types AS t ON (p.type_id=t.id)
                     WHERE p.id=?;";
-            $stmt=$pdo->prepare($sql);
-            $stmt->execute([$id]);
-            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        }
-        catch (\PDOException $e){
-            echo $e->getMessage();
-        }
     }
 
-    public static function add($product_name,$producer_id,$product_price,$type_id,$quantity,$image_url) {
-        try {
-            $db = getPDO();
-            $params = [];
-            $params[] = $product_name;
-            $params[] = $producer_id;
-            $params[] = $product_price;
-            $params[] = $type_id;
-            $params[] = $quantity;
-            $params[] = $image_url;
-            $sql = "INSERT INTO products (name, producer_id, price,type_id,quantity,image_url,date_created) VALUES (?,?,?,?,?,?,now());";
-            $stmt = $db->prepare($sql);
-            $stmt->execute($params);
-            $product_id=($db->lastInsertId());
-            new Product($product_id,$product_name,$producer_id,$product_price,$type_id,$quantity,$image_url);
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-        }
+    public  function add($product_name,$producer_id,$product_price,$type_id,$quantity,$image_url) {
+
+        $db = getPDO();
+        $params = [];
+        $params[] = $product_name;
+        $params[] = $producer_id;
+        $params[] = $product_price;
+        $params[] = $type_id;
+        $params[] = $quantity;
+        $params[] = $image_url;
+        $sql = "INSERT INTO products (name, producer_id, price,type_id,quantity,image_url,date_created) VALUES (?,?,?,?,?,?,now());";
+        $stmt = $db->prepare($sql);
+        $stmt->execute($params);
+        $product_id=($db->lastInsertId());
+        new Product($product_id,$product_name,$producer_id,$product_price,$type_id,$quantity,$image_url);
+
     }
-    public static function edit(array $product)
+
+    public function edit(array $product)
     {
-        try {
-            $db = getPDO();
+        $db = getPDO();
 
-            $params = [];
-            $params[] = $product["name"];
-            $params[] = $product["producer_id"];
-            $params[] = $product["price"];
-            $params[]=$product["old_price"];
-            $params[] = $product["type_id"];
-            $params[] = $product["quantity"];
-            $params[] = $product["image_url"];
-            $params[] = $product["product_id"];
+        $params = [];
+        $params[] = $product["name"];
+        $params[] = $product["producer_id"];
+        $params[] = $product["price"];
+        $params[]=$product["old_price"];
+        $params[] = $product["type_id"];
+        $params[] = $product["quantity"];
+        $params[] = $product["image_url"];
+        $params[] = $product["product_id"];
 
-            $sql = "UPDATE products SET name=?, producer_id=?,price=?,old_price=?, type_id=?, quantity=?, image_url=? WHERE id=? ;";
-            $stmt = $db->prepare($sql);
-            $stmt->execute($params);
+        $sql = "UPDATE products SET name=?, producer_id=?,price=?,old_price=?, type_id=?, quantity=?, image_url=? WHERE id=? ;";
+        $stmt = $db->prepare($sql);
+        $stmt->execute($params);
 
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-        }
     }
 
-   static function getProductsFromTypeId($id){
+    public function getProductsFromTypeId($id){
             $params = [];
             $params[] = $id;
             $pdo = getPDO();
@@ -110,7 +89,7 @@ class ProductDAO{
             return $products;
 
     }
-    static function getProductsFromTypeIdAsc($id){
+    public function getProductsFromTypeIdAsc($id){
 
             $params = [];
             $params[] = $id;
@@ -122,7 +101,7 @@ class ProductDAO{
             return $products;
         }
 
-    static function getProductsFromTypeIdDesc($id){
+    public function getProductsFromTypeIdDesc($id){
 
             $params = [];
             $params[] = $id;
@@ -134,107 +113,115 @@ class ProductDAO{
             return $products;
 
     }
+    public function checkQuantity ($id){
+
+        $params = [];
+        $params[] = $id;
+        $pdo = getPDO();
+        $sql = "SELECT quantity FROM products WHERE id = ?";
+        $statement = $pdo->prepare($sql);
+        $statement->execute($params);
+        $quantity = $statement->fetch(PDO::FETCH_ASSOC);
+        return $quantity;
+    }
+
+    public function findProduct ($id){
+       $pdo = getPDO();
+       $sql = "SELECT id , name , producer_id , price , type_id , quantity , image_url FROM products WHERE id = ?";
+       $statement = $pdo->prepare($sql);
+       $statement->execute([$id]);
+       $rows = $statement->fetch(PDO::FETCH_ASSOC);
+       $product = new Product($rows["id"] , $rows["name"] , $rows["producer_id"] , $rows["price"] , $rows["type_id"]
+           , $rows["quantity"] , $rows["image_url"]);
+
+       return $product;
+    }
+    public function decreaseProductQuantity($orderedProducts){
+        foreach ($orderedProducts as $product) {
+            $params = [];
+            $params[] = $product["quantity"];
+            $params[] = $product["product_id"];
+            $pdo = getPDO();
+            $sql = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
+            $statement = $pdo->prepare($sql);
+            $statement->execute($params);
+        }
+
+    }
+    public function getProductAttributes ($id){
+
+        $params = [];
+        $params[] = $id;
+        $pdo = getPDO();
+        $sql = "SELECT name  FROM attributes WHERE type_id = ?";
+        $statement = $pdo->prepare($sql);
+        $statement->execute($params);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+    public function getAttributeValues($typeId , $attributeName){
+        $params = [];
+        $params [] = $typeId;
+        $params [] = $attributeName;
+        $pdo = getPDO();
+        $sql =" SELECT value FROM product_attributes JOIN attributes ON attribute_id = id WHERE type_id = ? AND name = ?";
+        $statement = $pdo->prepare($sql);
+        $statement->execute($params);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function removePromotion($product_id,$price)
+    {
+
+        $db = getPDO();
+
+        $params=[];
+        $params[]=$price;
+        $params[]=$product_id;
+        $sql = "UPDATE products SET price=?, old_price=NULL WHERE id=? ;";
+        $stmt=$db->prepare($sql);
+        $stmt->execute($params);
+
+    }
+
+    public static function isInArray($array, $value){
+        foreach($array as $a){
+            if($a == $value){return true;}
+        }
+        return $false;
+    }
+
     public  static function filterProducts ($filters,$args){
-       // echo $filters . "\n\n";
+        // echo $filters . "\n\n";
         $pdo = getPDO();
         $sql = $filters;
         $statement = $pdo->prepare($sql);
         $statement->execute($args);
         $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+        // select id from products where price > ? AND price < ?
+//        $productsThatMatchPrice = getProductsThatMatchPrice(minPrice, maxPrice); // ["id2","id3","id4"]
+//        $result = [];
+//        foreach($products as $p){
+//            if(isInArray($productsThatMatchPrice, $p["id"])){
+//                $result.add($p);
+//            }
+//        }
         echo json_encode($products);
         error_log(json_encode($products));
     }
-
-
-   static function checkQuantity ($id){
-        try {
-            $params = [];
-            $params[] = $id;
-            $pdo = getPDO();
-            $sql = "SELECT quantity FROM products WHERE id = ?";
-            $statement = $pdo->prepare($sql);
-            $statement->execute($params);
-            $quantity = $statement->fetch(PDO::FETCH_ASSOC);
-            return $quantity;
+   public static function getProductsEmptyFilter($withoutFilter){
+        $pdo = getPDO();
+        $sql = $withoutFilter;
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+        $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($products);
         }
-        catch (PDOException $e){
-            echo  $e->getMessage();
-        }
-    }
 
-   static function findProduct ($id){
-
-            $pdo = getPDO();
-            $sql = "SELECT id , name , producer_id , price , type_id , quantity , image_url FROM products WHERE id = ?";
-            $statement = $pdo->prepare($sql);
-            $statement->execute([$id]);
-            $rows = $statement->fetch(PDO::FETCH_ASSOC);
-            $product = new Product($rows["id"] , $rows["name"] , $rows["producer_id"] , $rows["price"] , $rows["type_id"]
-                , $rows["quantity"] , $rows["image_url"]);
-
-            return $product;
-    }
-   static function decreaseProductQuantity($orderedProducts)
-    {
-        try{
-            foreach ($orderedProducts as $product) {
-                $params = [];
-                $params[] = $product["quantity"];
-                $params[] = $product["product_id"];
-                $pdo = getPDO();
-                $sql = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
-                $statement = $pdo->prepare($sql);
-                $statement->execute($params);
-            }
-        }
-        catch (PDOException $e){
-            echo $e->getMessage();
-        }
-    }
-    static function getProductAttributes ($id){
-
-            $params = [];
-            $params[] = $id;
-            $pdo = getPDO();
-            $sql = "SELECT name  FROM attributes WHERE type_id = ?";
-            $statement = $pdo->prepare($sql);
-            $statement->execute($params);
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    }
-
-       static function getAttributeValues($typeId , $attributeName){
-          $params = [];
-          $params [] = $typeId;
-          $params [] = $attributeName;
-          $pdo = getPDO();
-          $sql =" SELECT DISTINCT value FROM product_attributes JOIN attributes ON attribute_id = id WHERE type_id = ? AND name = ?";
-          $statement = $pdo->prepare($sql);
-          $statement->execute($params);
-          return $statement->fetchAll(PDO::FETCH_ASSOC);
-}
-
-
-    public static function removePromotion($product_id,$price)
-    {
-        try {
-            $db = getPDO();
-
-            $params=[];
-            $params[]=$price;
-            $params[]=$product_id;
-            $sql = "UPDATE products SET price=?, old_price=NULL WHERE id=? ;";
-            $stmt=$db->prepare($sql);
-            $stmt->execute($params);
-
-
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    public static function getUserEmailsByLikedProduct($productId){
+    public function getUserEmailsByLikedProduct($productId){
 
         $db = getPDO();
         $params = [];
@@ -248,6 +235,31 @@ class ProductDAO{
 
     }
 
+    public function getMostSold(){
+
+        $db = getPDO();
+
+        $sql = "SELECT p.id,p.name,p.producer_id,p.price,p.old_price,p.image_url,count(ohp.product_id) as 
+ordered_count FROM emag.products AS p
+JOIN orders_have_products AS ohp ON(p.id=ohp.product_id)
+group by p.id order by ordered_count desc LIMIT 6;";
+        $statement = $db->prepare($sql);
+        $statement->execute();
+        $emails = $statement->fetchAll(PDO::FETCH_OBJ);
+        return $emails;
+
+    }
+    public function getProductAttributesById ($id){
+
+        $pdo = getPDO();
+        $sql = "SELECT a.name,pa.value FROM attributes AS a
+JOIN product_attributes AS pa ON(a.id=pa.attribute_id)
+WHERE product_id =?;";
+        $statement = $pdo->prepare($sql);
+        $statement->execute([$id]);
+        return $statement->fetchAll(PDO::FETCH_OBJ);
+
+    }
 
 
 }

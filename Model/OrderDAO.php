@@ -10,7 +10,6 @@ class OrderDAO
 
     static function addOrderProducts($orderId, $orderedProducts)
     {
-        try {
             foreach ($orderedProducts as $product) {
                 $params = [];
                 $params[] = $orderId;
@@ -22,14 +21,10 @@ class OrderDAO
                 $statement = $pdo->prepare($sql);
                 $statement->execute($params);
             }
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
     }
 
     static function addOrder($addressId, $totalPrice)
     {
-        try {
             $params = [];
             $params[] = $_SESSION["logged_user_id"];
             $params[] = $addressId;
@@ -40,14 +35,10 @@ class OrderDAO
             $statement->execute($params);
             $id = $pdo->lastInsertId();
             return $id;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
     }
 
     static function showOrders()
     {
-        try {
             $params = [];
             $params[] = $_SESSION["logged_user_id"];
             $pdo = getPDO();
@@ -60,9 +51,7 @@ class OrderDAO
             $statement->execute($params);
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $rows;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
+
     }
 
     static  function finishOrder($orderedProducts , $totalPrice){

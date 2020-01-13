@@ -9,8 +9,12 @@ use model\FavouriteDAO;
 class FavouriteController{
     public function show(){
         $userController=new UserController();
-        $userController->validateForLoggedUser();
-        include_once "view/favourites.php";
+        if(!isset($_SESSION["logged_user_id"])){
+            include_once "view/login.php";
+        }else{
+            include_once "view/favourites.php";
+        }
+
     }
 
 
@@ -26,11 +30,11 @@ class FavouriteController{
                     }
                     else{
                         $favoriteDAO->addToFavourites($_GET["id"]);
-
+                        include_once "view/favourites.php";
                     }
                 }
             }catch (\PDOException $e){
-                include_once "view/main.php";
+                include_once "view/openPage.php";
                 echo "Oops, error 500!";
 
             }
@@ -45,12 +49,12 @@ class FavouriteController{
                 $favoriteDAO->deleteFromFavourites($_GET["id"]);
                 $this->show();
             }catch (\PDOException $e){
-            include_once "view/main.php";
+                include_once "view/openPage.php";
             echo "Oops, error 500!";
             }
 
         }else{
-
+            echo "Bad request!";
         }
     }
 }
