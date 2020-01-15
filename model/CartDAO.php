@@ -4,8 +4,9 @@ namespace model;
 use PDO;
 use PDOException;
 
-include_once "PDO.php";
+//include_once "PDO.php";
 class CartDAO{
+
   public  function checkIfInCart($id , $userId){
 
             $params = [];

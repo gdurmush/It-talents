@@ -8,7 +8,7 @@ use controller\AddressController;
 
 $addressController=new AddressController();
 $cities=$addressController->getCities();
-
+print_r($cities);
 
 
 ?>

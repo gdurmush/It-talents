@@ -4,17 +4,23 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-set_exception_handler("ExceptionHandler");
-function ExceptionHandler(Exception $exception){
+function handleExceptions(Exception $exception){
     $statusCode = $exception instanceof \exception\BaseException ? $exception->getStatusCode() : 500;
     $msg = $exception->getMessage();
+    ?>
+    <div class="alert alert-danger" role="alert">
+            <?php echo $msg; ?>
+        </div>
+<?php
 }
+
+set_exception_handler("handleExceptions");
 
 $controllerName = isset($_GET["target"]) ? $_GET["target"] : "main";
 $methodName = isset($_GET["action"]) ? $_GET["action"] : "render";
 
 
-$controllerClassName = "\\Controller\\" . ucfirst($controllerName) . "Controller";
+$controllerClassName = "\\controller\\" . ucfirst($controllerName) . "Controller";
 spl_autoload_register(function ($class){
     require_once str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
 });
@@ -47,13 +53,13 @@ if (class_exists($controllerClassName)){
     $controller = new $controllerClassName();
 
     if(method_exists($controller, $methodName)){
-        try{
+//        try{
             $controller->$methodName();
-        }catch (Exception $exception){
-            echo "error -> " . $exception->getMessage();
-
-            die();
-        }
+//        }catch (Exception $exception){
+//            echo "error -> " . $exception->getMessage();
+//
+//            die();
+//        }
     }else{
         echo "error: method not found: $controllerClassName -> $methodName\n";
 

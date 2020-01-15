@@ -1,7 +1,9 @@
 <?php
 
 namespace model;
-include_once "PDO.php";
+use PDO;
+use PDOException;
+//include_once "PDO.php";
 class AddressDAO{
 
 
@@ -21,7 +23,7 @@ class AddressDAO{
             $sql="SELECT * FROM cities;";
             $stmt=$pdo->prepare($sql);
             $stmt->execute();
-            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
 

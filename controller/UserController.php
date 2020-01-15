@@ -38,6 +38,7 @@ class UserController{
                         $_SESSION["logged_user_first_name"]=$user->first_name;
                         $_SESSION["logged_user_last_name"]=$user->last_name;
                     } else {
+                        include_once "view/login.php";
                         throw new NotAuthorizedException('Invalid username or password!');
 
                     }
@@ -50,7 +51,9 @@ class UserController{
                 header("Location:index.php?target=product&action=main");
             }else{
                 /* header("Location:index.php?target=user&action=loginPage");*/
+
                 throw new BadRequestException ("$msg");
+                include_once "view/login.php";
             }
         }
     }
