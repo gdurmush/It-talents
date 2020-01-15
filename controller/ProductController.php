@@ -386,6 +386,7 @@ class ProductController
                                 JOIN attributes as a ON (pha.attribute_id = a.id) 
                                 WHERE p.type_id = 1
                                 AND  a.name=? AND pha.value in($stringParams)) as $alias";
+
                         $args[].= $name;
                         $args = array_merge($args, $checked);
                     }else {
@@ -399,6 +400,7 @@ class ProductController
                             WHERE p.type_id = 1
                             AND  a.name=? AND pha.value in($stringParams)
                             ) as $alias on $prevAlias.id = $alias.id";
+
                         $args[].= $name;
                         $args = array_merge($args, $checked);
                     }

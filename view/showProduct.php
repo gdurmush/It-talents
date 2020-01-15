@@ -97,26 +97,33 @@ try{
 
                                 <?php
                                 $favouriteDAO=new FavouriteDAO;
-                                if ($favouriteDAO->checkIfInFavourites($this->id , $_SESSION["logged_user_role"]))
+                                $checker = $favouriteDAO->checkIfInFavourites($this->id , $_SESSION["logged_user_id"]);
+
+                                ?>
+
+                                <a href="index.php?target=rating&action=rateProduct&id=<?=$this->id?>" class="btn btn-primary btn-lg btn-block">Rate This Product</a>
+
+                                <?php
+
+                                if ($checker)
                                 {
                                     ?>
-
-                                        <a href="index.php?target=favourite&action=delete&id=<?=$this->id?>" class="btn btn-primary btn-lg btn-block">Remove From Favourite</a>
-
+                                        <form action="index.php?target=favourite&action=delete&id=<?=$this->id?>" method="post">
+                                            <input type="hidden" value="<?=$this->id?>" name="like">
+                                            <button type="submit"><img src="icons/like.svg" width="50" height="50"></button>
+                                        </form>
                                     <?php
                                 }
                                 else{
+
                                     ?>
-
-                                            <a href="index.php?target=favourite&action=add&id=<?=$this->id?>"><img src="icons/like.svg" width="50" height="50"></a>
-
+                                            <form action="index.php?target=favourite&action=add&id=<?=$this->id?>" method="post">
+                                                <input type="hidden" value="<?=$this->id?>" name="like">
+                                                <button type="submit"><img src="icons/unlike.svg" width="50" height="50"></button>
+                                            </form>
                                     <?php
                                 }
-                                ?>
 
-                                    <a href="index.php?target=rating&action=rateProduct&id=<?=$this->id?>" class="btn btn-primary btn-lg btn-block">Rate This Product</a>
-
-                                <?php
                             }
                             else {
                                 ?>
@@ -124,9 +131,9 @@ try{
                                     <a href="index.php?target=user&action=loginPage" class="btn btn-primary btn-lg btn-block">Add To Cart</a>
 
                                 <a href="index.php?target=user&action=loginPage" class="btn btn-primary btn-lg btn-block">Rate This Product</a>
-
-                                    <a href="index.php?target=user&action=loginPage"><img src="icons/like.svg" width="50" height="50"></a>
-
+                                <form action="index.php?target=user&action=loginPage" method="post">
+                                    <button type="submit"><img src="icons/unlike.svg" width="50" height="50"></button>
+                                </form>
 
 
                                 <?php

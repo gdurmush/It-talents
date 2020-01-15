@@ -45,7 +45,7 @@ class OrderDAO
             JOIN orders_have_products as op
             ON o.id = op.order_id 
             JOIN products as p ON p.id = op.product_id
-            WHERE o.user_id = ? ORDER BY o.date_created";
+            WHERE o.user_id = ? ORDER BY o.date_created DESC";
             $statement = $pdo->prepare($sql);
             $statement->execute($params);
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);

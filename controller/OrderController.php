@@ -13,15 +13,15 @@ error_reporting(E_ALL);
 class OrderController{
     public function order()
     {
-
-
-            $orderedProducts = new CartDAO();
+        UserController::validateForAdmin();
+        $orderedProducts = new CartDAO();
             if (isset($_POST["order"])){
 
 
               $orderedProductsa =  $orderedProducts->showCart($_SESSION["logged_user_id"]);
                 OrderDAO::finishOrder($orderedProductsa , $_POST["totalPrice"] , $_SESSION["logged_user_id"]);
-
+                $cart = new CartController;
+                $cart->show();
 
 
             }
@@ -30,6 +30,8 @@ class OrderController{
 
     }
     public function show(){
+        UserController::validateForAdmin();
+
         try{
             $products= new OrderDAO();
             $products=$products->showOrders($_SESSION["logged_user_id"]);

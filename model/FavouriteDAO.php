@@ -44,7 +44,7 @@ class FavouriteDAO{
         $sql = "SELECT product_id FROM user_favourite_products WHERE product_id = ? AND user_id = ?";
         $statement = $pdo->prepare($sql);
         $statement->execute($params);
-        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $statement->fetch(PDO::FETCH_ASSOC);
         return $rows;
 
     }

@@ -21,7 +21,7 @@ $products=$productController->getMostCelledProducts();
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <div class="container">
-    <h1 class="display-5"> BEST SELLERS FOR THE WEEK ! </h1>
+    <h1 class="display-5"> BEST SELLERS ! </h1>
     <div class="row">
         <div class="col-12">
             <div class="row">

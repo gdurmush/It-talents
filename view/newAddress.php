@@ -13,12 +13,6 @@ $cities=$addressController->getCities();
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
 <body>
 <div class="container">
     <?php
@@ -33,10 +27,10 @@ $cities=$addressController->getCities();
     }
     ?>
     <form action="index.php?target=address&action=add" method="post">
-        <table>
+        <div class="form-group">
             <tr>
                 <td>City</td>
-                <td><select name="city" required>
+                <td><select class="form-control" name="city" required>
                         <option value="">Select City</option>
                         <?php foreach ($cities as $city) {
 
@@ -48,13 +42,13 @@ $cities=$addressController->getCities();
             </tr>
             <tr>
                 <td>Street name</td>
-                <td><input type="text" name="street" placeholder="Enter street name" min="5" required ></td>
+                <td><input type="text" class="form-control" name="street" placeholder="Enter street name" min="5" required ></td>
             </tr>
-            <tr><td colspan="2"><input type="submit" name="add" value="Add new address"></td></tr>
-        </table>
+            <div class="group-control">
+            <tr><td colspan="2"><input type="submit" name="add"class="btn btn-primary mb-2" value="Add new address"></td></tr>
+            </div>
+        </div>
 
     </form>
-    <a href="index.php?target=user&action=account"><button>Back</button></a>
+    <a href="index.php?target=user&action=account"><button class="btn btn-primary mb-2">Go Back</button></a>
 </div>
-</body>
-</html>
