@@ -6,7 +6,7 @@ try{
     $userDAO=new UserDAO();
     $user=$userDAO->getUserByid($_SESSION["logged_user_id"]);
 }catch (\PDOException $e){
-    include_once "view/main.php";
+    include_once "view/header.php";
     echo "Oops, error 500!";
 
 }
@@ -26,84 +26,85 @@ try{
     <title>Document</title>
 </head>
 <body>
-
-<?php
-if (isset($msg) && $msg!=''&& $msg!="success"){
-    ?>
-    <div class="alert alert-danger" role="alert">
-        <?php echo $msg;?>
-    </div>
+<div class="container">
     <?php
-}elseif(isset($msg) &&  $msg=="success"){
-    ?>
-    <div class="list-group-item list-group-item-success" role="alert">
-        Successfully updated account!
-    </div>
-    <?php
-}?>
-<form action="index.php?target=User&action=edit" method="post">
-
-
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input name="email" type="email" value="<?php echo $user->email ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
-
-    </div>
-
-    <div class="form-group">
-        <label for="exampleInputEmail1">First Name</label>
-        <input type="text" name="first_name" value="<?php echo $user->first_name ?>" class="form-control" >
-
-    </div>
-    <div class="form-group">
-        <label >Last Name</label>
-        <input type="text" name="last_name" value="<?php echo $user->last_name ?>" class="form-control" >
-
-    </div>
-    <div class="form-group">
-        <label >Age</label>
-        <input type="number" name="age" value="<?php echo $user->age ?>" class="form-control" min="0" max="100" >
-
-    </div>
-    <div class="form-group">
-        <label >Phone number</label>
-        <input type="number" name="phone_number" value="<?php echo $user->phone_number ?>" class="form-control" placeholder="8**-***-***" >
-
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Change Password</label>
-        <input name="newPassword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your new password" >
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Enter current password</label>
-        <input name="accountPassword" type="password" class="form-control" id="exampleInputPassword1"  >
-    </div>
-
-    <?php
-    if($user->subscription==="yes"){
+    if (isset($msg) && $msg!=''&& $msg!="success"){
         ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $msg;?>
+        </div>
+        <?php
+    }elseif(isset($msg) &&  $msg=="success"){
+        ?>
+        <div class="list-group-item list-group-item-success" role="alert">
+            Successfully updated account!
+        </div>
+        <?php
+    }?>
+    <form action="index.php?target=User&action=edit" method="post">
+
 
         <div class="form-group">
-            <label >Subscribe for notification about latest promotions:</label><br>
-            <input type="radio" name="subs" value="yes" checked> YES <br>
-            <input type="radio" name="subs" value="no">NO <br>
+            <label for="exampleInputEmail1">Email address</label>
+            <input name="email" type="email" value="<?php echo $user->email ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+
         </div>
-    <?php
-    }else{
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">First Name</label>
+            <input type="text" name="first_name" value="<?php echo $user->first_name ?>" class="form-control" >
+
+        </div>
+        <div class="form-group">
+            <label >Last Name</label>
+            <input type="text" name="last_name" value="<?php echo $user->last_name ?>" class="form-control" >
+
+        </div>
+        <div class="form-group">
+            <label >Age</label>
+            <input type="number" name="age" value="<?php echo $user->age ?>" class="form-control" min="0" max="100" >
+
+        </div>
+        <div class="form-group">
+            <label >Phone number</label>
+           +359 <input type="number" name="phone_number" value="<?php echo $user->phone_number ?>" class="form-control" placeholder="8**-***-***" >
+
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Change Password</label>
+            <input name="newPassword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your new password" >
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Enter current password</label>
+            <input name="accountPassword" type="password" class="form-control" id="exampleInputPassword1"  >
+        </div>
+
+        <?php
+        if($user->subscription==="yes"){
+            ?>
+
+            <div class="form-group">
+                <label >Subscribe for notification about latest promotions:</label><br>
+                <input type="radio" name="subs" value="yes" checked> YES <br>
+                <input type="radio" name="subs" value="no">NO <br>
+            </div>
+            <?php
+        }else{
+            ?>
+            <div class="form-group">
+                <label >Subscribe for notification about latest promotions:</label>
+                <input type="checkbox" name="subscription">
+
+            </div>
+            <?php
+        }
         ?>
-    <div class="form-group">
-        <label >Subscribe for notification about latest promotions:</label>
-        <input type="checkbox" name="subscription">
-
-    </div>
-    <?php
-    }
-    ?>
 
 
 
-    <button name="edit" type="submit" class="btn btn-primary">Save changes</button>
-</form>
-<a href="index.php?target=User&action=account"><button name="myAccount" class="btn btn-primary">Back to My Account</button></a>
+        <button name="edit" type="submit" class="btn btn-primary">Save changes</button>
+    </form>
+    <a href="index.php?target=User&action=account"><button name="myAccount" class="btn btn-primary">Back to My Account</button></a>
+</div>
 </body>
 </html>

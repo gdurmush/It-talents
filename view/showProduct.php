@@ -18,15 +18,29 @@ try{
     $status=$productController->checkIfIsInPromotion($this->id);
     $productAttributes=$productController->getAttributes($this->id);
 
+    if (isset($_GET["v"]))
+    {
+        if ($_GET["v"] == 1) {
+            $msg = "Not Available";
+        }
+        elseif($_GET["v"] == 0){
+            $msg = "Added 1 To Cart !";
+        }
+    }
+    if (isset($_GET["v"])){
+       echo "<h1 >$msg</h1>";
+        }
     ?>
+
     <div  class="container">
+
 
         <div class="row">
             <h3><?= $this->name ?></h3>
         </div>
         <div class="row">
             <div class="col">
-                <img src="<?= $this->imageUrl ?>" class="">
+                <img src="<?= $this->imageUrl ?>" width="300" height="300" class="">
             </div>
             <div class="col">
                 <div class="row">
@@ -100,14 +114,14 @@ try{
                                 }
                                 ?>
 
-                                    <a href="index.php?target=product&action=rateProduct&id=<?=$this->id?>" class="btn btn-primary btn-lg btn-block">Rate This Product</a>
+                                    <a href="index.php?target=rating&action=rateProduct&id=<?=$this->id?>" class="btn btn-primary btn-lg btn-block">Rate This Product</a>
 
                                 <?php
                             }
                             else {
                                 ?>
 
-                                    <a href="index.php?target=user&action=loginPage" class="btn btn-primary btn-lg btn-block">Add To Card</a>
+                                    <a href="index.php?target=user&action=loginPage" class="btn btn-primary btn-lg btn-block">Add To Cart</a>
 
                                 <a href="index.php?target=user&action=loginPage" class="btn btn-primary btn-lg btn-block">Rate This Product</a>
 
@@ -201,7 +215,7 @@ try{
 
 <?php
 }catch (\PDOException $e){
-    include_once "view/main.php";
+    include_once "view/header.php";
     echo "Oops, error 500!";
 
 }

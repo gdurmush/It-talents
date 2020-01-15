@@ -1,8 +1,10 @@
 <?php
 
 namespace controller;
+use exception\NotFoundException;
 use model\User;
 use model\UserDAO;
+use PDOException;
 use PHPMailer;
 
 class UserController{
@@ -24,7 +26,10 @@ const MIN_LENGTH=8;
                 try{
                     $userDAO=new UserDAO();
                     $user = $userDAO->getUserByEmail($_POST["email"]);
-                }catch (\PDOException $e){
+
+
+
+                }catch (PDOException $e){
                     include_once "view/main.php";
                     echo "Oops, error 500!";
 
@@ -54,13 +59,13 @@ const MIN_LENGTH=8;
         $msg=$this->validate($_POST["email"],$_POST["password"],$_POST["first_name"],$_POST["last_name"],$_POST["phone_number"],$_POST["age"]);
 
 
-        try{
+
             $userDAO=new UserDAO();
             $result = $userDAO->getUserByEmail($_POST["email"]);
-        }catch (\PDOException $e){
-            include_once "view/main.php";
-            echo "Oops, error 500!";
-        }
+
+            if ($result){
+                throw new NotFoundException("User Already Exists");
+            }
 
         if($result){
             $msg="This email already exist!";
@@ -78,7 +83,7 @@ const MIN_LENGTH=8;
             try{
                 $userDAO=new UserDAO();
                 $userDAO->add($user);
-            }catch (\PDOException $e){
+            }catch (PDOException $e){
                 include_once "view/main.php";
                 echo "Oops, error 500!";
             }
@@ -87,7 +92,7 @@ const MIN_LENGTH=8;
             $_SESSION["logged_user_role"]=$user->getRole();
             $_SESSION["logged_user_first_name"]=$user->getFirstName();
             $_SESSION["logged_user_last_name"]=$user->getLastName();
-            include_once "view/main.php";
+            include_once "view/header.php";
         }else{
             include_once "view/register.php";
         }
@@ -104,7 +109,7 @@ const MIN_LENGTH=8;
         try{
             $userDAO=new UserDAO();
             $result=$userDAO->getUserById($_SESSION["logged_user_id"]);
-        }catch (\PDOException $e){
+        }catch (PDOException $e){
             include_once "view/main.php";
             echo "Oops, error 500!";
         }
@@ -150,7 +155,7 @@ const MIN_LENGTH=8;
                 $userDAO=new UserDAO();
                 $userDAO->update($user);
                 $msg="success";
-            }catch (\PDOException $e){
+            }catch (PDOException $e){
                 include_once "view/main.php";
                 echo "Oops, error 500!";
             }
@@ -162,8 +167,8 @@ const MIN_LENGTH=8;
             if(isset($_SESSION["logged_user_id"])){
                 unset($_SESSION);
                 session_destroy();
-                include_once "index.php";
-                /*header("Location: index.php");*/
+
+                header("Location: index.php?target=product&action=showMostOrdered");
             }
         }
 
@@ -213,7 +218,7 @@ const MIN_LENGTH=8;
         }
     }
     public function forgottenPassword (){
-        include_once "View/forgottenPassword.php";
+        include_once "view/forgottenPassword.php";
     }
     public function sendNewPassword(){
         if (isset($_POST["forgotPassword"])){
@@ -223,13 +228,14 @@ const MIN_LENGTH=8;
                 if ($emailCheck->checkEmailExist($_POST["email"],password_hash($newPassword,PASSWORD_BCRYPT))){
                     $email = new UserController();
                  $email->sendEmailPassword($_POST["email"],$newPassword);
+                 include_once "view/login.php";
                 }
             }
         }
     }
    public function sendEmailPassword($email, $newPassword)
     {
-        require_once "Controller/credentials.php";
+        require_once "controller/credentials.php";
         require_once "PHPMailer-5.2-stable/PHPMailerAutoload.php";
         $mail = new PHPMailer;
 //$mail->SMTPDebug = 3;                               // Enable verbose debug output
@@ -247,14 +253,14 @@ const MIN_LENGTH=8;
         $mail->isHTML(true);                                  // Set email format to HTML
 
         $mail->Subject = 'Forgotten Password!!!';
-        $mail->Body = "$newPassword is your new password , You can change it in your profile ! ";
+        $mail->Body = "$newPassword is your new password , You can change it in your profile ! Login " . "<a href='http://localhost:8888/It-talents/index.php?target=user&action=loginPage'>here</a>" ;
         $mail->AltBody = '';
 
         if (!$mail->send()) {
             echo 'Message could not be sent.';
             echo 'Mailer Error: ' . $mail->ErrorInfo;
         } else {
-            echo 'Message has been sent';
+            $msg = 'Message has been sent';
         }
     }
 

@@ -6,6 +6,8 @@ use model\ProductDAO;
 use model\Type;
 use model\TypeDAO;
 use PHPMailer;
+use const PDOException;
+
 include_once "credentials.php";
 
 ini_set('display_errors', 1);
@@ -18,131 +20,68 @@ class ProductController
     {
         if (isset($_GET["prdId"])) {
 
-            try {
                 $productDAO = new ProductDAO();
                 $product = $productDAO->findProduct($_GET["prdId"]);
                 $product->show();
-            } catch (\PDOException $e) {
-                include_once "view/main.php";
-                echo "Oops, error 500!";
-            }
 
         }
         if (isset($_GET["ctgId"])) {
 
-            try {
+
                 $typeDAO = new TypeDAO();
                 $types = $typeDAO->getTypesFromCategorieId($_GET["ctgId"]);
 
-            } catch (\PDOException $e) {
-                include_once "view/main.php";
-                echo "Oops, error 500!";
-            }
 
             foreach ($types as $type) {
                 $typeObject = new Type($type["id"], $type["name"], $type["categorie_id"]);
                 $typeObject->show();
             }
         }
-        if (isset($_GET["typId"]) && isset($_GET["order"])) {
-            if ($_GET["order"] == "asc") {
-                try {
-                    $productDAO = new ProductDAO();
-                    $products = $productDAO->getProductsFromTypeIdAsc($_GET["typId"]);
+         if (isset($_GET["typId"])) {
+             $checkType = TypeDAO::existsType($_GET["typId"]);
+             if ($checkType["count"] > 0) {
 
-                    $typeDAO = new TypeDAO();
-                    $type = $typeDAO->getTypeInformation($_GET["typId"]);
-                } catch (\PDOException $e) {
-                    include_once "view/main.php";
-                    echo "Oops, error 500!";
-                }
+                     $productDAO = new ProductDAO();
+                     $products = $productDAO->getProductsFromTypeId($_GET["typId"]);
+                     $typeDAO = new TypeDAO();
+                     $type = $typeDAO->getTypeInformation($_GET["typId"]);
+                     include_once "view/showProductsFromType.php";
 
+                     foreach ($products as $product) {
+                         $productDAO = new ProductDAO();
+                         $productList = $productDAO->findProduct($product["id"]);
 
-                include_once "view/showProductsFromType.php";
-                foreach ($products as $product) {
+                         $productList->showByType();
+                     }
 
-                    try {
-                        $productDAO = new ProductDAO();
-                        $productList = $productDAO->findProduct($product["id"]);
-                        $productList->showByType();
-                    } catch (\PDOException $e) {
-                        include_once "view/main.php";
-                        echo "Oops, error 500!";
-                    }
-                }
+                 $rrp=99;
+                 if(isset($_GET["page"])){
+                     $page=$_GET["page"];
 
-            } elseif ($_GET["order"] == "desc") {
+                 }else{
+                     $page=0;
+                 }
 
-                try {
-                    $productDAO = new ProductDAO();
-                    $products = $productDAO->getProductsFromTypeIdDesc($_GET["typId"]);
+                 if($page>1){
+                     $start=($page*$rrp)-$rrp;
 
-                    $typeDAO = new TypeDAO();
-                    $type = $typeDAO->getTypeInformation($_GET["typId"]);
-                } catch (\PDOException $e) {
-                    include_once "view/main.php";
-                    echo "Oops, error 500!";
-                }
-
-                include_once "view/showProductsFromType.php";
-                foreach ($products as $product) {
-                    $productDAO = new ProductDAO();
-                    $productList = $productDAO->findProduct($product["id"]);
-                    $productList->showByType();
-                }
-
-            }
-        } elseif (isset($_GET["typId"])) {
-
-           /* try {
+                 }else{
+                     $start=0;
+                 }
 
 
-                $productDAO = new ProductDAO();
-                $products = $productDAO->getProductsFromTypeId($_GET["typId"]);
-                $typeDAO = new TypeDAO();
-                $type = $typeDAO->getTypeInformation($_GET["typId"]);
-                include_once "view/showProductsFromType.php";
+                     $typeDAO=new TypeDAO();
+                     $resultSet=$typeDAO->getNumberOfProductsForType($_GET["typId"]);
+                     $numRows=$resultSet->count;
+                     $typeDAO=new TypeDAO();
+                     $products=$typeDAO->getAllByType($_GET["typId"],$start,$rrp);
+                     $filters=$this->getFilters($_GET["typId"]);
+                     $totalPages=$numRows/$rrp;
 
-                foreach ($products as $product) {
-                    $productDAO = new ProductDAO();
-                    $productList = $productDAO->findProduct($product["id"]);
-
-                    $productList->showByType();
-                }
-            } catch (\PDOException $e) {
-                include_once "view/main.php";
-                echo "Oops, error 500!";
-            }*/
-
-            $rrp=4;
-            if(isset($_GET["page"])){
-                $page=$_GET["page"];
-
-            }else{
-                $page=0;
-            }
-
-            if($page>1){
-                $start=($page*$rrp)-$rrp;
-
-            }else{
-                $start=0;
-            }
-
-            try{
-                $typeDAO=new TypeDAO();
-                $resultSet=$typeDAO->getNumberOfProductsForType($_GET["typId"]);
-                $numRows=$resultSet->count;
-                $typeDAO=new TypeDAO();
-                $products=$typeDAO->getAllByType($_GET["typId"],$start,$rrp);
-                $filters=$this->getFilters($_GET["typId"]);
-                $totalPages=$numRows/$rrp;
-
-            }catch (\PDOException $e){
-                include_once "view/main.php";
-                echo "Oops, error 500!";
-
-            }
+             }
+             else{
+                 header("Location: index.php?target=main&action=render");
+             }
 
 
             include_once "View/showProductByType.php";
@@ -152,7 +91,7 @@ class ProductController
     public function getFilters($id){
 
 
-        try{
+
             $typeDAO=new TypeDAO();
             $typeNames=$typeDAO->getAttributesByType($id);
 
@@ -162,17 +101,6 @@ class ProductController
 
             return $filter;
 
-        }catch (\PDOException $e){
-            include_once "view/main.php";
-            echo "Oops, error 500!";
-
-        }
-
-
-    }
-
-    public function showAsc()
-    {
 
     }
 
@@ -285,7 +213,10 @@ class ProductController
 
                     $productDAO = new ProductDAO();
                     $productDAO->edit($product);
-                    $this->sendPromotionEmail($product["product_id"], $product["name"]);
+                    if (!empty($_POST["newPrice"])){
+                        $this->sendPromotionEmail($product["product_id"], $product["name"]);
+                    }
+
 
                 }
 
@@ -369,12 +300,12 @@ class ProductController
                 $productId = $_POST["product_id"];
                 include_once "view/editProduct.php";
             } else {
-                header("Location:index.php");
+                include_once "view/main.php";
 
 
             }
         } else {
-            header("Location:index.php");
+            include_once "view/main.php";
         }
     }
 
@@ -387,13 +318,13 @@ class ProductController
 
     public function filterProducts()
     {
-
                 $counter = 0;
                 $filters = $_POST["checked"];
                 $msg = "";
                 $args = [];
                 error_log(json_encode($_POST["checked"]));
             if (isset($_POST["checked"])){
+
                 foreach ($_POST["checked"] as $filter){
                     $name = $filter["name"];
                     $checked = $filter["checkedValues"];
@@ -452,7 +383,7 @@ class ProductController
     }
     public function showMostOrdered(){
 
-        include_once "view/openPage.php";
+        include_once "view/main.php";
 
     }
     public function getAttributes($product_id){

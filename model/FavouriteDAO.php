@@ -27,9 +27,9 @@ class FavouriteDAO{
         $statement->execute($params);
 
     }
-    public function deleteFromFavourites ($id){
+    public function deleteFromFavourites ($id , $userId){
         $params = [];
-        $params[] = $_SESSION["logged_user_id"];
+        $params[] = $userId;
         $params[] = $id;
         $pdo = getPDO();
         $sql = "DELETE FROM user_favourite_products WHERE user_id = ? AND product_id = ? ";

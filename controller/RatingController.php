@@ -19,7 +19,7 @@ class ratingController
                     $ratingDAO->addRating($_SESSION["logged_user_id"], $_POST["product_id"], $_POST["rating"], $_POST["comment"]);
                     header("Location:index.php");
                 }catch (\PDOException $e){
-                    include_once "view/main.php";
+                    include_once "view/header.php";
                     echo "Oops, error 500!";
 
                 }
@@ -40,7 +40,7 @@ class ratingController
                     $ratingDAO->editRating($_POST["rating_id"], $_POST["rating"], $_POST["comment"]);
                     include_once "view/myRated.php";
                 }catch (\PDOException $e){
-                    include_once "view/main.php";
+                    include_once "view/header.php";
                     echo "Oops, error 500!";
 
                 }

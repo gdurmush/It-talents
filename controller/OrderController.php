@@ -1,5 +1,5 @@
 <?php
-namespace Controller;
+namespace controller;
 use Model\Address;
 use Model\AddressDAO;
 use model\CartDAO;
@@ -18,11 +18,9 @@ class OrderController{
             if (isset($_POST["order"])){
                 $orderedProducts = new CartDAO();
               $orderedProducts =  $orderedProducts->showCart($_SESSION["logged_user_id"]);
-                /*echo json_encode($orderedProducts);*/
-                OrderDAO::finishOrder($orderedProducts , $_POST["totalPrice"]);
+                OrderDAO::finishOrder($orderedProducts , $_POST["totalPrice"] , $_SESSION["logged_user_id"]);
 
-        }
-
+            }
         }
         catch (PDOException $e){
           echo $e->getMessage();
@@ -31,6 +29,14 @@ class OrderController{
         include_once "view/cart.php";
     }
     public function show(){
-      include_once "View/orders.php";
+        try{
+            $products= new OrderDAO();
+            $products=$products->showOrders();
+            include_once "view/orders.php";
+        }
+        catch (PDOException $e){
+            echo  $e->getMessage();
+        }
+
     }
 }

@@ -3,10 +3,12 @@ namespace view;
 use model\OrderDAO;
 
 
-$products= new OrderDAO();
-$products=$products->showOrders();
+?>
+<div class="container">
+    <?php
     foreach ($products as $product){
         ?>
+
         <table class="form-group">
             <tr>
                 <td width="80"><?=$product["name"]?></td>
@@ -20,6 +22,7 @@ $products=$products->showOrders();
         <?php
     }
 
-?>
+    ?>
+</div>
 
 

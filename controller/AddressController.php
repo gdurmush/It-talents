@@ -1,5 +1,5 @@
 <?php
-namespace Controller;
+namespace controller;
 
 use model\Address;
 use model\AddressDAO;
@@ -23,14 +23,11 @@ class AddressController{
                     echo "Oops, error 500!";
                 }
 
-
-
                 header("Location: index.php?target=user&action=account");
             }else{
                 $err=true;
                 $msg='All field are required';
             }
-
         }
     }
     public function edit(){
@@ -47,6 +44,7 @@ class AddressController{
 
                 }catch (\PDOException $e){
                     include_once "view/main.php";
+
                     echo "Oops, error 500!";
                 }
 
@@ -67,6 +65,7 @@ class AddressController{
 
             }catch (\PDOException $e){
                 include_once "view/main.php";
+
                 echo "Oops, error 500!";
             }
 

@@ -78,4 +78,13 @@ where type_id=?;";
         return $statement->fetchAll(PDO::FETCH_OBJ);
 
     }
+    public static function existsType($id){
+      $params=[];
+      $params[] = $id;
+      $pdo = getPDO();
+      $sql = "SELECT COUNT(id) as count FROM types WHERE id = ?";
+      $statement = $pdo->prepare($sql);
+      $statement->execute($params);
+      return $statement->fetch(PDO::FETCH_ASSOC);
+    }
 }

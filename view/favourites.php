@@ -4,39 +4,37 @@ namespace view;
 use model\FavouriteDAO;
 use model\ProductDAO;
 
+    ?>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <div class="container">
+    <h2>My Favourite Products</h2>
+    <div class="row">
+        <div class="col-12">
 
-try{
-    $favouriteDAO=new FavouriteDAO();
-    $favourites = $favouriteDAO->showFavourites();
+            <div class="row">
+                <?php
+                foreach ($favourites as $favourite) {
+                    $productDAO=new ProductDAO();
+                    $product = $productDAO->findProduct($favourite["product_id"])
+                    ?>
 
-    foreach ($favourites as $favourite) {
-        $productDAO=new ProductDAO();
-        $product = $productDAO->findProduct($favourite["product_id"])
-        ?>
-        <body>
-    <table>
-        <tr>
-            <td><img src="<?= $product->imageUrl ?>" width="150"></td>
-        </tr>
-        <tr>
-            <td><?=$product->name?></td>
-        </tr>
-        <tr>
-            <td><a href="index.php?target=cart&action=add&id=<?= $product->id ?>">
-                    <button>Add to cart</button>
-                </a></td>
-        </tr>
-        <tr>
-            <td><a href="index.php?target=favourite&action=delete&id=<?= $product->id ?>">
-                    <button>Remove From Favourites</button>
-                </a></td>
-        </tr>
-    </table>
-        <?php
-    }
+                    <div class="col-3">
 
-}catch (\PDOException $e){
-    include_once "view/main.php";
-    echo "Oops, error 500!";
-
-}
+                        <div class="card">
+                            <img class="card-img-top" src="<?= $product->imageUrl ?>" alt="Card image cap" height="200"
+                                 width="30">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $product->name ?></h5>
+                                <p class="card-text"><?= $product->price ?> EURO</p>
+                                <a href="index.php?target=cart&action=add&id=<?= $product->id ?>"
+                                   class="btn btn-primary">Add to cart</a>
+                                <a href="index.php?target=favourite&action=delete&id=<?= $product->id ?>"
+                                   class="btn btn-primary">Remove From Favourite</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>

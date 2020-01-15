@@ -21,7 +21,7 @@ class Search{
             $this->types = $searchDAO->searchType($this->search);
 
         }catch (\PDOException $e){
-            include_once "view/main.php";
+            include_once "view/header.php";
             echo "Oops, error 500!";
         }
 

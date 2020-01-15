@@ -13,9 +13,7 @@ use model\ProductDAO;
 
 //
 
-$cartDAO = new CartDAO();
-$productsInCart = $cartDAO->showCart($_SESSION["logged_user_id"]);
-$totalprice = 0;
+
 
 ?>
 
@@ -51,7 +49,7 @@ $totalprice = 0;
                                     <input type="submit" name="updateQuantity" class="btn btn-primary" style="margin-left: 5px;" value="Update">
                                 </form>
                             </div>
-                            <h5 class="card-title"><?=$productInfo->price?></h5>
+                            <h5 class="card-title"><?=$productInfo->price?> Euro</h5>
                             <div class="row">
                                 <a class="btn btn-primary" href="index.php?target=cart&action=delete&productId=<?= $product["product_id"] ?>" role="button" style="margin-left: 5px;">Remove From Cart</a>
                                 <?php
@@ -209,7 +207,7 @@ $totalprice = 0;
 
 
       }catch (\PDOException $e){
-          include_once "view/main.php";
+          include_once "view/header.php";
           echo "Oops, error 500!";
 
       }

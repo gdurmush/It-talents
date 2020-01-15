@@ -5,10 +5,14 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 use model\FavouriteDAO;
+use PDOException;
+use controller\UserController;
 
 class FavouriteController{
     public function show(){
         $userController=new UserController();
+        $favouriteDAO=new FavouriteDAO();
+        $favourites = $favouriteDAO->showFavourites();
         if(!isset($_SESSION["logged_user_id"])){
             include_once "view/login.php";
         }else{
@@ -19,6 +23,8 @@ class FavouriteController{
 
 
     public function add(){
+        $validateSession = new UserController();
+        $validateSession->validateForLoggedUser();
         if (isset($_GET["id"])){
             try{
                 if (isset($_SESSION["logged_user_id"])){
@@ -30,10 +36,11 @@ class FavouriteController{
                     }
                     else{
                         $favoriteDAO->addToFavourites($_GET["id"]);
-
+                        $this->show();
+                        include_once "view/favourites.php";
                     }
                 }
-            }catch (\PDOException $e){
+            }catch (PDOException $e){
                 include_once "view/main.php";
                 echo "Oops, error 500!";
 
@@ -43,18 +50,21 @@ class FavouriteController{
 
 
     public function delete(){
-        if (isset($_GET["id"])){
+        $validateSession = new UserController();
+        $validateSession->validateForLoggedUser();
+        if (isset($_GET["id"]) && is_numeric($_GET["id"])){
+
             try{
                 $favoriteDAO=new FavouriteDAO();
-                $favoriteDAO->deleteFromFavourites($_GET["id"]);
+                $favoriteDAO->deleteFromFavourites($_GET["id"] , $_SESSION["logged_user_id"]);
                 $this->show();
-            }catch (\PDOException $e){
-            include_once "view/main.php";
+            }catch (PDOException $e){
+                include_once "view/main.php";
             echo "Oops, error 500!";
             }
 
         }else{
-            echo "Bad request!";
+            $this->show();
         }
     }
 }

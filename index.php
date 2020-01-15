@@ -4,6 +4,12 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
+set_exception_handler("ExceptionHandler");
+function ExceptionHandler(Exception $exception){
+    $statusCode = $exception instanceof \exception\BaseException ? $exception->getStatusCode() : 500;
+    $msg = $exception->getMessage();
+}
+
 $controllerName = isset($_GET["target"]) ? $_GET["target"] : "main";
 $methodName = isset($_GET["action"]) ? $_GET["action"] : "render";
 
@@ -32,7 +38,7 @@ if(!(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_RE
 <body>
 
 <?php
-include_once "view/main.php";
+include_once "view/header.php";
 ?>
 <?php
 }
@@ -50,6 +56,7 @@ if (class_exists($controllerClassName)){
         }
     }else{
         echo "error: method not found: $controllerClassName -> $methodName\n";
+
 
         die();
     }

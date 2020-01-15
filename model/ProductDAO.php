@@ -185,11 +185,41 @@ class ProductDAO{
         $stmt->execute($params);
 
     }
-    public function filterProducts ($filters){
-        $filters = "ok";
-       $filters = json_decode($filters);
-       return $filters;
+
+    public static function isInArray($array, $value){
+        foreach($array as $a){
+            if($a == $value){return true;}
+        }
+        return $false;
     }
+
+    public  static function filterProducts ($filters,$args){
+        // echo $filters . "\n\n";
+        $pdo = getPDO();
+        $sql = $filters;
+        $statement = $pdo->prepare($sql);
+        $statement->execute($args);
+        $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        // select id from products where price > ? AND price < ?
+//        $productsThatMatchPrice = getProductsThatMatchPrice(minPrice, maxPrice); // ["id2","id3","id4"]
+//        $result = [];
+//        foreach($products as $p){
+//            if(isInArray($productsThatMatchPrice, $p["id"])){
+//                $result.add($p);
+//            }
+//        }
+        echo json_encode($products);
+        error_log(json_encode($products));
+    }
+   public static function getProductsEmptyFilter($withoutFilter){
+        $pdo = getPDO();
+        $sql = $withoutFilter;
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+        $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($products);
+        }
 
     public function getUserEmailsByLikedProduct($productId){
 
@@ -212,7 +242,7 @@ class ProductDAO{
         $sql = "SELECT p.id,p.name,p.producer_id,p.price,p.old_price,p.image_url,count(ohp.product_id) as 
 ordered_count FROM emag.products AS p
 JOIN orders_have_products AS ohp ON(p.id=ohp.product_id)
-group by p.id order by ordered_count desc LIMIT 12;";
+group by p.id order by ordered_count desc LIMIT 6;";
         $statement = $db->prepare($sql);
         $statement->execute();
         $emails = $statement->fetchAll(PDO::FETCH_OBJ);

@@ -31,6 +31,7 @@ if (isset($msg) && $msg!=""){
         <button name="login" type="submit" class="btn btn-primary">Login</button>
     </form>
     Don't have an account? Register here: <br>
-    <a href="index.php?target=User&action=registerPage"><button name="register" type="submit" class="btn btn-primary">Register</button></a>
+    <a href="index.php?target=User&action=registerPage"><button name="register" type="submit" class="btn btn-primary">Register</button></a><br><br>
+            <a href="index.php?target=User&action=forgottenPassword"><button type="submit" class="btn btn-primary">Forgot your password ?</button></a>
 </div>
 </body>

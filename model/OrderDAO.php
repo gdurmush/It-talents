@@ -54,14 +54,23 @@ class OrderDAO
 
     }
 
-    static  function finishOrder($orderedProducts , $totalPrice){
+    static  function finishOrder($orderedProducts , $totalPrice , $userId){
+        try{
+            $pdo = getPDO();
+            $pdo->beginTransaction();
+            $id = OrderDAO::addOrder($_POST["address"], $totalPrice);
+            OrderDAO::addOrderProducts($id , $orderedProducts);
+            $quantity = new ProductDAO();
+            $quantity->decreaseProductQuantity($orderedProducts);
+            $cart = new CartDAO();
+            $cart->deleteCart($userId);
+            $pdo->commit();
+        }
+        catch (PDOException $e){
+            $pdo->rollBack();
+            echo $e->getMessage();
 
-        $id = OrderDAO::addOrder($_POST["address"], $totalPrice);
-        OrderDAO::addOrderProducts($id , $orderedProducts);
-        $quantity = new ProductDAO();
-        $quantity->decreaseProductQuantity($orderedProducts);
-        $cart = new CartDAO();
-        $cart->deleteCart();
+        }
 
     }
 }

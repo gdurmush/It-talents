@@ -11,7 +11,7 @@ try{
     $product=$productDAO->getById($productId);
 
 }catch (\PDOException $e){
-    include_once "view/main.php";
+    include_once "view/header.php";
     echo "Oops, error 500!";
 
 }

@@ -15,7 +15,7 @@ if(isset($_SESSION["logged_user_id"])) {
         $addressDAO=new AddressDAO();
         $addresses=$addressDAO->getAll($_SESSION["logged_user_id"]);
     }catch (\PDOException $e){
-        include_once "view/main.php";
+        include_once "view/header.php";
         echo "Oops, error 500!";
 
     }
@@ -79,7 +79,7 @@ if(isset($_SESSION["logged_user_id"])) {
                     <p class="card-text"> Last Name: <?php echo $user->last_name ?></p>
                     <p class="card-text"> Email: <?php echo $user->email; ?></p>
                     <p class="card-text">  Age: <?php echo $user->age ?></p>
-                    <p class="card-text">  Phone Number: <?php echo $user->phone_number ?></p>
+                    <p class="card-text">  Phone Number: <?php echo "+359". $user->phone_number ?></p>
                     <a href="index.php?target=User&action=editPage" class="btn btn-primary">Edit Profile</a>
                 </div>
             </div>
