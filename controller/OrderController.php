@@ -14,19 +14,20 @@ class OrderController{
     public function order()
     {
 
-        try{
+
+            $orderedProducts = new CartDAO();
             if (isset($_POST["order"])){
-                $orderedProducts = new CartDAO();
-              $orderedProducts =  $orderedProducts->showCart($_SESSION["logged_user_id"]);
-                OrderDAO::finishOrder($orderedProducts , $_POST["totalPrice"] , $_SESSION["logged_user_id"]);
+
+
+              $orderedProductsa =  $orderedProducts->showCart($_SESSION["logged_user_id"]);
+                OrderDAO::finishOrder($orderedProductsa , $_POST["totalPrice"] , $_SESSION["logged_user_id"]);
+
+
 
             }
-        }
-        catch (PDOException $e){
-          echo $e->getMessage();
-        }
+
         $msg="Order received!";
-        include_once "view/cart.php";
+
     }
     public function show(){
         try{

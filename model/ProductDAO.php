@@ -3,12 +3,12 @@ namespace model;
 use PDO;
 use PDOException;
 
-include_once "PDO.php";
+
 
 class ProductDAO{
 
     public function getProducers(){
-        $pdo=getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $sql="SELECT * FROM producers;";
         $stmt=$pdo->prepare($sql);
         $stmt->execute();
@@ -18,7 +18,7 @@ class ProductDAO{
 
     public function getTypes(){
 
-            $pdo=getPDO();
+            $pdo = DBManager::getInstance()->getPDO();
             $sql="SELECT * FROM types;";
             $stmt=$pdo->prepare($sql);
             $stmt->execute();
@@ -27,7 +27,7 @@ class ProductDAO{
     }
 
     public  function getById($id){
-        $pdo=getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $sql=   "SELECT p.name, p.producer_id, pr.name AS producer_name,
                     p.price,p.old_price, p.type_id, t.name AS type_name,p.quantity,p.image_url
                     FROM products AS p 
@@ -42,7 +42,7 @@ class ProductDAO{
 
     public  function add($product_name,$producer_id,$product_price,$type_id,$quantity,$image_url) {
 
-        $db = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $params = [];
         $params[] = $product_name;
         $params[] = $producer_id;
@@ -51,16 +51,16 @@ class ProductDAO{
         $params[] = $quantity;
         $params[] = $image_url;
         $sql = "INSERT INTO products (name, producer_id, price,type_id,quantity,image_url,date_created) VALUES (?,?,?,?,?,?,now());";
-        $stmt = $db->prepare($sql);
+        $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
-        $product_id=($db->lastInsertId());
+        $product_id=($pdo->lastInsertId());
         new Product($product_id,$product_name,$producer_id,$product_price,$type_id,$quantity,$image_url);
 
     }
 
     public function edit(array $product)
     {
-        $db = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
 
         $params = [];
         $params[] = $product["name"];
@@ -73,7 +73,7 @@ class ProductDAO{
         $params[] = $product["product_id"];
 
         $sql = "UPDATE products SET name=?, producer_id=?,price=?,old_price=?, type_id=?, quantity=?, image_url=? WHERE id=? ;";
-        $stmt = $db->prepare($sql);
+        $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
 
     }
@@ -81,7 +81,7 @@ class ProductDAO{
     public function getProductsFromTypeId($id){
             $params = [];
             $params[] = $id;
-            $pdo = getPDO();
+            $pdo = DBManager::getInstance()->getPDO();
             $sql = "SELECT id , name FROM products WHERE type_id = ?";
             $statement = $pdo->prepare($sql);
             $statement->execute($params);
@@ -93,7 +93,7 @@ class ProductDAO{
 
             $params = [];
             $params[] = $id;
-            $pdo = getPDO();
+            $pdo = DBManager::getInstance()->getPDO();
             $sql = "SELECT id , name FROM products WHERE type_id = ? ORDER BY price ASC";
             $statement = $pdo->prepare($sql);
             $statement->execute($params);
@@ -105,7 +105,7 @@ class ProductDAO{
 
             $params = [];
             $params[] = $id;
-            $pdo = getPDO();
+            $pdo = DBManager::getInstance()->getPDO();
             $sql = "SELECT id , name FROM products WHERE type_id = ? ORDER BY price DESC";
             $statement = $pdo->prepare($sql);
             $statement->execute($params);
@@ -117,7 +117,7 @@ class ProductDAO{
 
         $params = [];
         $params[] = $id;
-        $pdo = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $sql = "SELECT quantity FROM products WHERE id = ?";
         $statement = $pdo->prepare($sql);
         $statement->execute($params);
@@ -126,7 +126,7 @@ class ProductDAO{
     }
 
     public function findProduct ($id){
-       $pdo = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
        $sql = "SELECT id , name , producer_id , price , type_id , quantity , image_url FROM products WHERE id = ?";
        $statement = $pdo->prepare($sql);
        $statement->execute([$id]);
@@ -141,7 +141,7 @@ class ProductDAO{
             $params = [];
             $params[] = $product["quantity"];
             $params[] = $product["product_id"];
-            $pdo = getPDO();
+            $pdo = DBManager::getInstance()->getPDO();
             $sql = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
             $statement = $pdo->prepare($sql);
             $statement->execute($params);
@@ -152,7 +152,7 @@ class ProductDAO{
 
         $params = [];
         $params[] = $id;
-        $pdo = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $sql = "SELECT name  FROM attributes WHERE type_id = ?";
         $statement = $pdo->prepare($sql);
         $statement->execute($params);
@@ -164,7 +164,7 @@ class ProductDAO{
         $params = [];
         $params [] = $typeId;
         $params [] = $attributeName;
-        $pdo = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $sql =" SELECT value FROM product_attributes JOIN attributes ON attribute_id = id WHERE type_id = ? AND name = ?";
         $statement = $pdo->prepare($sql);
         $statement->execute($params);
@@ -175,13 +175,14 @@ class ProductDAO{
     public function removePromotion($product_id,$price)
     {
 
-        $db = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
+
 
         $params=[];
         $params[]=$price;
         $params[]=$product_id;
         $sql = "UPDATE products SET price=?, old_price=NULL WHERE id=? ;";
-        $stmt=$db->prepare($sql);
+        $stmt=$pdo->prepare($sql);
         $stmt->execute($params);
 
     }
@@ -190,12 +191,12 @@ class ProductDAO{
         foreach($array as $a){
             if($a == $value){return true;}
         }
-        return $false;
+        return false;
     }
 
     public  static function filterProducts ($filters,$args){
         // echo $filters . "\n\n";
-        $pdo = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $sql = $filters;
         $statement = $pdo->prepare($sql);
         $statement->execute($args);
@@ -213,8 +214,8 @@ class ProductDAO{
         error_log(json_encode($products));
     }
    public static function getProductsEmptyFilter($withoutFilter){
-        $pdo = getPDO();
-        $sql = $withoutFilter;
+       $pdo = DBManager::getInstance()->getPDO();
+       $sql = $withoutFilter;
         $statement = $pdo->prepare($sql);
         $statement->execute();
         $products = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -223,12 +224,13 @@ class ProductDAO{
 
     public function getUserEmailsByLikedProduct($productId){
 
-        $db = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
+
         $params = [];
         $params[] = $productId;
         $sql = "SELECT email FROM users as u JOIN user_favourite_products as uf ON u.id = uf.user_id
          WHERE uf.product_id = ? and u.subscription = 'yes'";
-        $statement = $db->prepare($sql);
+        $statement = $pdo->prepare($sql);
         $statement->execute($params);
         $emails = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $emails;
@@ -237,13 +239,14 @@ class ProductDAO{
 
     public function getMostSold(){
 
-        $db = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
+
 
         $sql = "SELECT p.id,p.name,p.producer_id,p.price,p.old_price,p.image_url,count(ohp.product_id) as 
 ordered_count FROM emag.products AS p
 JOIN orders_have_products AS ohp ON(p.id=ohp.product_id)
 group by p.id order by ordered_count desc LIMIT 6;";
-        $statement = $db->prepare($sql);
+        $statement = $pdo->prepare($sql);
         $statement->execute();
         $emails = $statement->fetchAll(PDO::FETCH_OBJ);
         return $emails;
@@ -251,7 +254,7 @@ group by p.id order by ordered_count desc LIMIT 6;";
     }
     public function getProductAttributesById ($id){
 
-        $pdo = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $sql = "SELECT a.name,pa.value FROM attributes AS a
 JOIN product_attributes AS pa ON(a.id=pa.attribute_id)
 WHERE product_id =?;";

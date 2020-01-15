@@ -106,7 +106,7 @@ class AddressController{
 
     public static function checkUserAddress(){
         UserController::validateForLoggedUser();
-        //TODO Exeption
+
 
         $check = new AddressDAO;
         return $check->userAddress($_SESSION["logged_user_id"]);
