@@ -49,10 +49,8 @@ class UserController{
             if($msg==""){
                 header("Location:index.php?target=product&action=main");
             }else{
-                /* header("Location:index.php?target=user&action=loginPage");*/
 
                 throw new BadRequestException ("$msg");
-                include_once "view/login.php";
             }
         }
     }
@@ -85,10 +83,7 @@ class UserController{
             }
 
             if ($msg == "") {
-                //TODO confirm password
-                //DONE validate for valid email and password format,first name, last name, phone_number,age,
-
-
+                //TODO exeption
                 $userDAO = new UserDAO();
                 $user = $userDAO->getUserByEmail($_POST["email"]);
 
@@ -98,7 +93,7 @@ class UserController{
             }
 
 
-            //TODO validate for subscription
+
             $subscription = "no";
             if (isset($_POST["subscription"]) && $_POST["subscription"] == "on") {
                 $subscription = "yes";
@@ -109,7 +104,7 @@ class UserController{
                 $first_name = ucfirst($_POST["first_name"]);
                 $last_name = ucfirst($_POST["last_name"]);
                 $newUser = new User($_POST["email"], $password, $first_name, $last_name, $_POST["age"], $_POST["phone_number"], $role, $subscription);
-                //TODO Exeption
+
                 $userDAO = new UserDAO();
                 $userDAO->add($newUser);
 
@@ -136,7 +131,6 @@ class UserController{
         if (isset($_POST["edit"])) {
             $msg = '';
 
-//DONE validate for valid email and password format,first name, last name, phone_number,age,newPassword
 
             if (empty($_POST["email"]) || empty($_POST["accountPassword"])
                 || empty($_POST["first_name"]) || empty($_POST["last_name"])
@@ -162,7 +156,8 @@ class UserController{
                 $userDAO = new UserDAO();
                 $user = $userDAO->getUserById($_SESSION["logged_user_id"]);
                 if (password_verify($_POST["accountPassword"], $user->password) == false) {
-                    $msg = "Incorrect account password!";
+
+                    throw new NotAuthorizedException("Incorrect account password!");
                 }
 
 
@@ -171,6 +166,7 @@ class UserController{
                 } else {
                     if ($this->validatePassword($_POST["newPassword"])) {
                         $msg = "Your Password Must Contain At Least 8 Characters, At Least 1 Number And At Least 1  Letter!";
+                        throw new BadRequestException ("$msg");
                     } else {
                         $password = password_hash($_POST["newPassword"], PASSWORD_BCRYPT);
                     }
@@ -179,8 +175,6 @@ class UserController{
             }
 
 
-
-//TODO validate for subscription
             $subscription = null;
             if (isset($_POST["subscription"]) && $_POST["subscription"] == "on") {
                 $subscription = "yes";
@@ -198,7 +192,6 @@ class UserController{
                 $last_name = ucfirst($_POST["last_name"]);
                 $user = new User($_POST["email"], $password, $first_name, $last_name, $_POST["age"], $_POST["phone_number"], $role, $subscription);
                 $user->setId($_SESSION["logged_user_id"]);
-                //TODO Exeption
 
                 $userDAO = new UserDAO();
                 $userDAO->update($user);
@@ -229,7 +222,6 @@ class UserController{
     }
     public function account(){
         $this->validateForLoggedUser();
-
 
         $userDAO=new UserDAO();
         $user=$userDAO->getUserByid($_SESSION["logged_user_id"]);

@@ -108,10 +108,10 @@ class ProductController
     public function add()
     {
         UserController::validateForAdmin();
-//DONE validate for logged user status admin
+
         $msg = '';
         if (isset($_POST["save"])) {
-            //TODO validate product name,producer_id,price,type_id,quantity,file
+
             if (empty($_POST["name"]) || empty($_POST["producer_id"])
                 || empty($_POST["price"]) || empty($_POST["type_id"])
                 || empty($_POST["quantity"])) {

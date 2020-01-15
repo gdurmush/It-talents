@@ -6,6 +6,18 @@ class RatingDAO
 {
 
 
+
+
+    public  function getRatingById($rating_id)
+    {
+        $db = getPDO();
+        $sql = "SELECT * FROM user_rate_products WHERE id=?;";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$rating_id]);
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+
+    }
+
     public function addRating($user_id, $product_id, $rating, $comment)
     {
         $db = getPDO();
