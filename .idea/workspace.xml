@@ -1,35 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Controller/orderController.php~Order Fixes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/OrderDAO.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/OrderDAO.php~Order Fixes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/ProductDAO.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/ProductDAO.php~Product Filtration By Attributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/View/showProductByType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/View/showProductByType.php~Product Filtration By Attributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view/product.js" afterDir="false" />
+    <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="Exceptions added, some validation added on user,product and rating controller">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/AddressController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/AddressController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/CartController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/FavouriteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/FavouriteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/OrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/RatingController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/CartDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/CartDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/OrderDAO.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/ProductDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/ProductDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/TypeDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/TypeDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/UserDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/UserDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/account.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/account.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/addProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/addProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/editAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editAddress.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/editProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/editProfile.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editProfile.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/openPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/openPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/myRated.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/myRated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/newAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/newAddress.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/showProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/showProduct.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/showProductByType.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/showProductByType.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,16 +58,17 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/exception" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Apps\htdocs\emag-project" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Apps\htdocs\emag-project\Model" />
       <recent name="D:\Apps\htdocs\emag-project\Model\users" />
       <recent name="D:\Apps\htdocs\emag\View" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\It-talents\exception" />
+      <recent name="D:\Apps\htdocs\emag-project" />
     </key>
   </component>
   <component name="RunManager">
@@ -138,6 +126,8 @@
       <workItem from="1578647225818" duration="11759000" />
       <workItem from="1578730111078" duration="39721000" />
       <workItem from="1578817212485" duration="47803000" />
+      <workItem from="1579084762902" duration="240000" />
+      <workItem from="1579085205730" duration="2635000" />
     </task>
     <servers />
   </component>
@@ -167,6 +157,10 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Exceptions added, some validation added on user,product and rating controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exceptions added, some validation added on user,product and rating controller" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="1097" y="89" key="#PHP" timestamp="1577390987879">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -180,17 +174,23 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578668593551" />
-    <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1578864300066">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="360" y="192" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1579085480751">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="360" y="192" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1579085480751" />
     <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578864300066" />
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1579086969162">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1579086969162" />
     <state x="141" y="55" width="1781" height="897" key="DiffContextDialog" timestamp="1578862697079">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="141" y="55" width="1781" height="897" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578862697079" />
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1578660489275">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="526" y="192" key="FileChooserDialogImpl" timestamp="1579084879280">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="526" y="192" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1579084879280" />
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1578660489275" />
     <state x="330" y="291" key="NewPhpClassDialog" timestamp="1578760918661">
       <screen x="0" y="0" width="1920" height="1040" />

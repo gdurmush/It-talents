@@ -14,7 +14,7 @@ $controllerName = isset($_GET["target"]) ? $_GET["target"] : "main";
 $methodName = isset($_GET["action"]) ? $_GET["action"] : "render";
 
 
-$controllerClassName = "\\controller\\" . ucfirst($controllerName) . "controller";
+$controllerClassName = "\\Controller\\" . ucfirst($controllerName) . "Controller";
 spl_autoload_register(function ($class){
     require_once str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
 });

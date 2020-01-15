@@ -1,15 +1,16 @@
 <?php
 namespace view;
-use model\UserDAO;
+use controller\UserController;
 
-try{
-    $userDAO=new UserDAO();
-    $user=$userDAO->getUserByid($_SESSION["logged_user_id"]);
-}catch (\PDOException $e){
-    include_once "view/header.php";
-    echo "Oops, error 500!";
 
-}
+
+//DONE do not have method from DAO
+
+
+$userController=new UserController();
+$user=$userController->getUserById();
+
+
 
 
 
@@ -45,8 +46,10 @@ try{
 
 
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input name="email" type="email" value="<?php echo $user->email ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+            <label for="exampleInputEmail1">Email address:</label>
+            <label for="exampleInputEmail1"><?php echo $user->email ?></label>
+
+            <input name="email" type="hidden" value="<?php echo $user->email ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
 
         </div>
 
@@ -67,7 +70,7 @@ try{
         </div>
         <div class="form-group">
             <label >Phone number</label>
-           +359 <input type="number" name="phone_number" value="<?php echo $user->phone_number ?>" class="form-control" placeholder="8**-***-***" >
+            +359 <input type="number" name="phone_number" value="<?php echo $user->phone_number ?>" class="form-control" placeholder="8**-***-***" >
 
         </div>
         <div class="form-group">

@@ -1,15 +1,14 @@
 <?php
 namespace View;
-use model\AddressDAO;
+use controller\AddressController;
 
-try{
-    $addressDAO=new AddressDAO();
-    $cities=$addressDAO->getCities();
-}catch (\PDOException $e){
-    include_once "view/header.php";
-    echo "Oops, error 500!";
 
-}
+
+//TODO do not have method from DAO
+
+$addressController=new AddressController();
+$cities=$addressController->getCities();
+
 
 
 ?>
@@ -24,7 +23,7 @@ try{
 <body>
 <div class="container">
     <?php
-    if (isset($err) && $err){
+    if (isset($msg) && $msg!=""){
         ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $msg;?>
@@ -39,8 +38,10 @@ try{
                 <td><select name="city" required>
                         <option value="">Select City</option>
                         <?php foreach ($cities as $city) {
-                            echo "<option value='$city->id'>$city->name</option>";
 
+                            ?>
+                            <option value=<?=$city["id"]?>><?=$city["name"]?></option>";
+                            <?php
                         } ?>
                     </select></td>
             </tr>

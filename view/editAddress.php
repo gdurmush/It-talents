@@ -1,16 +1,13 @@
 <?php
 namespace view;
-use model\AddressDAO;
+use controller\AddressController;
 
-try{
-    $addressDAO=new AddressDAO;
-    $address=$addressDAO->getById($_POST["address_id"]);
-    $cities=$addressDAO->getCities();
-}catch (\PDOException $e){
-    include_once "view/header.php";
-    echo "Oops, error 500!";
 
-}
+//TODO do not have method from DAO
+
+$addressController=new AddressController();
+$cities=$addressController->getCities();
+
 
 ?>
 
@@ -24,26 +21,39 @@ try{
     <title>Document</title>
 </head>
 <body>
-<form action="index.php?target=address&action=edit" method="post">
-    <input type="hidden" name="address_id" value="<?php echo $address->id ?>">
-    <table>
-        <tr>
-            <td>City</td>
-            <td><select name="city" required>
-                    <option value="<?php echo $address->city_id ?>"><?php echo $address->city_name ?></option>
-                    <?php foreach ($cities as $city) {
-                        echo "<option value='$city->id'>$city->name</option>";
+<div class="container">
+    <?php
+    if (isset($msg) && $msg!=""){
+        ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $msg;?>
+        </div>
+        <?php
+    }
+    ?>
+    <form action="index.php?target=address&action=edit" method="post">
+        <input type="hidden" name="address_id" value="<?php echo $address->id ?>">
+        <table>
+            <tr>
+                <td>City</td>
+                <td><select name="city" required>
+                        <option value="<?php echo $address->city_id ?>"><?php echo $address->city_name ?></option>
+                        <?php foreach ($cities as $city) {
 
-                    } ?>
-                </select></td>
-        </tr>
-        <tr>
-            <td>Street name</td>
-            <td><input type="text" name="street" value="<?php echo $address->street_name?>" placeholder="Enter street name" min="5" required ></td>
-        </tr>
-        <tr><td colspan="2"><input type="submit" name="save" value="Save changes"></td></tr>
-    </table>
-</form>
-<a href="index.php?target=user&action=account"><button>Back</button></a>
+                            ?>
+                            <option value=<?=$city["id"]?>><?=$city["name"]?></option>";
+                            <?php
+                        } ?>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>Street name</td>
+                <td><input type="text" name="street" value="<?php echo $address->street_name?>" placeholder="Enter street name" min="5" required ></td>
+            </tr>
+            <tr><td colspan="2"><input type="submit" name="save" value="Save changes"></td></tr>
+        </table>
+    </form>
+    <a href="index.php?target=user&action=account"><button>Back</button></a>
+</div>
 </body>
 </html>
