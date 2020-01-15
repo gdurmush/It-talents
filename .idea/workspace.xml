@@ -2,25 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Wireframes and DB-design/db_design.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/unlike.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wireframes and DB-design/db_design.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/CartController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/FavouriteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/FavouriteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/OrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/FavouriteDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/FavouriteDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/OrderDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/OrderDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/account.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/account.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/editAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/editProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editProduct.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/newAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/newAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/orders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/showProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/showProduct.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/showProductByType.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/showProductByType.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +114,7 @@
       <workItem from="1578730111078" duration="39721000" />
       <workItem from="1578817212485" duration="47803000" />
       <workItem from="1579084762902" duration="240000" />
-      <workItem from="1579085205730" duration="32841000" />
+      <workItem from="1579085205730" duration="33927000" />
     </task>
     <task id="LOCAL-00001" summary="Exceptions added, some validation added on user,product and rating controller">
       <created>1579087858593</created>
