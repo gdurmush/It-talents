@@ -3,18 +3,8 @@ namespace view;
 
 use controller\AddressController;
 use model\AddressDAO;
-use model\CartDAO;
 use model\FavouriteDAO;
 use model\ProductDAO;
-/*include_once "view/search.php";*/
-
-
-
-
-//
-
-
-
 ?>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -40,8 +30,6 @@ use model\ProductDAO;
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title"><?=$productInfo->name?></h5>
-                            <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
                             <div class="row">
                                 <form action="index.php?target=cart&action=update" method="post">
                                     <input type="hidden" value="<?= $product["product_id"] ?>" name="productId">

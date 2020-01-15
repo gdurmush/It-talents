@@ -49,6 +49,11 @@ namespace view;
                             <button type="button"  class="btn btn-outline-primary" style="width: 100%">Log Out</button>
                         </a>
                     </div>
+                    <div class="row" style="width: 100%; margin-top: 5px; margin-left: 0px; margin-right: 0px;">
+                        <a href="index.php?target=address&action=newAddress" style="width: 100%">
+                            <button type="button"  class="btn btn-outline-primary" style="width: 100%">Add Address</button>
+                        </a>
+                    </div>
 
                 </div>
             </div>

@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="Exceptions added, some validation added on user,product and rating controller">
+    <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/AddressController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/AddressController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/RatingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/CartController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/FavouriteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/FavouriteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/OrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/FavouriteDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/FavouriteDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/OrderDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/OrderDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/account.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/account.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/addProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/addProduct.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/editAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/editProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editProduct.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/editProfile.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editProfile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/myRated.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/myRated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/favourites.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/favourites.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/filter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/newAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/newAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/register.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,8 +125,16 @@
       <workItem from="1578730111078" duration="39721000" />
       <workItem from="1578817212485" duration="47803000" />
       <workItem from="1579084762902" duration="240000" />
-      <workItem from="1579085205730" duration="2635000" />
+      <workItem from="1579085205730" duration="10304000" />
     </task>
+    <task id="LOCAL-00001" summary="Exceptions added, some validation added on user,product and rating controller">
+      <created>1579087858593</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1579087858593</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,9 +202,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="330" y="291" key="NewPhpClassDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578760918661" />
-    <state x="729" y="404" key="NewPhpFileDialog" timestamp="1578837524927">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="519" y="283" key="NewPhpFileDialog" timestamp="1579096080467">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="519" y="283" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1579096080467" />
     <state x="729" y="404" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578837524927" />
     <state x="795" y="186" key="RollbackChangesDialog" timestamp="1578862628334">
       <screen x="0" y="0" width="1920" height="1040" />

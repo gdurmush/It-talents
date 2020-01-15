@@ -8,15 +8,6 @@ namespace view;
 
     <h1>Login here:</h1>
     <br>
-    <?php
-    if (isset($msg) && $msg!=""){
-        ?>
-        <div class="alert alert-danger" role="alert">
-            <?php echo $msg; ?>
-        </div>
-        <?php
-    } ?>
-
     <form action="index.php?target=User&action=login" method="post">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>

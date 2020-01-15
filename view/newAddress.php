@@ -10,7 +10,6 @@ $addressController=new AddressController();
 $cities=$addressController->getCities();
 
 
-
 ?>
 
 
