@@ -2,12 +2,12 @@
 namespace model;
 
 use PDO;
-include_once "PDO.php";
+
 
 class TypeDAO{
   public function getTypeInformation ($id){
 
-            $pdo = getPDO();
+            $pdo = DBManager::getInstance()->getPDO();
             $sql = "SELECT id , name , categorie_id FROM types WHERE id = ? ";
             $statement = $pdo->prepare($sql);
             $statement->execute([$id]);
@@ -20,7 +20,7 @@ class TypeDAO{
 
             $params = [];
             $params[] = $id;
-            $pdo = getPDO();
+            $pdo = DBManager::getInstance()->getPDO();
             $sql = "SELECT id , name , categorie_id FROM types WHERE categorie_id = ?";
             $statement = $pdo->prepare($sql);
             $statement->execute($params);
@@ -30,8 +30,7 @@ class TypeDAO{
 
     public function getAllByType($id,$start,$productsPerPage){
 
-         $pdo = getPDO();
-
+        $pdo = DBManager::getInstance()->getPDO();
         $sql = "SELECT * FROM products where type_id=? LIMIT ".$start.",".$productsPerPage.";";
         $statement = $pdo->prepare($sql);
         $statement->execute([$id]);
@@ -42,7 +41,7 @@ class TypeDAO{
     public function getAttributesByType($id){
 
 
-        $pdo = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $sql = "SELECT distinct a.name, pha.value FROM attributes as a 
 JOIN product_attributes as pha ON(a.id=pha.attribute_id)
 where type_id=?;";
@@ -53,7 +52,7 @@ where type_id=?;";
     }
     public function getNumberOfProductsForType($id){
 
-            $pdo = getPDO();
+            $pdo = DBManager::getInstance()->getPDO();
             $sql = "SELECT count(id) AS count FROM products where type_id=?;";
             $statement = $pdo->prepare($sql);
             $statement->execute([$id]);
@@ -62,7 +61,7 @@ where type_id=?;";
     }
     public function getTypes(){
 
-        $pdo = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $sql = "SELECT * FROM emag.types;";
         $statement = $pdo->prepare($sql);
         $statement->execute();
@@ -71,7 +70,7 @@ where type_id=?;";
     }
     public function getCategories(){
 
-        $pdo = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $sql = "SELECT * FROM emag.categories;";
         $statement = $pdo->prepare($sql);
         $statement->execute();
@@ -81,8 +80,8 @@ where type_id=?;";
     public static function existsType($id){
       $params=[];
       $params[] = $id;
-      $pdo = getPDO();
-      $sql = "SELECT COUNT(id) as count FROM types WHERE id = ?";
+        $pdo = DBManager::getInstance()->getPDO();
+        $sql = "SELECT COUNT(id) as count FROM types WHERE id = ?";
       $statement = $pdo->prepare($sql);
       $statement->execute($params);
       return $statement->fetch(PDO::FETCH_ASSOC);

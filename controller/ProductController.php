@@ -142,7 +142,6 @@ class ProductController
                 if ($msg == "") {
 
                     $productDAO = new ProductDAO();
-                    //TODO Exeption
                     $productDAO->add($_POST["name"], $_POST["producer_id"], $_POST["price"], $_POST["type_id"], $_POST["quantity"], $img_url);
                     $msg = "Product added successfully!";
                 }else{
@@ -162,9 +161,6 @@ class ProductController
     }
 
     public function edit(){
-        //TODO validate for logged user status admin
-//TODO validate product name,producer_id,price,type_id,quantity,file,product_id,new_price
-
         if (isset($_POST["saveChanges"])) {
             $msg = "";
             if (empty($_POST["name"]) || empty($_POST["producer_id"])
@@ -223,7 +219,6 @@ class ProductController
                     $product["image_url"] = $img_url;
 
 
-                    //TODO Exeption
                     $productDAO = new ProductDAO();
                     $productDAO->edit($product);
                     if (!empty($_POST["newPrice"])){
@@ -263,7 +258,6 @@ class ProductController
 
     public function checkIfIsInPromotion($product_id)
     {
-        //TODO Exeption
         $productDAO = new ProductDAO();
         $product = $productDAO->getById($product_id);
 
@@ -298,11 +292,9 @@ class ProductController
     public function removeDiscount()
     {
         UserController::validateForAdmin();
-        //TODO validate for logged user and status admin
         if (isset($_POST["remove"])) {
             if (isset($_POST["product_id"]) && isset($_POST["product_old_price"])) {
                 if ($_POST["product_old_price"] != NULL) {
-                    //TODO Exeption
                     $productDAO = new ProductDAO();
                     $productDAO->removePromotion($_POST["product_id"], $_POST["product_old_price"]);
                 }
@@ -317,8 +309,7 @@ class ProductController
 
     public function addProduct()
     {
-
-        //TODO validate for logged user and status admin
+        UserController::validateForAdmin();
         include_once "view/addProduct.php";
     }
 
@@ -337,7 +328,6 @@ class ProductController
     }
 
 
-//TODO validate for logged user and status admin
     public function editProduct()
     {
         UserController::validateForAdmin();

@@ -26,7 +26,6 @@ class ratingController
             $productDAO=new ProductDAO();
             if($productDAO->findProduct([$_POST["product_id"]])){
                 if ($msg == "") {
-                    // TODO exeption and validate product id
 
                     $ratingDAO=new RatingDAO();
                     $ratingDAO->addRating($_SESSION["logged_user_id"], $_POST["product_id"], $_POST["rating"], $_POST["comment"]);

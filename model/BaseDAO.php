@@ -1,8 +1,10 @@
 <?php
-namespace model;
-class BaseDao {
+
+
+class BaseDAO
+{
     public function getPDO()
     {
-        return dbManager::getInstance()->getPDO();
+        return DBManager::getInstance()->getPDO();
     }
 }

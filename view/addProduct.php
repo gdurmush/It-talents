@@ -1,9 +1,9 @@
 <?php
 namespace view;
 use controller\ProductController;
-use model\ProductDAO;
 
-//TODO do not have method from DAO
+
+
 
 $productController=new ProductController();
 $producers=$productController->getProducers();

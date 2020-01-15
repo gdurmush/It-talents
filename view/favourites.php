@@ -1,7 +1,6 @@
 <?php
 namespace view;
 
-use model\FavouriteDAO;
 use model\ProductDAO;
 
     ?>

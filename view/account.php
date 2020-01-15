@@ -1,11 +1,6 @@
 <?php
 namespace view;
 
-//TODO do not have method from DAO
-//TODO Add address button
-
-
-
 
 ?>
 

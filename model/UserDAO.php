@@ -1,12 +1,12 @@
 <?php
 
 namespace model;
-include_once "PDO.php";
+
 
 class UserDAO{
     public function getUserByEmail($email){
 
-        $pdo=getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $sql="SELECT * FROM users WHERE email=?;";
         $stmt=$pdo->prepare($sql);
         $stmt->execute([$email]);
@@ -16,7 +16,7 @@ class UserDAO{
 
     public function getUserById($id){
 
-        $pdo=getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $sql="SELECT * FROM users WHERE id=?;";
         $stmt=$pdo->prepare($sql);
         $stmt->execute([$id]);
@@ -25,7 +25,7 @@ class UserDAO{
     }
 
     public function add(User $user){
-        $db = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $params = [];
         $params[] = $user->getEmail();
         $params[] = $user->getPassword();
@@ -36,16 +36,16 @@ class UserDAO{
         $params[] = $user->getRole();
         $params[]=$user->getSubscription();
         $sql = "INSERT INTO users (email, password, first_name,last_name,age,phone_number,role,subscription,date_created) VALUES (?, ?, ?,?,?,?,?,?,now());";
-        $stmt = $db->prepare($sql);
+        $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
-        $user->setId($db->lastInsertId());
+        $user->setId($pdo->lastInsertId());
 
     }
 
 
 
     public function update(User $user){
-        $db = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $params = [];
         $params[] = $user->getEmail();
         $params[] = $user->getPassword();
@@ -57,14 +57,14 @@ class UserDAO{
         $params[] = $user->getId();
 
         $sql = "UPDATE users SET email=?, password=?, first_name=?,last_name=?,age=?,phone_number=?,subscription=? WHERE id=? ;";
-        $stmt = $db->prepare($sql);
+        $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
 
 
     }
 
     public function checkEmailExist($email , $newPassword){
-        $pdo=getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $params = [];
         $params[] = $newPassword;
         $params[] = $email;

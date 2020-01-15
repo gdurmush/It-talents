@@ -97,8 +97,7 @@ use model\ProductDAO;
                     </form>
                     <?php
                         }
-                    } else {
-                    ?>
+                    } else {?>
                     <div>
                         <h4>You can't finish order without Address!</h4>
                         <a href="index.php?target=address&action=newAddress">

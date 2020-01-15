@@ -28,7 +28,9 @@ class AddressController{
 
                 header("Location: index.php?target=user&action=account");
             }else{
+
                 include_once "view/newAddress.php";
+               throw new BadRequestException ($msg);
             }
 
         }
@@ -70,7 +72,7 @@ class AddressController{
 
             $addressDAO=new AddressDAO();
             $addressDetails=$addressDAO->getById($_POST["address_id"]);
-            if($addressDetails->user_id === $_SESSION["logged_user_id"]){
+            if($addressDetails->user_id == $_SESSION["logged_user_id"]){
                 $addressDAO->delete($_POST["address_id"]);
             }else{
                 throw new NotAuthorizedException("Not Authorized for this operation!");
@@ -81,13 +83,10 @@ class AddressController{
 
     public function validateCity($cityId){
         $err=false;
-        //TODO Exeption
         $addressDAO=new AddressDAO();
         $addresses=$addressDAO->getCities();
         if(!in_array($cityId,$addresses)){
             $err=true;
-        }else{
-            throw new BadRequestException("Invalid city!");
         }
         return $err;
     }
@@ -113,7 +112,6 @@ class AddressController{
 
     public static function checkUserAddress(){
         UserController::validateForLoggedUser();
-
         $check = new AddressDAO;
         return $check->userAddress($_SESSION["logged_user_id"]);
 
