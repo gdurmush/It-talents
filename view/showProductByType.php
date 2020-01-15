@@ -104,33 +104,8 @@ if(isset($filters)  && isset($products)&& isset($totalPages) && isset($page)) {
 
 
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
 
-            <?php if($page>1){
-                $previousPage=--$page;
-                ?>
-                <li class="page-item"><a class="page-link" href="index.php?target=product&action=show&typId=<?= $_GET["typId"] ?>&page=<?=$previousPage?>">Previous</a></li>
-                <?php
-            }
-            for ($i = 1; $i <= $totalPages + 1; $i++) {
-                ?>
-                <li class="page-item"><a class="page-link" href="index.php?target=product&action=show&typId=<?= $_GET["typId"] ?>&page=<?= $i ?>"><?= $i ?></a></li>
-                <?php
-            }
-            if($page<$totalPages){
-                $nextPage=++$page;
-                ?>
-                <li class="page-item"><a class="page-link" href="index.php?target=product&action=show&typId=<?= $_GET["typId"] ?>&page=<?=$nextPage?>">Next</a></li>
-
-                <?php
-            }
-            ?>
-
-
-        </ul>
-    </nav>
     <?php
 }else {
-    include_once "index.php";
+
 }

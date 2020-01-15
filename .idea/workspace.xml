@@ -2,8 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Wireframes and DB-design/db_design.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icons/unlike.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wireframes and DB-design/db_design.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/CartController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/FavouriteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/FavouriteController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/FavouriteDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/FavouriteDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/OrderDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/OrderDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/account.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/account.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/editAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editAddress.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/editProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/newAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/newAddress.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/showProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/showProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/showProductByType.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/showProductByType.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +131,7 @@
       <workItem from="1578730111078" duration="39721000" />
       <workItem from="1578817212485" duration="47803000" />
       <workItem from="1579084762902" duration="240000" />
-      <workItem from="1579085205730" duration="27054000" />
+      <workItem from="1579085205730" duration="32841000" />
     </task>
     <task id="LOCAL-00001" summary="Exceptions added, some validation added on user,product and rating controller">
       <created>1579087858593</created>
@@ -170,10 +187,10 @@
     </state>
     <state x="491" y="186" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1579112252738" />
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578668593551" />
-    <state x="360" y="192" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1579085480751">
+    <state x="360" y="192" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1579116984024">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="360" y="192" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1579085480751" />
+    <state x="360" y="192" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1579116984024" />
     <state x="506" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578864300066" />
     <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1579087857476">
       <screen x="0" y="0" width="1366" height="728" />
@@ -209,6 +226,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="118" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1578254327346" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1579117170110">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1579117170110" />
     <state x="225" y="117" width="672" height="678" key="search.everywhere.popup" timestamp="1578744756511">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

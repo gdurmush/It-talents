@@ -40,15 +40,16 @@ namespace view;
                         </a>
                     </div>
                     <div class="row" style="width: 100%; margin-top: 5px; margin-left: 0px; margin-right: 0px;">
-                        <a href="index.php?target=user&action=logout" style="width: 100%">
-                            <button type="button"  class="btn btn-outline-primary" style="width: 100%">Log Out</button>
-                        </a>
-                    </div>
-                    <div class="row" style="width: 100%; margin-top: 5px; margin-left: 0px; margin-right: 0px;">
                         <a href="index.php?target=address&action=newAddress" style="width: 100%">
                             <button type="button"  class="btn btn-outline-primary" style="width: 100%">Add Address</button>
                         </a>
                     </div>
+                    <div class="row" style="width: 100%; margin-top: 5px; margin-left: 0px; margin-right: 0px;">
+                        <a href="index.php?target=user&action=logout" style="width: 100%">
+                            <button type="button"  class="btn btn-outline-primary" style="width: 100%">Log Out</button>
+                        </a>
+                    </div>
+
 
                 </div>
             </div>
@@ -60,7 +61,7 @@ namespace view;
         <div class="col-8">
             <div class="card">
                 <div class="card-header">
-                    Моите Данни
+                    About Me
                 </div>
                 <div class="card-body">
                     <p class="card-text"> First Name: <?php echo $user->first_name ?> </p>
@@ -94,6 +95,7 @@ namespace view;
                                         <input type='hidden' name='address_id' value="<?php echo $address->id; ?>">
                                         <input type="submit" class="btn btn-primary" name="deleteAddress" value="Delete">
                                     </form>
+
                                 </div>
                             </div>
                         </div>
