@@ -2,10 +2,6 @@
 namespace View;
 use controller\AddressController;
 
-
-
-//TODO do not have method from DAO
-
 $addressController=new AddressController();
 $cities=$addressController->getCities();
 

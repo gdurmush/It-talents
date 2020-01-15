@@ -3,10 +3,6 @@ namespace view;
 use controller\UserController;
 
 
-
-//DONE do not have method from DAO
-
-
 $userController=new UserController();
 $user=$userController->getUserById();
 

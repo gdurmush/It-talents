@@ -2,6 +2,7 @@
 namespace controller;
 
 use exception\BadRequestException;
+use exception\NotAuthorizedException;
 use model\Address;
 use model\AddressDAO;
 
@@ -21,11 +22,15 @@ class AddressController{
 
                 $address=new Address($_SESSION["logged_user_id"],$_POST["city"],$_POST["street"]);
                 $addressDAO=new AddressDAO();
+
+
                 $addressDAO->add($address);
-                //TODO Exeption
+
                 header("Location: index.php?target=user&action=account");
             }else{
+
                 include_once "view/newAddress.php";
+               throw new BadRequestException ($msg);
             }
 
         }
@@ -43,11 +48,13 @@ class AddressController{
             if($msg==""){
                 $address=new Address($_SESSION["logged_user_id"],$_POST["city"],$_POST["street"]);
                 $address->setId($_POST["address_id"]);
-
                 $addressDAO=new AddressDAO();
-                $addressDAO->edit($address);
-                //TODO Exeption
-
+                $addressDetails=$addressDAO->getById($_POST["address_id"]);
+                    if($addressDetails->user_id === $_SESSION["logged_user_id"]){
+                        $addressDAO->edit($address);
+                    }else{
+                        throw new NotAuthorizedException("Not Authorized for this operation!");
+                    }
 
                 header("Location: index.php?target=user&action=account");
             }else{
@@ -59,24 +66,23 @@ class AddressController{
     }
 
 
-//DONE delete validation if this address is used for previous orders
     public function delete(){
         UserController::validateForLoggedUser();
         if(isset($_POST["deleteAddress"])){
 
             $addressDAO=new AddressDAO();
-            $addressDAO->delete($_POST["address_id"]);
-//TODO Exeption
-
-
-
+            $addressDetails=$addressDAO->getById($_POST["address_id"]);
+            if($addressDetails->user_id == $_SESSION["logged_user_id"]){
+                $addressDAO->delete($_POST["address_id"]);
+            }else{
+                throw new NotAuthorizedException("Not Authorized for this operation!");
+            }
             header("Location: index.php?target=user&action=account");
         }
     }
 
     public function validateCity($cityId){
         $err=false;
-        //TODO Exeption
         $addressDAO=new AddressDAO();
         $addresses=$addressDAO->getCities();
         if(!in_array($cityId,$addresses)){
@@ -106,8 +112,6 @@ class AddressController{
 
     public static function checkUserAddress(){
         UserController::validateForLoggedUser();
-
-
         $check = new AddressDAO;
         return $check->userAddress($_SESSION["logged_user_id"]);
 

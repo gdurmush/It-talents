@@ -1,6 +1,8 @@
 <?php
 namespace controller;
 use exception\BadRequestException;
+use exception\NotAuthorizedException;
+use model\ProductDAO;
 use model\RatingDAO;
 
 
@@ -20,24 +22,28 @@ class ratingController
             }elseif($this->ratingValidation($_POST["rating"])){
                 $msg = "Invalid rating!";
             }
-            // DONE validate comment and rating
 
+            $productDAO=new ProductDAO();
+            if($productDAO->findProduct([$_POST["product_id"]])){
+                if ($msg == "") {
 
-            if ($msg == "") {
-                // TODO exeption and validate product id
+                    $ratingDAO=new RatingDAO();
+                    $ratingDAO->addRating($_SESSION["logged_user_id"], $_POST["product_id"], $_POST["rating"], $_POST["comment"]);
+                    header("Location: index.php?target=product&action=main");
 
-                $ratingDAO=new RatingDAO();
-                $ratingDAO->addRating($_SESSION["logged_user_id"], $_POST["product_id"], $_POST["rating"], $_POST["comment"]);
-                header("Location: index.php?target=product&action=main");
-
+                }else{
+                    throw new BadRequestException("$msg");
+                }
             }else{
-                throw new BadRequestException("$msg");
+                throw new NotAuthorizedException("Not authorized for this operation!");
             }
+
         }
 
     }
 
     public function editRate(){
+        $msg="";
         UserController::validateForLoggedUser();
         if (isset($_POST["saveChanges"])) {
 
@@ -49,12 +55,11 @@ class ratingController
                 $msg = "Invalid rating!";
             }
 
-            if ($msg == "") {
-
-                //TODO validate for rating id if is for this user and if exist on DB
-
-
-                // TODO exeption
+            $ratingDAO=new RatingDAO();
+            $rating=$ratingDAO->getRatingById($_POST["rating_id"]);
+            if($rating->user_id!==$_SESSION["logged_user_id"]){
+                throw new NotAuthorizedException("Not authorized for this operation!");
+            }elseif($msg == "") {
                 $ratingDAO=new RatingDAO();
                 $ratingDAO->editRating($_POST["rating_id"], $_POST["rating"], $_POST["comment"]);
                 include_once "view/myRated.php";
@@ -68,7 +73,6 @@ class ratingController
 
     public function showStars($product_id){
 
-// TODO exeption
 
         $ratingDAO=new RatingDAO();
         $product_stars=$ratingDAO->getStarsCount($product_id);

@@ -2,14 +2,17 @@
 
 namespace model;
 use PDO;
+
 class AddressDAO{
+
 
 
 
     public function getById($id){
 
         $pdo = DBManager::getInstance()->getPDO();
-        $sql="SELECT a.id, a.city_id, c.name AS city_name,a.street_name 
+        $sql="SELECT a.id, a.city_id,a.user_id, c.name AS city_name,a.street_name 
+
                     FROM addresses AS a JOIN cities AS c ON(a.city_id=c.id)WHERE a.id=?;";
         $stmt=$pdo->prepare($sql);
         $stmt->execute([$id]);
@@ -36,6 +39,7 @@ class AddressDAO{
             $stmt = $pdo->prepare($sql);
             $stmt->execute($params);
             $address->setId($pdo->lastInsertId());
+
 
     }
 

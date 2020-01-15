@@ -48,14 +48,12 @@ use model\ProductDAO;
                                 ?>
                                 <a class="btn btn-primary" href="index.php?target=favourite&action=add&id=<?= $productInfo->id ?>" role="button" style="margin-left: 5px;">Add To Favourite</a>
           <?php
-    }
-                                ?>
+    } ?>
                             </div>
                         </div>
                     </div>
 
                 </div>
-
 
             </div>
                 <?php

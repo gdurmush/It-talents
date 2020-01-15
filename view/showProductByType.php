@@ -2,9 +2,6 @@
 namespace view;
 
 
-use controller\ProductController;
-
-$controller = new ProductController();
 if(isset($filters)  && isset($products)&& isset($totalPages) && isset($page)) {
 
 
@@ -35,15 +32,12 @@ if(isset($filters)  && isset($products)&& isset($totalPages) && isset($page)) {
                                     </div>
                                 <?php }
                             } ?>
-                            <!-- form-check.// -->
 
-
-
-                        </div> <!-- card-body.// -->
+                        </div>
 
                     </div>
                     <?php } ?>
-                </article> <!-- card-group-item.// -->
+                </article>
 
 
 
