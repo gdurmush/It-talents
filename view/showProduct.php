@@ -5,7 +5,7 @@ use model\FavouriteDAO;
 use controller\ProductController;
 use model\RatingDAO;
 
-try{
+
 
     $ratingDAO=new RatingDAO();
     $review=$ratingDAO->getReviewsNumber($this->id);
@@ -219,10 +219,3 @@ try{
     </div>
 
 
-
-<?php
-}catch (\PDOException $e){
-    include_once "view/header.php";
-    echo "Oops, error 500!";
-
-}

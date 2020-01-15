@@ -95,6 +95,7 @@ class FavouriteController{
 
             }else{
                 $this->show();
+                throw new NotFoundException("Can't add Invalid Product to Favourites");
             }
         }
         else{
@@ -107,8 +108,12 @@ class FavouriteController{
 
             }else{
                 $this->show();
+                throw new NotFoundException("Can't add Invalid Product to Favourites");
             }
         }
+
+
+
 
     }
 }
