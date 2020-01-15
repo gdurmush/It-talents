@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 
 use exception\NotFoundException;
 use model\FavouriteDAO;
+use model\ProductDAO;
 use PDOException;
 use controller\UserController;
 
@@ -35,9 +36,19 @@ class FavouriteController{
                         echo "Already added in Favourites";
                     }
                     else{
-                        $favoriteDAO->addToFavourites($_GET["id"],$_SESSION["logged_user_id"]);
-                        $this->show();
-                        include_once "view/favourites.php";
+                        $productDAO = new ProductDAO();
+                        $cheker = $productDAO->findProduct($_GET["id"]);
+                        if ($cheker->id != ""){
+                            print_r($productDAO->findProduct($_GET["id"]));
+                            $favoriteDAO->addToFavourites($_GET["id"],$_SESSION["logged_user_id"]);
+                            $this->show();
+                            include_once "view/favourites.php";
+                        }
+                        else{
+                            $this->show();
+                            include_once "view/favourites.php";
+                        }
+
                     }
 
             }catch (PDOException $e){

@@ -14,7 +14,7 @@ class CartController{
         $validateSession = new UserController();
         $validateSession->validateForLoggedUser();
 
-            if (isset($_GET["id"])){
+            if (isset($_GET["id"]) && is_numeric($_GET["id"])){
 
                 $cartDAO=new CartDAO();
                 $productDAO = new ProductDAO();
@@ -38,6 +38,10 @@ class CartController{
 
                     }
                 }
+            else{
+                $this->show();
+                include_once "view/cart.php";
+            }
     }
 
     public function show(){
@@ -53,8 +57,9 @@ class CartController{
     public function update(){
         $validateSession = new UserController();
         $validateSession->validateForLoggedUser();
-        if (isset($_POST["updateQuantity"]) && $_POST["quantity"] > 0 && $_POST["quantity"] < 50  && is_numeric($_POST["quantity"])){
-            try {
+        if (isset($_POST["updateQuantity"]) && $_POST["quantity"] > 0 && $_POST["quantity"] < 50
+            && is_numeric($_POST["quantity"]) && (round($_POST["quantity"]) == $_POST["quantity"]) ){
+
                 $productDAO=new ProductDAO();
                 $productQuantity = $productDAO->checkQuantity($_POST["productId"]);
                 if ($productQuantity["quantity"] >= $_POST["quantity"]) {
@@ -66,27 +71,21 @@ class CartController{
                     echo "<h3>Quantity Not Available</h3>";
                 }
 
-            } catch (PDOException $e) {
-                include_once "view/main.php";
-                echo "Oops, error 500!";
-
-            }
+        }
+        else{
+            $this->show();
+            include_once "view/cart.php";
         }
 
     }
     public function delete(){
         $validateSession = new UserController();
         $validateSession->validateForLoggedUser();
-        try{
+
             $cartDAO=new CartDAO();
             $cartDAO->deleteProductFromCart($_GET["productId"] , $_SESSION["logged_user_id"]);
             $this->show();
-        }catch (PDOException $e){
-            echo "Not Gonna Work ";
-            include_once "view/main.php";
 
-
-        }
     }
 }
 
