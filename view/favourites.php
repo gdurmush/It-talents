@@ -22,8 +22,7 @@ use model\ProductDAO;
                     <div class="col-3">
 
                         <div class="card">
-                            <img class="card-img-top" src="<?= $product->imageUrl ?>" alt="Card image cap" height="200"
-                                 width="30">
+                           <a href="index.php?&target=product&action=show&prdId=<?=$product->id?>"> <img class="card-img-top" src="<?= $product->imageUrl ?>" alt="Card image cap" height="200" width="30"></a>
                             <div class="card-body">
                                 <h5 class="card-title"><?= $product->name ?></h5>
                                 <p class="card-text"><?= $product->price ?> EURO</p>

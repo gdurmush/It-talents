@@ -15,6 +15,7 @@ class CartController{
         $validateSession->validateForLoggedUser();
 
             if (isset($_GET["id"])){
+
                 $cartDAO=new CartDAO();
                 $productDAO = new ProductDAO();
                 $quantity = $productDAO->checkQuantity($_GET["id"]);
@@ -22,17 +23,17 @@ class CartController{
                     if ($check){
                         if ($check["quantity"] < $quantity["quantity"]) {
                             $cartDAO->updateQuantityOfProductInCart($_GET["id"] , $_SESSION["logged_user_id"]);
-                            include_once "view/cart.php";
+                            $this->show();
                         }
                         else{
                             echo "<h1>No more available Pieces</h1>";
-                            include_once "view/cart.php";
+                            $this->show();
 
                         }
                     }
                     else{
                         $cartDAO->putInCart($_GET["id"] , $_SESSION["logged_user_id"]);
-                        include_once "view/cart.php";
+                        $this->show();
 
 
                     }
@@ -52,7 +53,7 @@ class CartController{
     public function update(){
         $validateSession = new UserController();
         $validateSession->validateForLoggedUser();
-        if (isset($_POST["updateQuantity"])) {
+        if (isset($_POST["updateQuantity"]) && $_POST["quantity"] > 0 && $_POST["quantity"] < 50  && is_numeric($_POST["quantity"])){
             try {
                 $productDAO=new ProductDAO();
                 $productQuantity = $productDAO->checkQuantity($_POST["productId"]);

@@ -35,7 +35,7 @@ use model\ProductDAO;
                 <div class="row no-gutters">
 
                     <div class="col-md-4">
-                        <img src="<?=$productInfo->imageUrl?>" class="card-img" alt="...">
+                        <a href="index.php?target=product&action=show&prdId=<?=$productInfo->id?>"> <img src="<?=$productInfo->imageUrl?>" class="card-img" alt="..."></a>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">

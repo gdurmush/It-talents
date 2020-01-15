@@ -23,10 +23,10 @@ class OrderDAO
             }
     }
 
-    static function addOrder($addressId, $totalPrice)
+    static function addOrder($addressId, $totalPrice , $userId)
     {
             $params = [];
-            $params[] = $_SESSION["logged_user_id"];
+            $params[] = $userId;
             $params[] = $addressId;
             $params[] = $totalPrice;
             $pdo = getPDO();
@@ -37,10 +37,10 @@ class OrderDAO
             return $id;
     }
 
-    static function showOrders()
+    static function showOrders($userId)
     {
             $params = [];
-            $params[] = $_SESSION["logged_user_id"];
+            $params[] = $userId;
             $pdo = getPDO();
             $sql = "SELECT o.id, o.address_id , op.product_id , op.quantity, o.price,op.price as productPrice, p.name ,p.image_url , o.date_created  FROM orders as o
             JOIN orders_have_products as op
@@ -58,7 +58,7 @@ class OrderDAO
         try{
             $pdo = getPDO();
             $pdo->beginTransaction();
-            $id = OrderDAO::addOrder($_POST["address"], $totalPrice);
+            $id = OrderDAO::addOrder($_POST["address"], $totalPrice , $_SESSION["logged_user_id"]);
             OrderDAO::addOrderProducts($id , $orderedProducts);
             $quantity = new ProductDAO();
             $quantity->decreaseProductQuantity($orderedProducts);
