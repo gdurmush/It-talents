@@ -27,14 +27,10 @@ class OrderController{
 
     }
     public function show(){
-        try{
             $products= new OrderDAO();
             $products=$products->showOrders($_SESSION["logged_user_id"]);
             include_once "view/orders.php";
-        }
-        catch (PDOException $e){
-            echo  $e->getMessage();
-        }
+
 
     }
 }

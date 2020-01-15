@@ -3,38 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/AddressController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/AddressController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/CartController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/FavouriteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/FavouriteController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/RatingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/AddressDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/AddressDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/BaseDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/BaseDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/CartDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/CartDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/DBManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/DBManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/FavouriteDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/FavouriteDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/OrderDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/OrderDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/PDO.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/ProductDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/ProductDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/RatingDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/RatingDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Search.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/SearchDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/SearchDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/TypeDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/TypeDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/UserDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/UserDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/show2.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/account.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/account.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/addProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/addProduct.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/editAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/editProfile.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/editProfile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/favourites.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/favourites.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/fronend.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/myRated.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/myRated.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/newAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/newAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/orders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/showProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/showProduct.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/showProductByType.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/showProductByType.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +114,7 @@
       <workItem from="1578730111078" duration="39721000" />
       <workItem from="1578817212485" duration="47803000" />
       <workItem from="1579084762902" duration="240000" />
-      <workItem from="1579085205730" duration="25838000" />
+      <workItem from="1579085205730" duration="27054000" />
     </task>
     <task id="LOCAL-00001" summary="Exceptions added, some validation added on user,product and rating controller">
       <created>1579087858593</created>
