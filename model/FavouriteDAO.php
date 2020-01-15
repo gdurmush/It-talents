@@ -5,10 +5,10 @@ use PDOException;
 
 include_once "PDO.php";
 class FavouriteDAO{
-    public function showFavourites (){
+    public function showFavourites ($userId){
 
         $params = [];
-        $params[] = $_SESSION["logged_user_id"];
+        $params[] = $userId;
         $pdo = getPDO();
         $sql = "SELECT product_id FROM user_favourite_products WHERE user_id = ? ";
         $statement = $pdo->prepare($sql);
@@ -16,10 +16,10 @@ class FavouriteDAO{
         $rows =$statement->fetchAll(PDO::FETCH_ASSOC);
         return $rows;
     }
-    public function addToFavourites ($id){
+    public function addToFavourites ($id , $userId){
 
         $params = [];
-        $params[] = $_SESSION["logged_user_id"];
+        $params[] = $userId;
         $params[] = $id;
         $pdo =getPDO();
         $sql = "INSERT INTO user_favourite_products (user_id , product_id ) VALUES (? ,?)";

@@ -8,7 +8,6 @@ use controller\AddressController;
 
 $addressController=new AddressController();
 $cities=$addressController->getCities();
-print_r($cities);
 
 
 ?>
@@ -23,7 +22,9 @@ print_r($cities);
 <body>
 <div class="container">
     <?php
+
     if (isset($msg) && $msg!=""){
+
         ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $msg;?>

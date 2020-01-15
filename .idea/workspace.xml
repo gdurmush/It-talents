@@ -2,21 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/emag.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/emag.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/CartController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/FavouriteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/FavouriteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/OrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/AddressDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/AddressDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/CartDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/CartDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/FavouriteDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/FavouriteDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/OrderDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/OrderDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/RatingDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/RatingDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/SearchDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/SearchDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/TypeDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/TypeDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/UserDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/UserDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/account.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/account.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/favourites.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/favourites.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/filter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/newAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/newAddress.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,7 +125,7 @@
       <workItem from="1578730111078" duration="39721000" />
       <workItem from="1578817212485" duration="47803000" />
       <workItem from="1579084762902" duration="240000" />
-      <workItem from="1579085205730" duration="9211000" />
+      <workItem from="1579085205730" duration="10304000" />
     </task>
     <task id="LOCAL-00001" summary="Exceptions added, some validation added on user,product and rating controller">
       <created>1579087858593</created>

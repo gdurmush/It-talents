@@ -17,7 +17,6 @@ class UserController{
         $msg='';
         if(isset($_POST["login"])) {
             if (empty($_POST["email"]) || empty($_POST["password"])) {
-                //DONE validate for valid email and password format
                 $msg='All fields are required!';
             }elseif($this->validateEmail($_POST["email"])){
                 $msg="Invalid email format!";
