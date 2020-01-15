@@ -26,7 +26,6 @@ class UserController{
             }
             if($msg==""){
 
-                //TODO Exeption
                 $userDAO=new UserDAO();
                 $user = $userDAO->getUserByEmail($_POST["email"]);
 
@@ -83,7 +82,6 @@ class UserController{
             }
 
             if ($msg == "") {
-                //TODO exeption
                 $userDAO = new UserDAO();
                 $user = $userDAO->getUserByEmail($_POST["email"]);
 
