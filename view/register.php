@@ -10,7 +10,7 @@ namespace view;
 if (isset($msg) && $msg!=""){
     ?>
     <div class="alert alert-danger" role="alert">
-     <?php echo $msg;?>
+        <?php echo $msg;?>
     </div>
     <?php
 } ?>
@@ -29,6 +29,10 @@ if (isset($msg) && $msg!=""){
             <input name="password" type="password" class="form-control" id="exampleInputPassword1" required>
         </div>
         <div class="form-group">
+            <label for="exampleInputPassword1">Confirm Password</label>
+            <input name="confirmPassword" type="password" class="form-control" id="exampleInputPassword1" required>
+        </div>
+        <div class="form-group">
             <label for="exampleInputEmail1">First Name</label>
             <input type="text" name="first_name" class="form-control" required>
 
@@ -45,7 +49,7 @@ if (isset($msg) && $msg!=""){
         </div>
         <div class="form-group">
             <label >Phone number</label>
-            <input type="number" name="phone_number" class="form-control" placeholder="8## ### ###" required>
+            +359<input type="number" name="phone_number" class="form-control" placeholder="8## ### ###" required>
 
         </div>
         <div class="form-group">

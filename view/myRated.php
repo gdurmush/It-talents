@@ -1,16 +1,12 @@
 <?php
 namespace view;
 
-use model\RatingDAO;
 
-try{
-    $ratingDAO=new RatingDAO();
-    $myRatings=RatingDAO::showMyRated($_SESSION["logged_user_id"]);
-}catch (\PDOException $e){
-    include_once "view/header.php";
-    echo "Oops, error 500!";
 
-}
+//TODO do not have method from DAO
+
+
+
 
 
 

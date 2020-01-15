@@ -1,39 +1,27 @@
 <?php
 namespace view;
-use controller\UserController;
-use model\UserDAO;
-use model\AddressDAO;
+
+//TODO do not have method from DAO
+//TODO Add address button
 
 
 
-if(isset($_SESSION["logged_user_id"])) {
-    try{
-        $userController=new UserController();
-        $userController->validateForLoggedUser();
-        $userDAO=new UserDAO();
-        $user=$userDAO->getUserByid($_SESSION["logged_user_id"]);
-        $addressDAO=new AddressDAO();
-        $addresses=$addressDAO->getAll($_SESSION["logged_user_id"]);
-    }catch (\PDOException $e){
-        include_once "view/header.php";
-        echo "Oops, error 500!";
 
-    }
-    ?>
+?>
 
-    <!doctype html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-              crossorigin="anonymous">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-    </head>
-    <body>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -86,39 +74,34 @@ if(isset($_SESSION["logged_user_id"])) {
 
 
 
-                <div class="card" style="margin-top: 10px;">
-                    <div class="card-header">
-                        My addresses:
-                    </div>
-                    <div class="card-body">
-                        <?php foreach ($addresses as $address) {
-                            ?>
-                            <div class="card w-75" style="margin-bottom: 10px;">
-                                <div class="card-body">
-                                    <p class="card-text"><?php echo $address->street_name . ', ' . $address->city_name; ?></p>
-                                    <div class="row">
-                                        <form action='index.php?target=address&action=editAddress' method="post" style="margin-left: 15px;">
-                                            <input type='hidden' name='address_id' value="<?php echo $address->id; ?>">
-                                            <input type="submit" class="btn btn-primary" name="editAddress" value="Edit" >
-                                        </form>
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header">
+                    My addresses:
+                </div>
+                <div class="card-body">
+                    <?php foreach ($addresses as $address) {
+                        ?>
+                        <div class="card w-75" style="margin-bottom: 10px;">
+                            <div class="card-body">
+                                <p class="card-text"><?php echo $address->street_name . ', ' . $address->city_name; ?></p>
+                                <div class="row">
+                                    <form action='index.php?target=address&action=editAddress' method="post" style="margin-left: 15px;">
+                                        <input type='hidden' name='address_id' value="<?php echo $address->id; ?>">
+                                        <input type="submit" class="btn btn-primary" name="editAddress" value="Edit" >
+                                    </form>
 
-                                        <form action='index.php?target=address&action=delete' method="post" style="margin-left: 15px;">
-                                            <input type='hidden' name='address_id' value="<?php echo $address->id; ?>">
-                                            <input type="submit" class="btn btn-primary" name="deleteAddress" value="Delete">
-                                        </form>
-                                    </div>
+                                    <form action='index.php?target=address&action=delete' method="post" style="margin-left: 15px;">
+                                        <input type='hidden' name='address_id' value="<?php echo $address->id; ?>">
+                                        <input type="submit" class="btn btn-primary" name="deleteAddress" value="Delete">
+                                    </form>
                                 </div>
                             </div>
-                        <?php }?>
-                    </div>
+                        </div>
+                    <?php }?>
                 </div>
+            </div>
         </div>
     </div>
 </div>
-    </body>
-    </html>
-    <?php
-}else{
-    include_once "login.php";
-}
-?>
+</body>
+</html>

@@ -1,34 +1,4 @@
-<?php
-namespace view;
-use model\ProductDAO;
 
-
-try{
-    $productDAO=new ProductDAO();
-    $producers=$productDAO->getProducers();
-    $types=$productDAO->getTypes();
-
-    $product=$productDAO->getById($productId);
-
-}catch (\PDOException $e){
-    include_once "view/header.php";
-    echo "Oops, error 500!";
-
-}
-
-$isInPromotion=false;
-?>
-
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
 <?php
 if (isset($msg) && $msg!="") {
     echo $msg;
@@ -42,12 +12,12 @@ if ($product["old_price"]!=NULL) {
 
 
 <table>
-<tr>
-    <td><?= $product["name"]?></td>
-</tr>
-<tr>
-    <td><img src="<?=$product["image_url"] ?>"width="150"></td>
-</tr>
+    <tr>
+        <td><?= $product["name"]?></td>
+    </tr>
+    <tr>
+        <td><img src="<?=$product["image_url"] ?>" width="150"></td>
+    </tr>
     <tr>
         <td>Producer:</td>
         <td><?=$product["producer_name"] ?></td>
@@ -61,26 +31,26 @@ if ($product["old_price"]!=NULL) {
         <td><?= $product["quantity"] ?></td>
     </tr>
 
-<?php if($isInPromotion){
-    ?>
-    <tr>
-        <td>Old Price:</td>
-        <td><?= $product["old_price"]?> EURO</td>
-    </tr>
-    <tr>
-        <td>New Price:</td>
-        <td><?=  $product["price"]?> EURO</td>
-    </tr>
+    <?php if($isInPromotion){
+        ?>
+        <tr>
+            <td>Old Price:</td>
+            <td><?= $product["old_price"]?> EURO</td>
+        </tr>
+        <tr>
+            <td>New Price:</td>
+            <td><?=  $product["price"]?> EURO</td>
+        </tr>
 
-    <?php
-}else{
-    ?>
-    <tr>
-        <td>Price:</td>
-        <td><?= $product["price"] ?> EURO</td>
-    </tr>
-    <?php
-}?>
+        <?php
+    }else{
+        ?>
+        <tr>
+            <td>Price:</td>
+            <td><?= $product["price"] ?> EURO</td>
+        </tr>
+        <?php
+    }?>
 
 </table>
 <hr>
@@ -91,7 +61,7 @@ if ($product["old_price"]!=NULL) {
         <tr>
             <td>Name</td>
             <td><input type="text" name="name" value="<?= $product["name"]?>" required></td>
-        <td><input type="hidden" name="product_id" value="<?= $productId?>"></td>
+            <td><input type="hidden" name="product_id" value="<?= $productId?>"></td>
 
 
         </tr>
@@ -137,7 +107,7 @@ if ($product["old_price"]!=NULL) {
         <tr>
             <td>Upload image</td>
             <td><input type="file" name="file"></td>
-            <tr><input type="hidden" name="old_image" value="<?= $product["image_url"]?>"></tr>
+        <tr><input type="hidden" name="old_image" value="<?= $product["image_url"]?>"></tr>
         </tr>
 
 
@@ -152,5 +122,3 @@ if ($product["old_price"]!=NULL) {
     <input type="hidden" name="product_old_price" value="<?=$product["old_price"]?>">
     <input type="submit" name="remove" value="Remove Promotion">
 </form>
-</body>
-</html>

@@ -1,6 +1,7 @@
 <?php
 namespace controller;
 
+use exception\BadRequestException;
 use model\Filter;
 use model\ProductDAO;
 use model\Type;
@@ -104,19 +105,20 @@ class ProductController
 
     }
 
-
     public function add()
     {
-
+        UserController::validateForAdmin();
+//DONE validate for logged user status admin
         $msg = '';
         if (isset($_POST["save"])) {
+            //TODO validate product name,producer_id,price,type_id,quantity,file
             if (empty($_POST["name"]) || empty($_POST["producer_id"])
                 || empty($_POST["price"]) || empty($_POST["type_id"])
                 || empty($_POST["quantity"])) {
 
                 $msg = "All fields are required!";
-            } else {
-                if (!is_numeric($_POST["quantity"]) || $_POST["quantity"] < 0 || $_POST["quantity"] != round($_POST["quantity"])) {
+            } else{
+                if (!is_numeric($_POST["quantity"]) || $_POST["quantity"]  <=0 || $_POST["quantity"] != round($_POST["quantity"])) {
                     $msg = "Invalid quantity format!";
                 }
 
@@ -140,19 +142,28 @@ class ProductController
                 if ($msg == "") {
 
                     $productDAO = new ProductDAO();
+                    //TODO Exeption
                     $productDAO->add($_POST["name"], $_POST["producer_id"], $_POST["price"], $_POST["type_id"], $_POST["quantity"], $img_url);
                     $msg = "Product added successfully!";
+                }else{
+                    throw new BadRequestException("$msg");
                 }
 
             }
         }
         include_once "view/addProduct.php";
     }
+    public function productNameValidation($name){
+        $err=false;
+        if(!ctype_alpha($name) || strlen($name) < 2){
+            $err=true;
+        }
+        return $err;
+    }
 
-
-    public function edit()
-    {
-
+    public function edit(){
+        //TODO validate for logged user status admin
+//TODO validate product name,producer_id,price,type_id,quantity,file,product_id,new_price
 
         if (isset($_POST["saveChanges"])) {
             $msg = "";
@@ -160,19 +171,15 @@ class ProductController
                 || empty($_POST["price"]) || empty($_POST["type_id"])
                 || empty($_POST["quantity"])) {
                 $msg = "All fields are required!";
-            } else {
-                $i = $_POST["quantity"];
-
-                if (!is_numeric($i) || $i < 0 || $i != round($i)) {
-                    $msg = "Invalid quantity format!";
-                }
-
+            } elseif($this->validateQuantity($_POST["quantity"])) {
+                $msg = "Invalid quantity format!";
+            }else{
 
                 if ($msg == "") {
                     $price = $_POST["price"];
                     $old_price = NULL;
-                    if (!empty($_POST["newPrice"])) {
-                        $msg = $this->validatePrice($_POST["newPrice"]);
+                    if (!empty($_POST["newPrice"]) || ! $this->validatePrice($_POST["newPrice"])) {
+                        $msg = "Invalid price format!";
                         if ($_POST["newPrice"] > $_POST["price"]) {
                             $msg = "New price of product must be lower than price !";
                         } else {
@@ -181,9 +188,13 @@ class ProductController
 
                         }
                     }
+                }else{
+                    throw new BadRequestException("$msg");
                 }
                 if ($msg == "") {
                     $msg = $this->validatePrice($_POST["price"]);
+                }else{
+                    throw new BadRequestException("$msg");
                 }
 
 
@@ -211,6 +222,8 @@ class ProductController
                     $product["quantity"] = $_POST["quantity"];
                     $product["image_url"] = $img_url;
 
+
+                    //TODO Exeption
                     $productDAO = new ProductDAO();
                     $productDAO->edit($product);
                     if (!empty($_POST["newPrice"])){
@@ -218,6 +231,8 @@ class ProductController
                     }
 
 
+                }else{
+                    throw new BadRequestException("$msg");
                 }
 
             }
@@ -228,17 +243,27 @@ class ProductController
     }
 
     public function validatePrice($price)
-    {
-        $msg = "";
-        if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $price) || !is_numeric($price)) {
-            $msg = "Invalid price format!";
-        }
-        return $msg;
+{
+    $err=false;
+    if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $price) || !is_numeric($price)) {
+        $err = true;
     }
+    return $err;
+}
 
+    public function validateQuantity($quantity)
+    {
+        $err=false;
+        if (!is_numeric($quantity) || $quantity  <=0 || $quantity != round($quantity)) {
+            $err=true;
+        }
+
+        return $err;
+    }
 
     public function checkIfIsInPromotion($product_id)
     {
+        //TODO Exeption
         $productDAO = new ProductDAO();
         $product = $productDAO->getById($product_id);
 
@@ -272,9 +297,12 @@ class ProductController
 
     public function removeDiscount()
     {
+        UserController::validateForAdmin();
+        //TODO validate for logged user and status admin
         if (isset($_POST["remove"])) {
             if (isset($_POST["product_id"]) && isset($_POST["product_old_price"])) {
                 if ($_POST["product_old_price"] != NULL) {
+                    //TODO Exeption
                     $productDAO = new ProductDAO();
                     $productDAO->removePromotion($_POST["product_id"], $_POST["product_old_price"]);
                 }
@@ -289,12 +317,30 @@ class ProductController
 
     public function addProduct()
     {
+
+        //TODO validate for logged user and status admin
         include_once "view/addProduct.php";
     }
 
+    public function getProducers(){
+        $productDAO=new ProductDAO();
+        return $productDAO->getProducers();
+    }
 
+    public function getTypes(){
+        $productDAO=new ProductDAO();
+        return $productDAO->getTypes();
+    }
+    public function getProductById($productId){
+        $productDAO=new ProductDAO();
+        return $productDAO->getById($productId);
+    }
+
+
+//TODO validate for logged user and status admin
     public function editProduct()
     {
+        UserController::validateForAdmin();
         if (isset($_POST["editProduct"])) {
             if (isset($_POST["product_id"])) {
                 $productId = $_POST["product_id"];
@@ -381,7 +427,7 @@ class ProductController
         return $products=$productDAO->getMostSold();
 
     }
-    public function showMostOrdered(){
+ public function main(){
 
         include_once "view/main.php";
 

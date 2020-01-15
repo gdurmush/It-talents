@@ -12,6 +12,8 @@ use controller\UserController;
 
 class FavouriteController{
     public function show(){
+        $validateSession = new UserController();
+        $validateSession->validateForLoggedUser();
         $userController=new UserController();
         $favouriteDAO=new FavouriteDAO();
         $favourites = $favouriteDAO->showFavourites($_SESSION["logged_user_id"]);
@@ -39,7 +41,6 @@ class FavouriteController{
                         $productDAO = new ProductDAO();
                         $cheker = $productDAO->findProduct($_GET["id"]);
                         if ($cheker->id != ""){
-                            print_r($productDAO->findProduct($_GET["id"]));
                             $favoriteDAO->addToFavourites($_GET["id"],$_SESSION["logged_user_id"]);
                             $this->show();
                             include_once "view/favourites.php";

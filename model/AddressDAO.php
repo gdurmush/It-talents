@@ -21,7 +21,7 @@ class AddressDAO{
             $sql="SELECT * FROM cities;";
             $stmt=$pdo->prepare($sql);
             $stmt->execute();
-            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
 

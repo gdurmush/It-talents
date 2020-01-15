@@ -8,14 +8,14 @@ namespace view;
 
     <h1>Login here:</h1>
     <br>
-<?php
-if (isset($msg) && $msg!=""){
-    ?>
-    <div class="alert alert-danger" role="alert">
-        <?php echo $msg; ?>
-    </div>
     <?php
-} ?>
+    if (isset($msg) && $msg!=""){
+        ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $msg; ?>
+        </div>
+        <?php
+    } ?>
 
     <form action="index.php?target=User&action=login" method="post">
         <div class="form-group">
@@ -32,6 +32,6 @@ if (isset($msg) && $msg!=""){
     </form>
     Don't have an account? Register here: <br>
     <a href="index.php?target=User&action=registerPage"><button name="register" type="submit" class="btn btn-primary">Register</button></a><br><br>
-            <a href="index.php?target=User&action=forgottenPassword"><button type="submit" class="btn btn-primary">Forgot your password ?</button></a>
+    <a href="index.php?target=User&action=forgottenPassword"><button type="submit" class="btn btn-primary">Forgot your password ?</button></a>
 </div>
 </body>
