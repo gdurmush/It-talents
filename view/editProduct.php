@@ -1,10 +1,24 @@
-
 <?php
+namespace view;
+use controller\ProductController;
+
+
 if (isset($msg) && $msg!="") {
     echo $msg;
-}?> <br>
+}
+
+
+
+?> <br>
 
 <?php
+
+$productController=new ProductController();
+$producers=$productController->getProducers();
+$product=$productController->getProductById($productId);
+$types= $productController->getTypes();
+
+$isInPromotion=false;
 if ($product["old_price"]!=NULL) {
     $isInPromotion=true;
     echo "In Promotion!";

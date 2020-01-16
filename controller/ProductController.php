@@ -161,6 +161,7 @@ class ProductController
     }
 
     public function edit(){
+
         if (isset($_POST["saveChanges"])) {
             $msg = "";
             if (empty($_POST["name"]) || empty($_POST["producer_id"])
@@ -174,23 +175,22 @@ class ProductController
                 if ($msg == "") {
                     $price = $_POST["price"];
                     $old_price = NULL;
-                    if (!empty($_POST["newPrice"]) || ! $this->validatePrice($_POST["newPrice"])) {
-                        $msg = "Invalid price format!";
-                        if ($_POST["newPrice"] > $_POST["price"]) {
+                    if (isset($_POST["newPrice"]) && !$this->validatePrice($_POST["newPrice"])) {
+                        if ($_POST["newPrice"] >= $_POST["price"]) {
                             $msg = "New price of product must be lower than price !";
-                        } else {
+                        }else{
                             $price = $_POST["newPrice"];
                             $old_price = $_POST["price"];
-
                         }
+
+
                     }
                 }else{
                     throw new BadRequestException("$msg");
                 }
-                if ($msg == "") {
-                    $msg = $this->validatePrice($_POST["price"]);
-                }else{
-                    throw new BadRequestException("$msg");
+
+                if ($this->validatePrice($_POST["price"])) {
+                    throw new BadRequestException("Invalid price!");
                 }
 
 
@@ -233,8 +233,14 @@ class ProductController
             }
 
         }
-        $productId = $_POST["product_id"];
-        include_once "view/editProduct.php";
+
+        if(isset($_POST["product_id"])){
+            $productId = $_POST["product_id"];
+            include_once "view/editProduct.php";
+        }else{
+            header("Location:index.php?target=product&action=main");
+        }
+
     }
 
     public function validatePrice($price)

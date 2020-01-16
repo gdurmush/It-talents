@@ -31,7 +31,7 @@ class OrderController{
     }
     public function show(){
         UserController::validateForLoggedUser();
-
+        
             $products= new OrderDAO();
             $products=$products->showOrders($_SESSION["logged_user_id"]);
             include_once "view/orders.php";

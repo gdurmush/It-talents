@@ -21,6 +21,7 @@ class CartController{
                     $check = $cartDAO->checkIfInCart($_GET["id"] , $_SESSION["logged_user_id"]);
                     if ($check){
                         if ($check["quantity"] < $quantity["quantity"] && $quantity["quantity"] > 0) {
+
                             $cartDAO->updateQuantityOfProductInCart($_GET["id"] , $_SESSION["logged_user_id"]);
                             $this->show();
                         }
