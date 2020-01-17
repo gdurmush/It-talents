@@ -73,10 +73,6 @@ $user=$userController->getUserById();
             <label for="exampleInputPassword1">Change Password</label>
             <input name="newPassword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your new password" >
         </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Enter current password</label>
-            <input name="accountPassword" type="password" class="form-control" id="exampleInputPassword1"  >
-        </div>
 
         <?php
         if($user->subscription==="yes"){
@@ -95,9 +91,15 @@ $user=$userController->getUserById();
                 <input type="checkbox" name="subscription">
 
             </div>
+
             <?php
         }
+
         ?>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Enter password to confirm changes</label>
+            <input name="accountPassword" type="password" class="form-control" id="exampleInputPassword1"  >
+        </div>
 
 
 

@@ -19,8 +19,9 @@ class CartController{
                 $productDAO = new ProductDAO();
                 $quantity = $productDAO->checkQuantity($_GET["id"]);
                     $check = $cartDAO->checkIfInCart($_GET["id"] , $_SESSION["logged_user_id"]);
-                    if ($check && $check["quantity"] > $quantity["quantity"]){
-                        if ($check["quantity"] > $quantity["quantity"]) {
+                    if ($check){
+                        if ($check["quantity"] < $quantity["quantity"] && $quantity["quantity"] > 0) {
+
                             $cartDAO->updateQuantityOfProductInCart($_GET["id"] , $_SESSION["logged_user_id"]);
                             $this->show();
                         }
@@ -30,11 +31,15 @@ class CartController{
 
                         }
                     }
-                    else{
+                    elseif($quantity["quantity"] > 0){
                         $cartDAO->putInCart($_GET["id"] , $_SESSION["logged_user_id"]);
                         $this->show();
 
 
+                    }
+                    else{
+                        echo "<h1>Quantity Not Available</h1>";
+                        $this->show();
                     }
                 }
             else{

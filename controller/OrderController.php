@@ -13,7 +13,7 @@ error_reporting(E_ALL);
 class OrderController{
     public function order()
     {
-        UserController::validateForAdmin();
+        UserController::validateForLoggedUser();
         $orderedProducts = new CartDAO();
             if (isset($_POST["order"])){
 
@@ -30,9 +30,8 @@ class OrderController{
 
     }
     public function show(){
-        UserController::validateForAdmin();
-
-
+        UserController::validateForLoggedUser();
+        
             $products= new OrderDAO();
             $products=$products->showOrders($_SESSION["logged_user_id"]);
             include_once "view/orders.php";

@@ -20,11 +20,11 @@ namespace view;
             <tr><input type="hidden" name="product_id" value="<?php echo $_GET['id'] ;?>"></tr>
             <tr>
                 <td>Give your vote from 1 to 5 for this product</td>
-                <td><input type="number" name="rating" min="1" max="5"></td>
+                <td><input type="number" value="1" name="rating" min="1" max="5"></td>
             </tr>
             <tr>
                 <td>Write comments for this product</td>
-                <td><textarea name="comment" id="" cols="30" rows="10"  minlength="4"></textarea></td>
+                <td><textarea name="comment" placeholder="write your opinion for this product here ...." id="" cols="30" rows="10"  minlength="4"></textarea></td>
             </tr>
 
             <tr>

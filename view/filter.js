@@ -57,7 +57,7 @@ $(function(){
 
         }
         else {
-
+        productsContainer.show();
 
         }
     });
