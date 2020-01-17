@@ -9,11 +9,11 @@ class RatingDAO
 
     public  function getRatingById($rating_id)
     {
-        $db = getPDO();
+        $pdo = DBManager::getInstance()->getPDO();
         $sql = "SELECT * FROM user_rate_products WHERE id=?;";
-        $stmt = $db->prepare($sql);
+        $stmt = $pdo->prepare($sql);
         $stmt->execute([$rating_id]);
-        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+        return $stmt->fetch(\PDO::FETCH_OBJ);
 
     }
 

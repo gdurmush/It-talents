@@ -55,14 +55,15 @@ class ratingController
                 $msg = "Invalid rating!";
             }
 
-            $ratingDAO=new RatingDAO();
+              $ratingDAO=new RatingDAO();
             $rating=$ratingDAO->getRatingById($_POST["rating_id"]);
             if($rating->user_id!==$_SESSION["logged_user_id"]){
+
                 throw new NotAuthorizedException("Not authorized for this operation!");
             }elseif($msg == "") {
-                $ratingDAO=new RatingDAO();
+               $ratingDAO=new RatingDAO();
                 $ratingDAO->editRating($_POST["rating_id"], $_POST["rating"], $_POST["comment"]);
-                include_once "view/myRated.php";
+                header("Location: index.php?target=rating&action=myRated");
 
             }
         }else{

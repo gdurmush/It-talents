@@ -48,7 +48,7 @@ class UserController{
             if($msg==""){
                 header("Location:index.php?target=product&action=main");
             }else{
-
+                include_once "view/login.php";
                 throw new BadRequestException ("$msg");
             }
         }

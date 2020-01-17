@@ -7,7 +7,7 @@ use model\ProductDAO;
 use model\Type;
 use model\TypeDAO;
 use PHPMailer;
-use const PDOException;
+
 
 include_once "credentials.php";
 
