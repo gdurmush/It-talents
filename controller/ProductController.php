@@ -456,8 +456,9 @@ class ProductController
             $mail->isHTML(true);                                  // Set email format to HTML
 
             $mail->Subject = 'Your Product is on Sale !!!';
-            $mail->Body = "$productName Product is in Sale Now !!! Go Check it out before the sale expires ";
+            $mail->Body = "$productName Product is in Sale Now !!! Go Check it out before the sale expires <a href = http://localhost:8888/It-talents/index.php?target=product&action=show&prdId=$productId>Open Here</a>";
             $mail->AltBody = 'Click For Register';
+
 
             if (!$mail->send()) {
                 echo 'Message could not be sent.';

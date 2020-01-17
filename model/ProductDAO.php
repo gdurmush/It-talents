@@ -202,14 +202,6 @@ class ProductDAO{
         $statement->execute($args);
         $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        // select id from products where price > ? AND price < ?
-//        $productsThatMatchPrice = getProductsThatMatchPrice(minPrice, maxPrice); // ["id2","id3","id4"]
-//        $result = [];
-//        foreach($products as $p){
-//            if(isInArray($productsThatMatchPrice, $p["id"])){
-//                $result.add($p);
-//            }
-//        }
         echo json_encode($products);
         error_log(json_encode($products));
     }
