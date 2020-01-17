@@ -4,6 +4,8 @@
     <list default="true" id="d031366c-e6df-4735-999a-ee226a888b16" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/RatingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/RatingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/UserController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +116,7 @@
       <workItem from="1578730111078" duration="39721000" />
       <workItem from="1578817212485" duration="47803000" />
       <workItem from="1579084762902" duration="240000" />
-      <workItem from="1579085205730" duration="33927000" />
+      <workItem from="1579085205730" duration="38068000" />
     </task>
     <task id="LOCAL-00001" summary="Exceptions added, some validation added on user,product and rating controller">
       <created>1579087858593</created>
